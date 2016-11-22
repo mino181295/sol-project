@@ -3,3 +3,7 @@ body {
   color: #fff;
   background-color: pink;
 }
+
+.jumbotron {
+  background-color: violet;
+}
