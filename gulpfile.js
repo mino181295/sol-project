@@ -7,19 +7,6 @@ var gulp = require('gulp'),
     reload = browserSync.reload,
     plumber = require('gulp-plumber');
 
-//Script task
-gulp.task('scripts', function () {
-    gulp.src(['app/js/**/*.js', '!app/js/**/*min.js'])
-        .pipe(plumber())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'));
-});
-
-//Sass tasks
-
 //Html task
 gulp.task('html', function () {
     gulp.src('app/**/*.html')
@@ -28,18 +15,12 @@ gulp.task('html', function () {
         }));
 });
 
-gulp.task('sass', function () {
-    gulp.src('app/scss/**/*.scss')
-        .pipe(plumber())
-        .pipe(sass({
-            outputStyle: 'expanded'
-        }).on('error', sass.logError))
-        .pipe(gulp.dest('app/css'))
+gulp.task('css', function () {
+    gulp.src('app/**/*.css')
         .pipe(reload({
             stream: true
         }));
 });
-
 
 //BrowserSync task
 gulp.task('browser-sync', function () {
@@ -52,10 +33,9 @@ gulp.task('browser-sync', function () {
 
 //Watch tasks
 gulp.task('watch', function () {
-    gulp.watch('app/js/**/*.js', ['scripts']);
     gulp.watch('app/**/*.html', ['html']);
-    gulp.watch('app/**/*.scss', ['sass']);
+    gulp.watch('app/**/*.css', ['css']);
 });
 
 //Default task
-gulp.task('default', ['scripts', 'html', 'sass', 'browser-sync', 'watch']);
+gulp.task('default', ['html', 'browser-sync', 'watch']);
