@@ -1,6 +1,7 @@
 <html>
 <head>
-<link href="calendarStyle.css" type="text/css" rel="stylesheet" />
+<base href="../ />
+<link href="css/calendarStyle.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <?php
