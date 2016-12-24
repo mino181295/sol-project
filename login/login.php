@@ -3,7 +3,7 @@
 <head>
 	<script type="text/javascript" src="sha512.js"></script>
 	<script type="text/javascript" src="forms.js"></script>
-	<title></title>
+	<title>login</title>
 </head>
 <body>
 	<?php
