@@ -25,7 +25,9 @@ $(function(){
         showDate();
     });
 
-    /** MAIN **/
+    /*************************
+    * MAIN 
+    **************************/
     var d = new Date();
     var currentYear = d.getFullYear();
     var currentMonth = d.getMonth();
