@@ -37,7 +37,7 @@ $(function(){
             content += "<tr>";
             for (var j = 1; j <= 7 && cellsNo >= 0; j++, cellsNo--) {
                 var val = (daysNo - cellsNo);
-                content += "<td>" + (val > 0 ? val : " ")  + "</td>";
+                content += "<td id='day-" + val + "'>" + (val > 0 ? val : " ")  + "</td>";
             }
             content += "</tr>";
         };
@@ -47,29 +47,46 @@ $(function(){
         updateTopBar();
     }
 
+    function goToday() {
+        currentYear = date.getFullYear();
+        currentMonth = date.getMonth();
+        currentDay = date.getDate();
+        updateTopBar();
+        createCalendar();
+        pickToday();
+    }
+
+    function pickToday() {
+        $("#day-" + currentDay).css("background-color", "#EEEEEE");
+    }
+
     $("#nextMonth").click(function() {
         currentMonth = getNextMonth();
         currentYear += currentMonth == 0 ? 1 : 0
         createCalendar();
+        if (currentMonth == date.getMonth()) {
+            pickToday();
+        }
     });
 
     $("#prevMonth").click(function() {
         currentMonth = getPrevMonth();
         currentYear -= currentMonth == 11 ? 1 : 0
         createCalendar();
+        if (currentMonth == date.getMonth()) {
+            pickToday();
+        }
     });
 
     $("#today").click(function(event) {
-        
+        goToday();
     });
 
     /*************************
     * MAIN 
     **************************/
-    var d = new Date();
-    var currentYear = d.getFullYear();
-    var currentMonth = d.getMonth();
-    createCalendar();
+    var date = new Date();
+    goToday();
 /*
     // media query event handler
     if (matchMedia) {
