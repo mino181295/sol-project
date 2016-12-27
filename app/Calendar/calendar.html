@@ -3,38 +3,52 @@
 <html lang="it">
 
 <head>
-    <meta charset="utf-8">
     <title>Calendario</title>
+    <meta charset="utf-8">
+
+    <!-- JQUERY + JAVASCRIPT -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="calendar.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="calendar.css"> -->
-    <link rel="stylesheet" type="text/css" href="../lib/Bootstrap/css/boostrap.min.css" />
+    
+    <!-- BOOTSTRAP + CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="../lib/Bootstrap/css/bootstrap.min.css"></link>
+    <script type="text/javascript" src="../lib/Bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="calendar.css">
+
 </head>
 <body>
-    <main class="col-xs-3 col-xs-offset-3">
-        <div id="topTable">
-            <button type="button" id="prevMonth">Precedente</button>
+    <main class="container-fluid">        
+        <div id="topTable" class="row">
             <h1 class="month-yearInfo">Mese-Anno</h1>
-            <button type="button" id="nextMonth">Successivo</button>
-        </div>
-        <table>
-            <caption class="month-yearInfo" class="sr-only">Mese-Anno</caption>
-            <thead>
-                <tr>
-                    <th>Lunedì</th>
-                    <th>Martedì</th>
-                    <th>Mercoledì</th>
-                    <th>Giovedì</th>
-                    <th>Venerdì</th>
-                    <th>Sabato</th>
-                    <th>Domenica</th>
-                </tr>
-            </thead>
-            <tbody>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" id="prevMonth" class="btn btn-default">Prec</button>
+              <button type="button" id="today" class="btn btn-default">Oggi</button>
+              <button type="button" id="nextMonth" class="btn btn-default">Succ</button>
+          </div>
+      </div>
 
-            </tbody>
-        </table>
-    </main>
+      <div class="row">
+        <div class="table-responsive col-xs-offset-1 col-xs-10">
+            <table class="table">
+                <caption class="month-yearInfo sr-only">Mese-Anno</caption>
+                <thead>
+                    <tr>
+                        <th>Lunedì</th>
+                        <th>Martedì</th>
+                        <th>Mercoledì</th>
+                        <th>Giovedì</th>
+                        <th>Venerdì</th>
+                        <th>Sabato</th>
+                        <th>Domenica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 </body>
 
 </html>
