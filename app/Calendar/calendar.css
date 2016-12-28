@@ -17,11 +17,27 @@ main {
 }
 
 #topTable {
-    height: 100%;
-    border-radius: 10px;
+    padding-bottom: 1%;
 }
 
-thead, #topTable {
+#today {
+        width: 80px;
+    }
+
+
+
+
+/****************************
+*       MEDIA QUERIES
+*****************************/
+@media (max-width: 600px) {
+    td {
+        height: 60px;
+    }
+
+    button {
+        height: 50px;
+    }
 
 }
 

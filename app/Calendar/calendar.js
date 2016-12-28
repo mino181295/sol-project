@@ -3,10 +3,15 @@ $(function(){
     var monthNames = ['Gennaio', 'Febbrario', 'Marzo','Aprile', 'Maggio', 'Giugno', 'Luglio',
     'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
 
-    var dayNames = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Sabato', 'Domenica'];
+    var dayNames = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
 
     var seasonColor = ["#428bca", "#5cb85c", "#d9534f", "#f0ad4e"];
 
+
+
+    /************************************
+    *            FUNCTIONS
+    ************************************/
     function getDaysInMonth(year, month) {
         return new Date(year, month+1, 0).getDate();
     }
@@ -20,7 +25,7 @@ $(function(){
     }
 
     function updateTopBar() {
-        $(".month-yearInfo").text(monthNames[currentMonth] + " - " + currentYear);
+        $(".month-yearInfo").text(monthNames[currentMonth] + " - " + currentYear); // aggiorno anche la caption della table
         $("#prevMonth").text(monthNames[getPrevMonth()]);
         $("#nextMonth").text(monthNames[getNextMonth()]);
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
@@ -60,6 +65,11 @@ $(function(){
         $("#day-" + currentDay).css("background-color", "#EEEEEE");
     }
 
+
+
+    /************************************
+    *            CALLS BACK
+    ************************************/
     $("#nextMonth").click(function() {
         currentMonth = getNextMonth();
         currentYear += currentMonth == 0 ? 1 : 0
@@ -82,25 +92,31 @@ $(function(){
         goToday();
     });
 
-    /*************************
-    * MAIN 
-    **************************/
+
+
+    /************************************
+    *             MAIN
+    ************************************/
     var date = new Date();
     goToday();
-/*
+
+
+
+
+
     // media query event handler
     if (matchMedia) {
-      var mq = window.matchMedia("(min-width: 500px)");
+      var mq = window.matchMedia("(max-width: 600px)");
       mq.addListener(WidthChange);
       WidthChange(mq);
   }
 
   function WidthChange(mq) {
-      if (mq.matches) {
-        alert("ciao");
-      } else {
-      }
-
+      var content = "<tr>";
+      dayNames.forEach(function(day) {
+        content += "<th>" + day.substring(0, (mq.matches ? 3 : day.length)) + "</th>";
+    }); 
+      content += "</tr>";
+      $("thead").html(content);
   }
-  */
 });
