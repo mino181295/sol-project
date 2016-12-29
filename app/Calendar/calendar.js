@@ -7,6 +7,8 @@ $(function(){
 
     var seasonColor = ["#428bca", "#5cb85c", "#d9534f", "#f0ad4e"];
 
+    var state = {"monthly": 0, "weekly": 1, "daily": 2}; // calendar enum for month/week/day
+
 
 
     /************************************
@@ -31,7 +33,26 @@ $(function(){
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
+    function createTHead() {
+        var content = "<tr>";
+        var length = dayNames.length;
+        
+        if (currState == state.weekly) {
+            content += "<th>Ora</th>";
+            length -= 2; //escludo il sabato e la domenica
+        }
+        
+        for (i=0; i<length; i++) {
+            var day = dayNames[i];
+            content += "<th>" + day.substring(0, (tinyScreen ? 3 : day.length)) + "</th>";
+        }
+        content += "</tr>";
+        $("thead").html(content);
+    }
+
     function createCalendar() {
+        currState = state.monthly;
+        createTHead();
         var content = "";
         var firstDay = new Date(currentYear, currentMonth, 1).getDay(); // primo giorno del mese (0-dom, 1-lun, 2-mar, .. 6-sab)
         firstDay = firstDay == 0 ? 7 : firstDay;
@@ -42,14 +63,25 @@ $(function(){
             content += "<tr>";
             for (var j = 1; j <= 7 && cellsNo >= 0; j++, cellsNo--) {
                 var val = (daysNo - cellsNo);
-                content += "<td id='day-" + val + "'>" + (val > 0 ? val : " ")  + "</td>";
+                content += "<td " + (val > 0 ? ("id='day-" + val + "'>" + val) : ">") + "</td>";
             }
             content += "</tr>";
         };
 
         $("tbody").html(content);
+        $("[id^=day-").click(showWeek);
 
         updateTopBar();
+    }
+
+    function showWeek(event) {
+        currState = state.weekly;
+        createTHead();
+        var content = "";
+        //event.target.id
+        // RICHIESTA TRAMITE AJAX DEL TBODY RELATIVO ALLA SETTIMANA RICHIESTA
+       
+        $("tbody").html(content);
     }
 
     function goToday() {
@@ -95,28 +127,26 @@ $(function(){
 
 
     /************************************
+    *   MEDIA QUERY EVENT HANDLER
+    ************************************/
+    if (matchMedia) {
+        var mq = window.matchMedia("(max-width: 768px)");
+        mq.addListener(WidthChange);
+        WidthChange(mq);
+    }
+
+    function WidthChange(mq) {
+        tinyScreen = mq.matches; // variabile globale di default
+        createTHead();
+    }
+
+
+
+    /************************************
     *             MAIN
     ************************************/
     var date = new Date();
+    var currState = state.monthly;
     goToday();
 
-
-
-
-
-    // media query event handler
-    if (matchMedia) {
-      var mq = window.matchMedia("(max-width: 600px)");
-      mq.addListener(WidthChange);
-      WidthChange(mq);
-  }
-
-  function WidthChange(mq) {
-      var content = "<tr>";
-      dayNames.forEach(function(day) {
-        content += "<th>" + day.substring(0, (mq.matches ? 3 : day.length)) + "</th>";
-    }); 
-      content += "</tr>";
-      $("thead").html(content);
-  }
 });
