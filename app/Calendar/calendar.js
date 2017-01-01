@@ -34,44 +34,51 @@ $(function(){
     }
 
     function createTHead() {
-        var content = "<tr>";
+       var row = $("<tr></tr>"); // creo la riga
         var length = dayNames.length;
         
         if (currState == state.weekly) {
-            content += "<th>Ora</th>";
+            row.append($("<th></th>").text("Ora"));
             length -= 2; //escludo il sabato e la domenica
         }
         
         for (i=0; i<length; i++) {
             var day = dayNames[i];
-            content += "<th>" + day.substring(0, (tinyScreen ? 3 : day.length)) + "</th>";
+            var content = day.substring(0, (tinyScreen ? 3 : day.length));
+            row.append($("<th></th>").text(content)); // creo le colonne
         }
-        content += "</tr>";
-        $("thead").html(content);
+
+        $("thead").html(row);
     }
 
-    function createCalendar() {
+    function showMonth() {
         currState = state.monthly;
         createTHead();
-        var content = "";
+        updateTopBar();
+
         var firstDay = new Date(currentYear, currentMonth, 1).getDay(); // primo giorno del mese (0-dom, 1-lun, 2-mar, .. 6-sab)
         firstDay = firstDay == 0 ? 7 : firstDay;
         var daysNo = getDaysInMonth(currentYear, currentMonth);
         var cellsNo = daysNo + firstDay - 2; // tengo conto anche delle caselle dei giorni nello scorso mese ma nella prima settimana di quello attuale
         var rowsNo = Math.floor((cellsNo+6)/7); // per arrotondare in eccesso il numero di settimane
+
+        var tBody = $("<tbody></tbody>");
         for (var i = 1; i<=rowsNo; i++) {
-            content += "<tr>";
+            var row = $("<tr></tr>");
             for (var j = 1; j <= 7 && cellsNo >= 0; j++, cellsNo--) {
                 var val = (daysNo - cellsNo);
-                content += "<td " + (val > 0 ? ("id='day-" + val + "'>" + val) : ">") + "</td>";
+                var cell = $("<td></td>").text(val > 0 ? val : "");
+                if (val > 0) {
+                    cell.attr('id', "day-" + val);    
+                }
+                row.append(cell);
             }
-            content += "</tr>";
+            tBody.append(row);
         };
 
-        $("tbody").html(content);
+        $("tbody").remove();
+        $("thead").after(tBody);
         $("[id^=day-").click(showWeek);
-
-        updateTopBar();
     }
 
     function showWeek(event) {
@@ -89,7 +96,7 @@ $(function(){
         currentMonth = date.getMonth();
         currentDay = date.getDate();
         updateTopBar();
-        createCalendar();
+        showMonth();
         pickToday();
     }
 
@@ -105,7 +112,7 @@ $(function(){
     $("#nextMonth").click(function() {
         currentMonth = getNextMonth();
         currentYear += currentMonth == 0 ? 1 : 0
-        createCalendar();
+        showMonth();
         if (currentMonth == date.getMonth()) {
             pickToday();
         }
@@ -114,7 +121,7 @@ $(function(){
     $("#prevMonth").click(function() {
         currentMonth = getPrevMonth();
         currentYear -= currentMonth == 11 ? 1 : 0
-        createCalendar();
+        showMonth();
         if (currentMonth == date.getMonth()) {
             pickToday();
         }
