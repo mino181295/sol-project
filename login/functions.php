@@ -1,6 +1,6 @@
 <?php
 function sec_session_start() {
-        $session_name = 'sec_session_id'; // Imposta un nome di sessione
+        $session_name = 'file_sharing_session'; // Imposta un nome di sessione
         $secure = false; // Imposta il parametro a true se vuoi usare il protocollo 'https'.
         $httponly = true; // Questo impedirà ad un javascript di essere in grado di accedere all'id di sessione.
         ini_set('session.use_only_cookies', 1); // Forza la sessione ad utilizzare solo i cookie.
@@ -9,6 +9,25 @@ function sec_session_start() {
         session_name($session_name); // Imposta il nome di sessione con quello prescelto all'inizio della funzione.
         session_start(); // Avvia la sessione php.
         session_regenerate_id(); // Rigenera la sessione e cancella quella creata in precedenza.
+    }
+
+    function sendAllertMail($email) {
+      // definisco mittente e destinatario della mail
+      $nome_mittente = "Direzione unibo";
+      $mail_mittente = "lorenzo.chiana@gmail.com";
+      $mail_destinatario = $email;
+
+      // definisco il subject ed il body della mail
+      $mail_oggetto = "Disattivato account";
+      $mail_corpo = "A seguito di varie irregolarità e' stato disattivato l'account: " . $email;
+
+      // aggiusto un po' le intestazioni della mail
+      // E' in questa sezione che deve essere definito il mittente (From)
+      $mail_headers = "From: " .  $nome_mittente . " <" .  $mail_mittente . ">\r\n";
+      $mail_headers .= "Reply-To: " .  $mail_mittente . "\r\n";
+
+      mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
+
     }
 
     function login($email, $password, $mysqli) {
@@ -23,8 +42,10 @@ function sec_session_start() {
       if($stmt->num_rows == 1) { // se l'utente esiste
          // verifichiamo che non sia disabilitato in seguito all'esecuzione di troppi tentativi di accesso errati.
       if(checkbrute($user_id, $mysqli) == true) { 
+        checkcaptcha();
             // Account disabilitato
-            // Invia un e-mail all'utente avvisandolo che il suo account è stato disabilitato.
+            // Invia un e-mail a chi di dovere che segnala l'irregolarità fatte dall'acount in questione e poi spetterà ad esso se riattivarla o no manulmente.
+          //sendAllertMail($email);
       	return false;
       } else {
          if($db_password == $password) { // Verifica che la password memorizzata nel database corrisponda alla password fornita dall'utente.
@@ -51,6 +72,28 @@ function sec_session_start() {
    	return false;
    }
 }
+}
+
+function checkcaptcha(){
+        $LoginCaptcha = new Captcha('LoginCaptcha');
+        $LoginCaptcha->UserInputID = 'CaptchaCode';
+        $LoginCaptcha->ImageWidth = 200;
+        $LoginCaptcha->CodeLength = 4;
+        $LoginCaptcha->CodeStyle = CodeStyle::Alpha;
+
+        // only show the Captcha if it hasn't been already solved 
+        // for the current message
+        if(!$LoginCaptcha->IsSolved) { ?>
+          <label for="CaptchaCode">Retype the characters from the picture:</label>
+          <?php echo $LoginCaptcha->Html(); ?>
+          <input type="text" name="CaptchaCode" id="CaptchaCode" 
+            class="textbox" /><?php
+
+          // CAPTCHA validation failed, show error message
+          if ('Captcha' == $error) { ?>
+            <span class="incorrect">Incorrect code</span><?php
+          }
+        }
 }
 
 function checkbrute($user_id, $mysqli) {
