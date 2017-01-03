@@ -8,7 +8,12 @@
 <body>
 	<?php
 		if(isset($_GET['error'])) { 
-		   echo 'Error Logging In!';
+			$error = $_GET['error'];
+			if($error == 1) {
+				echo "E-mail sbagliata!";
+			} else {
+				echo "Password sbagliata!";
+			}
 		}
 	?>
 	<form action="process_login.php" method="post" name="login_form">

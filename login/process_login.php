@@ -9,9 +9,12 @@
 	      	// Login eseguito
 	   		//echo 'Success: You have been logged in!';
 	   		header('Location: ./home.html');
-	   	} else {
-	      // Login fallito
+	   	} else if(!emailExist($email, $mysqli)){ // Login fallito
+	      	// email sbagliata
 	   		header('Location: ./login.php?error=1');
+	  	} else {
+	  		// password sbagliata
+	  		header('Location: ./login.php?error=2');
 	  	}
 	} else { 
 	   // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
