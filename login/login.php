@@ -14,9 +14,9 @@
 	<form action="process_login.php" method="post" name="login_form">
 		<fieldset>
 			<legend>Login</legend>
-			Email: <input type="text" name="email" /><br/>
-	   		Password: <input type="password" name="pw" id="password"/><br/>
-	   		<input type="button" value="Login" onclick="formhash(this.form, this.form.password);" />
+	   		Email: <input type="email" name="email" id="email" autocomplete="on" placeholder="Email" required /><br/>
+	   		Password: <input type="password" name="pw" id="password" placeholder="Password" required /><br/>
+	   		<input type="submit" name="go" onclick="formhash(this.form, this.form.password);" /> 
 		</fieldset>
 	</form>
 

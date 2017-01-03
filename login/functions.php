@@ -42,7 +42,7 @@ function sec_session_start() {
       if($stmt->num_rows == 1) { // se l'utente esiste
          // verifichiamo che non sia disabilitato in seguito all'esecuzione di troppi tentativi di accesso errati.
       if(checkbrute($user_id, $mysqli) == true) { 
-        checkcaptcha();
+        
             // Account disabilitato
             // Invia un e-mail a chi di dovere che segnala l'irregolarità fatte dall'acount in questione e poi spetterà ad esso se riattivarla o no manulmente.
           //sendAllertMail($email);
