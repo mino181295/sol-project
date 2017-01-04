@@ -9,7 +9,7 @@
 	      	// Login eseguito
 	   		//echo 'Success: You have been logged in!';
 	   		header('Location: ./home.html');
-	   	} else if(!emailExist($email, $mysqli)){ // Login fallito
+	   	} else if(!emailExist($email, $mysqli)){ 
 	      	// email sbagliata
 	   		header('Location: ./login.php?error=1');
 	  	} else {
