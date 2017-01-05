@@ -24,6 +24,10 @@ main {
         width: 80px;
     }
 
+.notCurrMonth {
+    color: #c9c9c9
+}
+
 
 
 
@@ -37,7 +41,7 @@ main {
 
     button {
         height: 50px;
+        width: 70px;
     }
-
 }
 

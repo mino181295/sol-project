@@ -27,18 +27,21 @@ $(function(){
     }
 
     function updateTopBar() {
-        $(".month-yearInfo").text(monthNames[currentMonth] + " - " + currentYear); // aggiorno anche la caption della table
-        $("#prevMonth").text(monthNames[getPrevMonth()]);
-        $("#nextMonth").text(monthNames[getNextMonth()]);
+        var text = currState == state.monthly ? "Calendario mensile " : "Calendario settimanale ";
+        var info = monthNames[currentMonth] + " " + currentYear;
+        
+        $("#topTable h1").text(info);
+        $("caption").text(text + info); // aggiorno anche la caption della table
+        
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
     function createTHead() {
        var row = $("<tr></tr>"); // creo la riga
-        var length = dayNames.length;
-        
-        if (currState == state.weekly) {
-            row.append($("<th></th>").text("Ora"));
+       var length = dayNames.length;
+
+       if (currState == state.weekly) {
+        row.append($("<th></th>").text("Ora"));
             length -= 2; //escludo il sabato e la domenica
         }
         
@@ -52,7 +55,6 @@ $(function(){
     }
 
     function showMonth() {
-        currState = state.monthly;
         createTHead();
         updateTopBar();
 
@@ -61,47 +63,74 @@ $(function(){
         var daysNo = getDaysInMonth(currentYear, currentMonth);
         var cellsNo = daysNo + firstDay - 2; // tengo conto anche delle caselle dei giorni nello scorso mese ma nella prima settimana di quello attuale
         var rowsNo = Math.floor((cellsNo+6)/7); // per arrotondare in eccesso il numero di settimane
-
+        
         var tBody = $("<tbody></tbody>");
         for (var i = 1; i<=rowsNo; i++) {
             var row = $("<tr></tr>");
-            for (var j = 1; j <= 7 && cellsNo >= 0; j++, cellsNo--) {
-                var val = (daysNo - cellsNo);
-                var cell = $("<td></td>").text(val > 0 ? val : "");
-                if (val > 0) {
-                    cell.attr('id', "day-" + val);    
+            for (var j = 1; j <= 7; j++, cellsNo--) {
+                var cell = $("<td></td>");
+
+                if (cellsNo < 0) { // giorno del mese successivo ma nella stessa settimana di giorni di questo mese
+                    cell.addClass('notCurrMonth');
+                    cell.text(-cellsNo);
+                } else {
+                    var diff = daysNo - cellsNo;   
+                    if (diff <= 0) { // giorno del mese precedente ma nella stessa settimana di giorni di questo mese
+                        cell.addClass('notCurrMonth');
+                        var prevMonth = getPrevMonth();
+                        var year = currentYear - (prevMonth == 11 ? 1 : 0);
+                        cell.text(getDaysInMonth(year, prevMonth) + diff);
+                    } else { // giorno di questo mese
+                        cell.text(diff);
+                        if (diff == currentDay && currentMonth == date.getMonth() &&
+                                                currentYear == date.getFullYear() ) {
+                            cell.attr('id', 'currDay');
+                        }
+                    }
                 }
                 row.append(cell);
             }
             tBody.append(row);
         };
-
         $("tbody").remove();
         $("thead").after(tBody);
-        $("[id^=day-").click(showWeek);
+        pickToday();
+     //   $("td").not(".notCurrMonth").click(showWeek);
     }
 
-    function showWeek(event) {
-        currState = state.weekly;
+    function showWeek() {
+        updateTopBar();
         createTHead();
         var content = "";
-        //event.target.id
-        // RICHIESTA TRAMITE AJAX DEL TBODY RELATIVO ALLA SETTIMANA RICHIESTA
-       
+        
+        // ottengo i giorni estremi dei questa settimana
+        //var currWeek = $("#day-" + currentDay).parent();
+        var currWeek = $(this).parent();
+        var fDay = currWeek.children().first().text();
+        var lDay = currWeek.children().last().text();
+
+        // RICHIESTA TRAMITE AJAX: mando giorni estremi della settimana interessata
+        $.getJSON('weekGen.php', {'fDay': fDay, 'lDay': lDay}, function(json) {
+            alert(json.result);
+        });        
+
         $("tbody").html(content);
     }
 
     function goToday() {
         currentYear = date.getFullYear();
         currentMonth = date.getMonth();
-        currentDay = date.getDate();
+        currentDay = date.getDate(); // RIMANE FISSO INDIPENDENTEMENTE DAL MESE-ANNO!
         updateTopBar();
-        showMonth();
-        pickToday();
+        if (currState == state.monthly) {
+            showMonth(); // rigenero il calendario mensile del giorno corrente.
+        } else {
+            showWeek();  // rigenero il calendario settimanale del giorno corrente.
+        }
     }
 
     function pickToday() {
-        $("#day-" + currentDay).css("background-color", "#EEEEEE");
+        $("#currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
     }
 
 
@@ -109,26 +138,32 @@ $(function(){
     /************************************
     *            CALLS BACK
     ************************************/
-    $("#nextMonth").click(function() {
-        currentMonth = getNextMonth();
-        currentYear += currentMonth == 0 ? 1 : 0
-        showMonth();
-        if (currentMonth == date.getMonth()) {
-            pickToday();
+    $("#next").click(function() {
+        if (currState == state.monthly) {
+            currentMonth = getNextMonth();
+            currentYear += currentMonth == 0 ? 1 : 0
+            showMonth();
         }
     });
 
-    $("#prevMonth").click(function() {
-        currentMonth = getPrevMonth();
-        currentYear -= currentMonth == 11 ? 1 : 0
-        showMonth();
-        if (currentMonth == date.getMonth()) {
-            pickToday();
+    $("#prev").click(function() {
+        if (currState == state.monthly) {
+            currentMonth = getPrevMonth();
+            currentYear -= currentMonth == 11 ? 1 : 0
+            showMonth();
         }
     });
 
-    $("#today").click(function(event) {
-        goToday();
+    $("#today").click(goToday);
+
+    $("#monthMode").click(function() {
+        currState = state.monthly;
+        showMonth();
+    });
+    
+    $("#weekMode").click(function() {
+        currState = state.weekly;
+        showWeek();
     });
 
 
@@ -145,6 +180,7 @@ $(function(){
     function WidthChange(mq) {
         tinyScreen = mq.matches; // variabile globale di default
         createTHead();
+        $("#weekMode").text(tinyScreen ? "Sett." : "Settimana");
     }
 
 

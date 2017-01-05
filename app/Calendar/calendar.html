@@ -20,23 +20,29 @@
 <body>
     <main class="container-fluid">        
         <div id="topTable" class="row">
-            <h1 class="month-yearInfo">Mese-Anno</h1>
+            <h1>Mese-Anno</h1>
             <div class="btn-group" role="group" aria-label="...">
-                <button type="button" id="prevMonth" class="btn btn-default">Prec</button>
+                <button type="button" id="prev" class="btn btn-default btn-arrow-left">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </button>
+                <button type="button" id="monthMode" class="btn btn-default">Mese</button>
                 <button type="button" id="today" class="btn btn-default">Oggi</button>
-                <button type="button" id="nextMonth" class="btn btn-default">Succ</button>
+                <button type="button" id="weekMode" class="btn btn-default">Settimana</button>
+                <button type="button" id="next" class="btn btn-default btn-arrow-right">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
 
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-fixed">
-                    <caption class="month-yearInfo sr-only">Mese-Anno</caption>
+                    <caption class="sr-only">TipoCalendario-Mese-Anno</caption>
                     <thead>
-                    <!-- CODE AUTOMATICALLY GENERATED HERE -->
+                        <!-- CODE AUTOMATICALLY GENERATED HERE -->
                     </thead>
                     <tbody>
-                    <!-- CODE AUTOMATICALLY GENERATED HERE -->
+                        <!-- CODE AUTOMATICALLY GENERATED HERE -->
                     </tbody>
                 </table>
             </div>
