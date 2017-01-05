@@ -1,6 +1,7 @@
 @charset "utf-8";
 
-@import url(openSourceCode/reset.css);
+@import url('fonts/cinzel-v4-latin/cinzel-v4-latin-regular.eot');
+@import url('openSourceCode/reset.css');
 
 body {
 	background-color: #C0C0C0;
@@ -22,6 +23,31 @@ input {
 #login {
 	margin: 50px auto;
 	width: 500px;
+}
+
+.groupMargin {margin-bottom:8px; }
+
+#introduction p {
+    padding-top:1.5em;
+}
+
+#brandname {
+	font-family: 'Cinzel', serif;
+	position: fixed;
+	bottom: 10px;
+	left:50px;
+  	color: white;
+  	font-family: Cinzel, serif;
+  	font-size: 2.5em;
+}
+#brandname .nome{
+    padding-top: 0;
+    font-size: 0.9em;
+}
+#brandname p.titoletto {
+	font-size: 0.6em;
+	line-height: 6px;
+    padding-top: 0;
 }
 
 #header {

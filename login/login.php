@@ -40,5 +40,12 @@
 
 	</div>
 
+	<div id="introduction" class="groupMargin">
+		<div id="brandname">
+			<p class="titoletto">Alma Mater Studiorum</p>
+			<p class="nome">Università di Bologna</p>
+		</div>
+	</div>
+
 </body>	
 </html>
