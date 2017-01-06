@@ -27,36 +27,58 @@ $(function(){
     }
 
     function updateTopBar() {
-        var text = currState == state.monthly ? "Calendario mensile " : "Calendario settimanale ";
         var info = monthNames[currentMonth] + " " + currentYear;
-        
-        $("#topTable h1").text(info);
-        $("caption").text(text + info); // aggiorno anche la caption della table
-        
+        $("#topTable h1").text(info);        
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
+    // Creo il thead della table interessata ed aggiorno la caption
     function createTHead() {
-       var row = $("<tr></tr>"); // creo la riga
-       var length = dayNames.length;
+        var row = $("<tr></tr>"); // creo la riga
+        var length = dayNames.length;
+        var table = "#monthly-table ";
+        var caption = "Calendario mensile ";
 
-       if (currState == state.weekly) {
-        row.append($("<th></th>").text("Ora"));
+        if (currState == state.weekly) {
+            row.append($("<th></th>").text("Ora"));
             length -= 2; //escludo il sabato e la domenica
+            table = "#weekly-table ";
+            caption = "Calendario settimanale ";
         }
         
+        var days = new Array();
+        if (currState == state.weekly) {
+            var week = $("#monthly-table tbody tr").eq(currentWeek-1);
+            $.each(week.children(), function() {
+                days.push($(this).text());
+            });
+        }
+
         for (i=0; i<length; i++) {
             var day = dayNames[i];
-            var content = day.substring(0, (tinyScreen ? 3 : day.length));
+            var dayNo = days.length == 0 ? "" : " " + days[i];
+            var content = day.substring(0, (tinyScreen ? 3 : day.length)) + dayNo;
             row.append($("<th></th>").text(content)); // creo le colonne
         }
 
-        $("thead").html(row);
+        var info = monthNames[currentMonth] + " " + currentYear;
+        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
+        $(table + "caption").text(info); // aggiorno anche la caption della table
+
+        $(table + "thead").html(row);
     }
 
-    function showMonth() {
+    // updateWeekNo==true -> setto il numero di settimana SOLO quando scorro i mesi e quando tornon al giorno corrente.
+    function createMonth(updateWeekNo) {
         createTHead();
         updateTopBar();
+        
+        //setto di default la settimana iniziale a 1 poi la imposterò eventualmente a quella del giorno corrente
+        if (updateWeekNo)
+            currentWeek = 1; 
+
+        // di default considero il mese "completo" i.e. terminante di domenica.
+        monthComplete = true;
 
         var firstDay = new Date(currentYear, currentMonth, 1).getDay(); // primo giorno del mese (0-dom, 1-lun, 2-mar, .. 6-sab)
         firstDay = firstDay == 0 ? 7 : firstDay;
@@ -64,6 +86,8 @@ $(function(){
         var cellsNo = daysNo + firstDay - 2; // tengo conto anche delle caselle dei giorni nello scorso mese ma nella prima settimana di quello attuale
         var rowsNo = Math.floor((cellsNo+6)/7); // per arrotondare in eccesso il numero di settimane
         
+        weeksNo = rowsNo;
+
         var tBody = $("<tbody></tbody>");
         for (var i = 1; i<=rowsNo; i++) {
             var row = $("<tr></tr>");
@@ -73,6 +97,7 @@ $(function(){
                 if (cellsNo < 0) { // giorno del mese successivo ma nella stessa settimana di giorni di questo mese
                     cell.addClass('notCurrMonth');
                     cell.text(-cellsNo);
+                    monthComplete = false;
                 } else {
                     var diff = daysNo - cellsNo;   
                     if (diff <= 0) { // giorno del mese precedente ma nella stessa settimana di giorni di questo mese
@@ -82,55 +107,66 @@ $(function(){
                         cell.text(getDaysInMonth(year, prevMonth) + diff);
                     } else { // giorno di questo mese
                         cell.text(diff);
-                        if (diff == currentDay && currentMonth == date.getMonth() &&
-                                                currentYear == date.getFullYear() ) {
-                            cell.attr('id', 'currDay');
+                        if (diff == currentDay && currentMonth == date.getMonth() && currentYear == date.getFullYear()) {
+                            cell.addClass("currDay");
+                            if (updateWeekNo) 
+                                currentWeek = i;
                         }
+
                     }
                 }
                 row.append(cell);
             }
             tBody.append(row);
         };
-        $("tbody").remove();
-        $("thead").after(tBody);
+        $("#monthly-table tbody").remove();
+        $("#monthly-table thead").after(tBody);
         pickToday();
-     //   $("td").not(".notCurrMonth").click(showWeek);
+    }
+
+    function showMonth() {
+        $("#weekly-table").fadeOut();
+        $("#monthly-table").fadeIn();
     }
 
     function showWeek() {
-        updateTopBar();
-        createTHead();
         var content = "";
-        
-        // ottengo i giorni estremi dei questa settimana
-        //var currWeek = $("#day-" + currentDay).parent();
-        var currWeek = $(this).parent();
-        var fDay = currWeek.children().first().text();
-        var lDay = currWeek.children().last().text();
+
+        // prendo gli estremi della settimana corrente
+        week = $("#monthly-table tbody tr").eq(currentWeek-1);
+        fDay = week.children().first().text();
+        lDay = week.children().last().text();
+
+        console.log("week-" + currentWeek + "; fDay: " + fDay + "; fDay: " + lDay);
 
         // RICHIESTA TRAMITE AJAX: mando giorni estremi della settimana interessata
         $.getJSON('weekGen.php', {'fDay': fDay, 'lDay': lDay}, function(json) {
-            alert(json.result);
-        });        
+          //  alert(json.result);
+      });        
 
-        $("tbody").html(content);
+        $("#weekly-table tbody").html(content);
+
+        createTHead();
+        updateTopBar();
+
+        $("#monthly-table").fadeOut();
+        $("#weekly-table").fadeIn();
     }
 
     function goToday() {
         currentYear = date.getFullYear();
         currentMonth = date.getMonth();
         currentDay = date.getDate(); // RIMANE FISSO INDIPENDENTEMENTE DAL MESE-ANNO!
-        updateTopBar();
-        if (currState == state.monthly) {
-            showMonth(); // rigenero il calendario mensile del giorno corrente.
-        } else {
+        createMonth(true); // rigenero il calendario mensile del giorno corrente (lo rigenero sempre in quando quello settimanale SI BASA su quello mensile)
+        if (currState == state.weekly) {
             showWeek();  // rigenero il calendario settimanale del giorno corrente.
+        } else {
+            showMonth();
         }
     }
 
     function pickToday() {
-        $("#currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
+        $(".currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
     }
 
 
@@ -139,31 +175,67 @@ $(function(){
     *            CALLS BACK
     ************************************/
     $("#next").click(function() {
-        if (currState == state.monthly) {
+        var nextM = false;
+        
+        if (currState == state.weekly) {
+            currentWeek = currentWeek % weeksNo + 1; 
+            if (currentWeek == 1) {
+                nextM = true; 
+                // prendo la seconda settimana del mese corrente (evito di prendere la prima 2 volte) se il mese precedente non finiva di domenica
+                currentWeek += monthComplete ? 0 : 1; 
+            }
+        }
+        
+        // devo scorrere di un mese
+        var monthly = currState == state.monthly
+        if (nextM || monthly) {
             currentMonth = getNextMonth();
             currentYear += currentMonth == 0 ? 1 : 0
-            showMonth();
+            createMonth(monthly); // creo solo
         }
+
+        if (currState == state.weekly)
+            showWeek(); // creo+mostro
+        else
+            showMonth();
     });
 
     $("#prev").click(function() {
-        if (currState == state.monthly) {
+        var prevM = false;
+        
+        if (currState == state.weekly) {
+            currentWeek--; 
+            prevM = currentWeek == 0; 
+        }
+        
+        // devo scorrere di un mese
+        var monthly = currState == state.monthly
+        if (prevM || monthly) {
             currentMonth = getPrevMonth();
             currentYear -= currentMonth == 11 ? 1 : 0
-            showMonth();
+            createMonth(monthly); // creo solo
         }
+
+        if (currState == state.weekly) {
+            if (prevM) 
+                currentWeek = weeksNo - (monthComplete ? 0 : 1); // prendo la penultima settimana del mese corrente (evito di prendere l'ultima 2 volte) se il mese non finisce di domenica
+            showWeek(); // creo+mostro
+        }
+        else
+            showMonth();
     });
 
     $("#today").click(goToday);
 
     $("#monthMode").click(function() {
         currState = state.monthly;
+        createMonth(true);
         showMonth();
     });
     
     $("#weekMode").click(function() {
         currState = state.weekly;
-        showWeek();
+        showWeek(); // sfrutto il calendario mensile già creato.
     });
 
 
@@ -189,7 +261,13 @@ $(function(){
     *             MAIN
     ************************************/
     var date = new Date();
+    var currentYear;
+    var currentMonth;
+    var currentWeek;
+    var currentDay; 
     var currState = state.monthly;
+    var fDay;
+    var lDay;
     goToday();
 
 });
