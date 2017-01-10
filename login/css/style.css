@@ -1,95 +1,23 @@
-@charset "utf-8";
-
-@import url('fonts/cinzel-v4-latin/cinzel-v4-latin-regular.eot');
-@import url('openSourceCode/reset.css');
-
-body {
-	background-color: #C0C0C0;
-	color: #000;
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	line-height: 1.5em;
+.login {
+    margin-top:27px;
+}
+.set-logo {
+    background:#fff;
+    color:#ddd;
+    border-radius:500%;
+    padding:11px;
+    font-size:108px;
+    border: solid #ddd 14px;
+}
+.logo {
+    margin-top:27px;
+    margin-bottom:54px;
 }
 
-input {
-	border: none;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
+.last-row {
+    margin-bottom:0px;
 }
 
-#login {
-	margin: 50px auto;
-	width: 500px;
-}
-
-.groupMargin {margin-bottom:8px; }
-
-#introduction p {
-    padding-top:1.5em;
-}
-
-#brandname {
-	font-family: 'Cinzel', serif;
-	position: fixed;
-	bottom: 10px;
-	left:50px;
-  	color: white;
-  	font-family: Cinzel, serif;
-  	font-size: 2.5em;
-}
-#brandname .nome{
-    padding-top: 0;
-    font-size: 0.9em;
-}
-#brandname p.titoletto {
-	font-size: 0.6em;
-	line-height: 6px;
-    padding-top: 0;
-}
-
-#header {
-	background-color: #6b0808;
-	-webkit-border-radius: 20px 20px 0 0;
-	-moz-border-radius: 20px 20px 0 0;
-	border-radius: 20px 20px 0 0;
-	color: #fff;
-	font-size: 28px;
-	padding: 20px 26px;
-}
-
-#login fieldset {
-	background-color: #fff;
-	-webkit-border-radius: 0 0 20px 20px;
-	-moz-border-radius: 0 0 20px 20px;
-	border-radius: 0 0 20px 20px;
-	padding: 20px 26px;
-}
-
-#login fieldset input {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-#login fieldset input[type="email"], #login fieldset input[type="password"] {
-	background-color: #eee;
-	color: #777;
-	padding: 4px 10px;
-	width: 428px;
-}
-
-#login fieldset input[type="submit"] {
-	background-color: #6b0808;
-	color: #fff;
-	display: block;
-	margin: 0 auto;
-	padding: 4px 0;
-	width: 100px;
-}
-
-#login fieldset input[type="submit"]:hover {
-	background-color: #28ad63;
+.checklabel {
+    font-weight:100;
 }
