@@ -46,6 +46,7 @@ $(function(){
             caption = "Calendario settimanale ";
         }
         
+        // recupero i numeri dei giorni della settimana corrente
         var days = new Array();
         if (currState == state.weekly) {
             var week = $("#monthly-table tbody tr").eq(currentWeek-1);
@@ -54,16 +55,23 @@ $(function(){
             });
         }
 
+        // creo le colonne di intestazione con i nomi dei giorni
         for (i=0; i<length; i++) {
+            var cell = $("<th></th>");
+
             var day = dayNames[i];
-            var dayNo = days.length == 0 ? "" : " " + days[i];
-            var content = day.substring(0, (tinyScreen ? 3 : day.length)) + dayNo;
-            row.append($("<th></th>").text(content)); // creo le colonne
+            var dayNum = days.length == 0 ? "" : " " + days[i]; // recupero il numero del giorno
+            if (dayNum == currentDay)
+                cell.addClass('currDay');
+
+            var content = day.substring(0, (tinyScreen ? 3 : day.length)) + dayNum; // uso abbreviazioni per schermi piccoli
+            row.append(cell.text(content));
         }
 
+        // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
         var info = monthNames[currentMonth] + " " + currentYear;
         info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
-        $(table + "caption").text(info); // aggiorno anche la caption della table
+        $(table + "caption").text(info);
 
         $(table + "thead").html(row);
     }
@@ -151,6 +159,7 @@ $(function(){
 
         $("#monthly-table").fadeOut();
         $("#weekly-table").fadeIn();
+        pickToday();
     }
 
     function goToday() {
