@@ -5,6 +5,7 @@
 	if(isset($_POST['email'], $_POST['pw'])) { 
 		$email = $_POST['email'];
 	  	$password = $_POST['pw']; // Recupero la password criptata.
+	  	echo "Prima: $password";
 	   	if(login($email, $password, $mysqli) == true) {
 	      	// Login eseguito
 	   		//echo 'Success: You have been logged in!';

@@ -11,24 +11,6 @@
     session_regenerate_id(); // Rigenera la sessione e cancella quella creata in precedenza.
   }
 
-  function sendAllertMail($email) {
-    // definisco mittente e destinatario della mail
-    $nome_mittente = "Direzione unibo";
-    $mail_mittente = "lorenzo.chiana@gmail.com";
-    $mail_destinatario = $email;
-
-    // definisco il subject ed il body della mail
-    $mail_oggetto = "Disattivato account";
-    $mail_corpo = "A seguito di varie irregolarità e' stato disattivato l'account: " . $email;
-
-    // aggiusto un po' le intestazioni della mail
-    // E' in questa sezione che deve essere definito il mittente (From)
-    $mail_headers = "From: " .  $nome_mittente . " <" .  $mail_mittente . ">\r\n";
-    $mail_headers .= "Reply-To: " .  $mail_mittente . "\r\n";
-
-    mail($mail_destinatario, $mail_oggetto, $mail_corpo, $mail_headers);
-  }
-
   function login($email, $password, $mysqli) {
     // Usando statement sql 'prepared' non sarà possibile attuare un attacco di tipo SQL injection.
     if ($stmt = $mysqli->prepare("SELECT id, username, password, salt FROM members WHERE email = ? LIMIT 1")) { 
