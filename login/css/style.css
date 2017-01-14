@@ -21,3 +21,10 @@
 .checklabel {
     font-weight:100;
 }
+
+.form-group{
+    margin-bottom: 15px;
+}
+label{
+    margin-bottom: 15px;
+}
