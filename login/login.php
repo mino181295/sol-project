@@ -30,11 +30,11 @@
 								//email sbagliata
 								echo
 		              			'<div class="form-group">
-									<label for="email" class="cols-sm-2 control-label">Email</label>
+									<label for="email" class="cols-sm-2 control-label">E-mail</label>
 									<div class="cols-sm-10">
 										<div class="input-group has-error has-feedback">
 											<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-											<input type="email" class="form-control input-lg" name="email" id="email" autocomplete="on" placeholder="es. mario.rossi@unibo.it, mario.rossi@studio.unibo.it"/>
+											<input type="email" class="form-control input-lg" name="email" id="email" autocomplete="on" placeholder="es. mario.rossi@studio.unibo.it"/>
 										</div>
 									</div>
 								</div>
@@ -52,11 +52,11 @@
 								//password sbagliata
 								echo 
 								'<div class="form-group">
-									<label for="email" class="cols-sm-2 control-label">Email</label>
+									<label for="email" class="cols-sm-2 control-label">E-mail</label>
 									<div class="cols-sm-10">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-											<input type="text" class="form-control input-lg" name="email" id="email"  placeholder="es. mario.rossi@unibo.it, mario.rossi@studio.unibo.it"/>
+											<input type="text" class="form-control input-lg" name="email" id="email"  placeholder="es. mario.rossi@studio.unibo.it"/>
 										</div>
 									</div>
 								</div>
@@ -74,11 +74,11 @@
 						} else {
 							echo 
 							'<div class="form-group">
-								<label for="email" class="cols-sm-2 control-label">Email</label>
+								<label for="email" class="cols-sm-2 control-label">E-mail</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-										<input type="text" class="form-control input-lg" name="email" id="email"  placeholder="es. mario.rossi@unibo.it, mario.rossi@studio.unibo.it"/>
+										<input type="text" class="form-control input-lg" name="email" id="email"  placeholder="es. mario.rossi@studio.unibo.it"/>
 									</div>
 								</div>
 							</div>

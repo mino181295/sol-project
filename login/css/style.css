@@ -14,17 +14,14 @@
     margin-bottom:54px;
 }
 
-.last-row {
-    margin-bottom:0px;
-}
-
-.checklabel {
-    font-weight:100;
-}
-
 .form-group{
     margin-bottom: 15px;
 }
+
 label{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+button {
+    margin-top: 25px;
 }
