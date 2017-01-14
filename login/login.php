@@ -20,7 +20,8 @@
 	            <form role="form" action="process_login.php" method="post" name="login_form">
 	              <div class="form-group text-center">
 	                <div class="logo">
-	                    <span class="glyphicon glyphicon-user set-logo"></span>
+	                    <!--<span class="glyphicon glyphicon-user set-logo"></span>-->
+	                    <img src="../app/image/logo_unibo.png" alt="">
 	                </div>
 	              </div>
 	              <?php
