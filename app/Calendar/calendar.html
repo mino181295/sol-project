@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="it">
 
 <head>
     <title>Calendario</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- JQUERY + JAVASCRIPT -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/jQuery/jquery.min.js"></script>
     <script type="text/javascript" src="calendar.js"></script>
     
-    <!-- BOOTSTRAP + CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="../lib/Bootstrap/css/bootstrap.min.css"></link>
+    <!-- BOOTSTRAP + CSS -->
+    
+    <link type="text/css" rel="stylesheet" href="../lib/Bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="../lib/Bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="calendar.css">
+    <link rel="stylesheet" type="text/css" href="calendar.css" />
 
 </head>
 <body>
     <main class="container-fluid">        
-        <div id="topTable" class="row">
+        <header id="topTable" class="row">
             <h1>Mese-Anno</h1>
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button" id="prev" class="btn btn-default btn-arrow-left">
@@ -32,7 +32,7 @@
                     <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                 </button>
             </div>
-        </div>
+        </header>
 
         <div class="row">
             <div class="table-responsive">

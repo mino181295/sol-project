@@ -36,44 +36,46 @@ $(function(){
     function createTHead() {
         var row = $("<tr></tr>"); // creo la riga
         var length = dayNames.length;
-        var table = "#monthly-table ";
+        var table = "monthly-table";
         var caption = "Calendario mensile ";
-
+        var daysInWeek = new Array();
+        
+        // se devo creare calendario settimanale
         if (currState == state.weekly) {
             row.append($("<th></th>").text("Ora"));
             length -= 2; //escludo il sabato e la domenica
-            table = "#weekly-table ";
+            table = "weekly-table";
             caption = "Calendario settimanale ";
-        }
-        
-        // recupero i numeri dei giorni della settimana corrente
-        var days = new Array();
-        if (currState == state.weekly) {
+            id = ""
+
+            // recupero i numeri dei giorni della settimana corrente
             var week = $("#monthly-table tbody tr").eq(currentWeek-1);
             $.each(week.children(), function() {
-                days.push($(this).text());
+                daysInWeek.push($(this).text());
             });
         }
 
         // creo le colonne di intestazione con i nomi dei giorni
         for (i=0; i<length; i++) {
-            var cell = $("<th></th>");
+            var dayName = dayNames[i];
+            var cell = $("<th></th>").attr('id', dayName + "-" + table);
+            var content = dayName.substring(0, (tinyScreen ? 3 : dayName.length)); // uso abbreviazioni per schermi piccoli
 
-            var day = dayNames[i];
-            var dayNum = days.length == 0 ? "" : " " + days[i]; // recupero il numero del giorno
-            if (dayNum == currentDay)
-                cell.addClass('currDay');
+            // nel calendario settimanale
+            if (currState == state.weekly) {
+                content += daysInWeek[i];            // aggiungo il numero del giorno nell'intestazione
+                if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
+                    cell.addClass('currDay');
+            }
 
-            var content = day.substring(0, (tinyScreen ? 3 : day.length)) + dayNum; // uso abbreviazioni per schermi piccoli
             row.append(cell.text(content));
         }
 
         // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
         var info = monthNames[currentMonth] + " " + currentYear;
         info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
-        $(table + "caption").text(info);
-
-        $(table + "thead").html(row);
+        $("#" + table + " caption").text(info);
+        $("#" + table + " thead").html(row);
     }
 
     // updateWeekNo==true -> setto il numero di settimana SOLO quando scorro i mesi e quando tornon al giorno corrente.
@@ -100,7 +102,7 @@ $(function(){
         for (var i = 1; i<=rowsNo; i++) {
             var row = $("<tr></tr>");
             for (var j = 1; j <= 7; j++, cellsNo--) {
-                var cell = $("<td></td>");
+                var cell = $("<td></td>").attr('headers', dayNames[j-1]);
 
                 if (cellsNo < 0) { // giorno del mese successivo ma nella stessa settimana di giorni di questo mese
                     cell.addClass('notCurrMonth');
