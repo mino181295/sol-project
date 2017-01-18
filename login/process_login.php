@@ -1,14 +1,12 @@
 <?php
 	include 'db_connect.php';
 	include 'functions.php';
-	sec_session_start(); // usiamo la nostra funzione per avviare una sessione php sicura
+	sec_session_start();
 	if(isset($_POST['email'], $_POST['pw'])) { 
 		$email = $_POST['email'];
-	  	$password = $_POST['pw']; // Recupero la password criptata.
-	  	echo "Prima: $password";
+	  	$password = $_POST['pw']; 
 	   	if(login($email, $password, $mysqli) == true) {
 	      	// Login eseguito
-	   		//echo 'Success: You have been logged in!';
 	   		header('Location: ./home.html');
 	   	} else if(!emailExist($email, $mysqli)){ 
 	      	// email sbagliata
