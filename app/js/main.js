@@ -9,6 +9,7 @@ $(document).ready(function () {
     } else {
         $("#sol-label").text("Studenti Online");
     }
+    
     $(window).resize(function () {
         docHeight = $(document).height();
         docWidth = $(document).width();
