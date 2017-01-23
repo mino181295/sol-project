@@ -3,18 +3,14 @@ html,
 body {
     height: 100%;
     width: 100%;
-    margin: 0px;
+    background-color: whitesmoke;
 }
-
 
 /*Navbar*/
 
-#navbar-container {
-    margin-bottom: 0px;
-    margin-bottom: 0px;
-}
-
 .navbar-brand {
+    font-family: Roboto;
+    font-weight: bold;
     margin-top: 3px;
     padding: 13px;
 }
@@ -29,7 +25,7 @@ body {
 }
 
 .badge-notify {
-    background: red;
+    background: darkred;
     position: relative;
     top: -14px;
     left: -13px;
@@ -50,16 +46,23 @@ body {
     display: inline-block !important;
 }
 
-.dropdown-toggle {
-    padding-right: 0px !important;
-    padding-right: 0px !important;
+.dropdown-menu {
 }
 
-.dropdown-header,
-.dropdown-item {
+.dropdown-toggle {
+    padding-right: 0px;
+    padding-right: 0px;
+}
+
+.dropdown-header {
+    font-size: 1.5em;
     text-align: center;
 }
 
+.dropdown-item {
+    text-align: right;
+    margin-right: 10px;
+}
 
 /*Sidebar*/
 
@@ -68,6 +71,7 @@ body {
 }
 
 #wrapper {
+    margin-top: 60px;
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -87,11 +91,11 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    background: black;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -100,7 +104,6 @@ body {
 
 #page-content-wrapper {
     width: 100%;
-    position: absolute;
     padding: 15px;
 }
 
@@ -109,16 +112,15 @@ body {
     margin-right: -250px;
 }
 
-
 /* Sidebar Styles */
 
 .sidebar-nav {
     position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
     list-style: none;
+    width: 250px;
+    padding: 0;
+    margin: 0;
+    top: 20px;
 }
 
 .sidebar-nav li {
@@ -169,6 +171,7 @@ body {
 
 @media(min-width:768px) {
     #wrapper {
+        margin-top: 54px;
         padding-left: 250px;
     }
     #wrapper.toggled {
@@ -190,12 +193,30 @@ body {
     }
 }
 
-
 /*Content Wrapper*/
 
 #page-content-wrapper {
     padding: 0px;
     height: 500px;
+}
+
+#menu-toggle {
+    padding: 15px;
+    padding-left: 2px;
+    background-color: #7f0000;
+    ;
+    border-left: none;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#menu-toggle:hover {
+    background-color: darkred;
+}
+
+#sidebar-btn {
+    color: white;
+    margin-left: 2px;
 }
 
 #toggle-button {
@@ -205,7 +226,7 @@ body {
 
 @media (min-width:768px) {
     #toggle-button {
-        margin: 10% 0%;
+        margin: 300px 0%;
     }
 }
 
@@ -213,12 +234,12 @@ body {
     padding: 30px 0px;
 }
 
-#buttons-container {
-    margin: 0px;
-}
-
 
 /*Bottoni*/
+
+#buttons-container {
+    margin-top: 20px;
+}
 
 #buttons-container .btn {
     border-radius: 0px;
@@ -272,10 +293,9 @@ body {
     }
 }
 
-
 /*Tablet*/
 
-@media only screen and (min-width: 768px) and (max-width: 991px){
+@media only screen and (min-width: 768px) and (max-width: 991px) {
     .btn-sq {
         width: 190px !important;
         height: 190px !important;
@@ -293,7 +313,6 @@ body {
         padding: 7px;
     }
 }
-
 
 /*Desktop*/
 

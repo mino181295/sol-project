@@ -8,6 +8,7 @@
 
         <link type="text/css" rel="stylesheet" href="lib\Bootstrap\css\bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="stylesheet" href="css\animate.css">
         <link type="text/css" rel="stylesheet" href="css\style.css">
 
         <script type="text/javascript" src="lib\jQuery\jquery.min.js"></script>
@@ -16,7 +17,7 @@
 
         <body>
             <header id="navbar-container">
-                <nav class="navbar navbar-inverse">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container-fluid">
                         <!-- Parte che non viene raggruppata -->
                         <div class="nav navbar-header">
@@ -75,7 +76,7 @@
                     <!-- container-fluid -->
                 </nav>
             </header>
-                <div id="wrapper" class="toggled">
+                <div id="wrapper" class="">
                     <!-- Sidebar -->
                     <div id="sidebar-wrapper">
                         <nav>
@@ -135,9 +136,8 @@
                         <div class="container-fluid">
                             <!-- Una colonna dedicata al bottone della sidebar-->
                             <div class="row">
-                                
                                 <div class="col-xs-1 col-md-1" id="toggle-button">                           
-                                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                    <a href="#" id="menu-toggle">
                                         <span id="sidebar-btn" class="glyphicon glyphicon-menu-right"></span>
                                     </a>                                                        
                                 </div>
@@ -171,9 +171,11 @@
                                         <h1>Impostazioni</h1>
                                     </a>
                                 </div>
+                                <!--buttons-container-->
                             </div>
-                            
-                        </div>                        
+                            <!--row-->
+                        </div>  
+                        <!--page content wrapper-->
                     </div>
 
         </body>
