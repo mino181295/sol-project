@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 
-        <link type="text/css" rel="stylesheet" href="lib\Bootstrap\css\bootstrap.min.css"></link>
-        <link type="text/css" rel="stylesheet" href="css\style.css"></link>
+        <link type="text/css" rel="stylesheet" href="lib\Bootstrap\css\bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="stylesheet" href="css\style.css">
 
         <script type="text/javascript" src="lib\jQuery\jquery.min.js"></script>
         <script type="text/javascript" src="lib\Bootstrap\js\bootstrap.min.js"></script>
@@ -79,7 +80,7 @@
                     <div id="sidebar-wrapper">
                         <nav>
                         <ul class="nav sidebar-nav">
-                            <li><a class="sidebar-brand">Menù</a></li>
+                            <li><a href="#">Home<span class="glyphicon glyphicon-home pull-right"></span></a></li>
 	                        
 		                    <li><a href="#" id="subscribing-menu" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
                                 Iscrizioni<span class="glyphicon glyphicon-plus pull-right"></span></a>
@@ -104,12 +105,20 @@
 				                    <li class="sidebar-submenu"><a href="#">Calendario</a></li>
 				                    <li class="sidebar-submenu"><a href="#">Bandi</a></li>
 				                    <li class="sidebar-submenu"><a href="#">Tirocini</a></li>
-                                    <li class="sidebar-submenu"><a href="#">Servizio</a></li>
+                                    <li class="sidebar-submenu"><a href="#">Servizio studio</a></li>
 			                     </ul>
 		                   </li>
                            <li><a href="#" id="unsubscribing-menu" data-toggle="collapse" data-target="#submenu4" aria-expanded="false">
                                Abbandono<span class="glyphicon glyphicon-plus pull-right"></span></a>
 			                     <ul class="nav collapse" id="submenu4" role="menu" aria-labelledby="unsubscribing-menu">
+				                    <li class="sidebar-submenu"><a href="#">Cambia corso</a></li>
+				                    <li class="sidebar-submenu"><a href="#">Sospendi gli studi</a></li>
+                                    <li class="sidebar-submenu"><a href="#">Rinuncia agli studi</a></li>
+			                     </ul>
+		                   </li>
+                           <li><a href="#" id="logout-menu" data-toggle="collapse" data-target="#submenu4" aria-expanded="false">
+                               Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a>
+			                     <ul class="nav navbar-right collapse" id="submenu4" role="menu" aria-labelledby="logout-menu">
 				                    <li class="sidebar-submenu"><a href="#">Cambia corso</a></li>
 				                    <li class="sidebar-submenu"><a href="#">Sospendi gli studi</a></li>
                                     <li class="sidebar-submenu"><a href="#">Rinuncia agli studi</a></li>
@@ -121,12 +130,50 @@
                     <!-- sidebar-wrapper -->
 
                     <!-- Page Content -->
-                    <div id="page-content-wrapper">    
-                        <div class="col-md-8" id="toggle-button">                           
-                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
-                                <span id="sidebar-btn" class="glyphicon glyphicon-menu-right"></span>
-                            </a>                                                        
-                        </div>
+                    <div id="page-content-wrapper"> 
+                        <!--Container del contenuto centrale-->
+                        <div class="container-fluid">
+                            <!-- Una colonna dedicata al bottone della sidebar-->
+                            <div class="row">
+                                
+                                <div class="col-xs-1 col-md-1" id="toggle-button">                           
+                                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                        <span id="sidebar-btn" class="glyphicon glyphicon-menu-right"></span>
+                                    </a>                                                        
+                                </div>
+                                <div class="col-xs-10 col-md-10" id="buttons-container">
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <h1>Calendario</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <h1>Profilo</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-etsy" aria-hidden="true"></i>
+                                        <h1>Esami</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                                        <h1>Libretto Online</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                        <h1>Servizio Studio</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        <h1>Preferiti</h1>
+                                    </a>
+                                    <a href="#" class="btn btn-sq">
+                                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                                        <h1>Impostazioni</h1>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>                        
                     </div>
 
         </body>
