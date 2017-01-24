@@ -43,7 +43,7 @@ $(document).ready(function () {
     var eT = 0;
     var randomEffectVector = ["flipInX", "flipInY"];
     $('.btn-sq').hide().each(function () {
-        $(this).delay(eT).fadeIn('fast').addClass("animated "+ randomEffectVector[Math.floor(Math.random()+1)]);
+        $(this).delay(eT).fadeIn('fast').addClass("animated "+ randomEffectVector[Math.floor(Math.random()*2)]);
         eT += 350;
     });
     $('.btn-sq').click(function () {
