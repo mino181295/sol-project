@@ -29,8 +29,13 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <!--Titolo-->
-                            <a class="navbar-brand" id="sol-label" href="#">Studenti Online</a>
-                            <p class="navbar-text" id="school-information">Ingegneria e Scienze Informatiche</p>
+                            <div class="nav navbar-text pull-left" id="toggle-button">                           
+                                    <a href="#" id="menu-toggle">
+                                        <i class="fa fa-cogs" id="sidebar-btn" aria-hidden="true"></i>
+                                    </a>                                                        
+                            </div>
+                            <a class="nav navbar-brand" id="sol-label" href="#">Studenti Online</a>
+                            <p class="nav navbar-text" id="school-information">Ingegneria e Scienze Informatiche</p>
                             <!--Dropdown notifiche-->
                             <div class="nav navbar-nav text-center">
                                 <ul class="nav navbar-nav" id="notification-button">
@@ -83,7 +88,7 @@
                         <ul class="nav sidebar-nav">
                             <li><a href="#">Home<span class="glyphicon glyphicon-home pull-right"></span></a></li>
 	                        
-		                    <li><a href="#" id="subscribing-menu" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
+		                    <li><a href="#" id="subscribing-menu" data-toggle="collapse" data-target="#submenu1" >
                                 Iscrizioni<span class="glyphicon glyphicon-plus pull-right"></span></a>
 			                     <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="subscribing-menu">
 				                    <li class="sidebar-submenu"><a href="#">Iscrizione prove</a></li>
@@ -92,7 +97,7 @@
                                     <li class="sidebar-submenu"><a href="#">Piano di studi</a></li>
 			                     </ul>
 		                   </li>
-                           <li><a href="#" id="manage-menu" data-toggle="collapse" data-target="#submenu2" aria-expanded="false">
+                           <li><a href="#" id="manage-menu" data-toggle="collapse" data-target="#submenu2" >
                                Gestione<span class="glyphicon glyphicon-plus pull-right"></span></a>
 			                     <ul class="nav collapse" id="submenu2" role="menu" aria-labelledby="manage-menu">
 				                    <li class="sidebar-submenu"><a href="#">Prenota esame</a></li>
@@ -100,7 +105,7 @@
                                     <li class="sidebar-submenu"><a href="#">Presenta domanda di laurea</a></li>
 			                     </ul>
 		                   </li>
-                            <li><a href="#" id="manage-menu" data-toggle="collapse" data-target="#submenu3" aria-expanded="false">
+                            <li><a href="#" id="manage-menu" data-toggle="collapse" data-target="#submenu3" >
                                 Servizi<span class="glyphicon glyphicon-plus pull-right"></span></a>
 			                     <ul class="nav collapse" id="submenu3" role="menu" aria-labelledby="manage-menu">
 				                    <li class="sidebar-submenu"><a href="#">Calendario</a></li>
@@ -109,7 +114,7 @@
                                     <li class="sidebar-submenu"><a href="#">Servizio studio</a></li>
 			                     </ul>
 		                   </li>
-                           <li><a href="#" id="unsubscribing-menu" data-toggle="collapse" data-target="#submenu4" aria-expanded="false">
+                           <li><a href="#" id="unsubscribing-menu" data-toggle="collapse" data-target="#submenu4">
                                Abbandono<span class="glyphicon glyphicon-plus pull-right"></span></a>
 			                     <ul class="nav collapse" id="submenu4" role="menu" aria-labelledby="unsubscribing-menu">
 				                    <li class="sidebar-submenu"><a href="#">Cambia corso</a></li>
@@ -136,12 +141,8 @@
                         <div class="container-fluid" id="fluid-page-wrapper">
                             <!-- Una colonna dedicata al bottone della sidebar-->
                             <div class="row">
-                                <div class="col-xs-1 col-md-1" id="toggle-button">                           
-                                    <a href="#" id="menu-toggle">
-                                        <span id="sidebar-btn" class="glyphicon glyphicon-menu-right"></span>
-                                    </a>                                                        
-                                </div>
-                                <div class="col-xs-10 col-md-10" id="page-container">
+                                
+                                <div class="col-xs-12 col-md-12" id="page-container">
                                     <a href="#" class="btn btn-sq">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                         <h1>Calendario</h1>
