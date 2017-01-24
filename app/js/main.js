@@ -9,16 +9,16 @@ $(document).ready(function () {
     } else {
         $("#sol-label").text("Studenti Online");
     }
-
-    if ($("#wrapper").hasClass("toggled")) {
-        $("#sidebar-btn").addClass("glyphicon-menu-right");
+    
+    if (!$("#wrapper").hasClass("toggled")) {
         $("#sidebar-btn").removeClass("glyphicon-menu-left");
+        $("#sidebar-btn").addClass("glyphicon-menu-right");
     } else {
-
-        $("#sidebar-btn").addClass("glyphicon-menu-left");
         $("#sidebar-btn").removeClass("glyphicon-menu-right");
+        $("#sidebar-btn").addClass("glyphicon-menu-left");
 
     }
+    
     $(window).resize(function () {
 
         docHeight = $(document).height();
@@ -38,7 +38,7 @@ $(document).ready(function () {
     //Fade in dei bottoni
     var eT = 0;
     $('.btn-sq').hide().each(function () {
-        $(this).delay(eT).fadeIn('slow').addClass("animated bounceIn");
+        $(this).delay(eT).fadeIn('fast').addClass("animated bounceIn");
 
         eT += 350;
     });
@@ -57,9 +57,9 @@ $(document).ready(function () {
     });
     
     $("#notification-button").hover(function () {
-        $("#notification-label").addClass("animated shake");
+        $("#notification-label, #notification-number").addClass("animated shake");
     }, function () {
-        $("#notification-label").removeClass("animated shake");
+        $("#notification-label, #notification-number").removeClass("animated shake");
 
     });
 
@@ -67,13 +67,13 @@ $(document).ready(function () {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
 
-        if ($("#wrapper").hasClass("toggled")) {
-            $("#sidebar-btn").addClass("glyphicon-menu-right");
+        if (!$("#wrapper").hasClass("toggled")) {
             $("#sidebar-btn").removeClass("glyphicon-menu-left");
+            $("#sidebar-btn").addClass("glyphicon-menu-right");
         } else {
 
-            $("#sidebar-btn").addClass("glyphicon-menu-left");
             $("#sidebar-btn").removeClass("glyphicon-menu-right");
+            $("#sidebar-btn").addClass("glyphicon-menu-left");
 
         }
     });

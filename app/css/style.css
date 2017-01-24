@@ -73,10 +73,10 @@ body {
 #wrapper {
     margin-top: 60px;
     padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
 }
 
 #wrapper.toggled {
@@ -92,10 +92,10 @@ body {
     margin-left: -250px;
     overflow-y: auto;
     background: black;
-    -webkit-transition: width 0.5s ease;
-    -moz-transition: width 0.5s ease;
-    -o-transition: width 0.5s ease;
-    transition: width 0.5s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -201,14 +201,16 @@ body {
 }
 
 #menu-toggle {
-    padding: 15px;
-    padding-left: 2px;
+    margin-left: 0px;
+    padding: 15px 10px 15px 0px;
+    
     background-color: #7f0000;
-    ;
+    
     border-left: none;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
 }
+
 
 #menu-toggle:hover {
     background-color: darkred;
@@ -216,12 +218,13 @@ body {
 
 #sidebar-btn {
     color: white;
-    margin-left: 2px;
+    margin-left: 0px;
 }
 
 #toggle-button {
     padding-left: 0px;
-    margin: 50% 0%;
+    padding-right: 0px;
+    margin: 200px 0%;
 }
 
 @media (min-width:768px) {
@@ -237,11 +240,11 @@ body {
 
 /*Bottoni*/
 
-#buttons-container {
+#page-container {
     margin-top: 20px;
 }
 
-#buttons-container .btn {
+#page-container .btn {
     border-radius: 0px;
     padding: 10px;
     margin: 5px;
