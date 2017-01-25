@@ -3,7 +3,7 @@ $(document).ready(function () {
     var docHeight = $(document).height();
     var docWidth = $(document).width();
     //Controllo per la label brand
-    if (docWidth < 768) {
+    if (docWidth < 769) {
         $("#sol-label").text("SOL");
         $("#school-information").hide();
     } else {
@@ -11,7 +11,7 @@ $(document).ready(function () {
     }
     //Controllo per il toggle
 
-    if (!$("#wrapper").hasClass("toggled") && docWidth > 768) {
+    if (!$("#wrapper").hasClass("toggled") && docWidth > 769) {
         $("#sidebar-btn").removeClass("fa-cogs");
         $("#sidebar-btn").addClass("fa-arrow-left");
     }
@@ -20,7 +20,7 @@ $(document).ready(function () {
         docHeight = $(document).height();
         docWidth = $(document).width();
 
-        if (!$("#wrapper").hasClass("toggled") && docWidth > 768) {
+        if (!$("#wrapper").hasClass("toggled") && docWidth > 769) {
             $("#sidebar-btn").removeClass("fa-cogs");
             $("#sidebar-btn").addClass("fa-arrow-left");
         } else {
@@ -28,7 +28,7 @@ $(document).ready(function () {
             $("#sidebar-btn").addClass("fa-cogs");
         }
 
-        if (docWidth < 768) {
+        if (docWidth < 769) {
             $("#sol-label").text("SOL");
             $("#school-information").hide();
 
