@@ -60,12 +60,13 @@ $(document).ready(function () {
 
     });
     //Shake delle notifiche
-    $("#notification-button").hover(function () {
+    $("#navbar-notification a, navbar-notification").hover(function () {
         $("#notification-label, #notification-number").addClass("animated shake");
     }, function () {
         $("#notification-label, #notification-number").removeClass("animated shake");
 
     });
+    
     //Cambio al click della sidebar
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
