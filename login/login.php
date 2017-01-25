@@ -1,3 +1,13 @@
+<?php
+    include './functions.php';
+    //getNomeUtente, getSchool, link logout to all the buttons, link calendar to all buttons
+    sec_session_start();
+    if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
+
+    	header('Location: ../app/index.php');
+    } 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
