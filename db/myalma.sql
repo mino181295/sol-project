@@ -10,8 +10,7 @@
 create database MYALMA;
 use MYALMA;
 
-GRANT USAGE ON *.* TO 'secure_user'@'localhost';
-
+CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
 GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
