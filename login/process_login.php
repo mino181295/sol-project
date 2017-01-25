@@ -8,7 +8,7 @@
 	   	if(login($email, $password, $mysqli) == true) {
 	      	// Login eseguito
 	      	$_SESSION['loggedIn']=true;
-	   		header('Location: ./../app/index.php');
+	   		header('Location: ../app/index.php');
 	   	} else if(!emailExist($email, $mysqli)){ 
 	      	// email sbagliata
 	   		header('Location: ./login.php?error=1');
