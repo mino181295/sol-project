@@ -1,7 +1,7 @@
 <?php
   function sec_session_start() {
-    $session_name = 'ams_session'; // nome della sessione
-    $secure = true; // impostato a true per usare il protocollo 'https'
+    $session_name = 'sol_session'; // nome della sessione
+    $secure = false; // impostato a true per usare il protocollo 'https'
     $httponly = true; // impedisce ad un javascript di essere in grado di accedere all'id di sessione
     ini_set('session.use_only_cookies', 1); // forza la sessione ad utilizzare solo i cookie
     $cookieParams = session_get_cookie_params(); // legge i parametri correnti relativi ai cookie

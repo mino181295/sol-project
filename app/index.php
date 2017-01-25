@@ -1,7 +1,7 @@
     <?php
+        include '../login/functions.php';
         //getNomeUtente, getSchool, link logout to all the buttons, link calendar to all buttons
-        session_start();
-        $_SESSION['loggedIn'] = true;
+        sec_session_start();
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
         } else {
             header('Location: ../login/login.php');
