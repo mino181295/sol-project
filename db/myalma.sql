@@ -55,6 +55,7 @@ CREATE TABLE `corso` (
 CREATE TABLE `corsostudi` (
   `ID` char(5) NOT NULL,
   `Denominazione` varchar(20) NOT NULL
+  `DurataAnni` int(11) NOT NULL,
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
