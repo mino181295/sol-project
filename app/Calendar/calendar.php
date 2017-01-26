@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <?php 
-    session_start();
-    $_SESSION["nome"] = "ciao";
+session_start();
+$_SESSION["nome"] = "ciao";
 ?>
 <head>
     <title>Calendario</title>
@@ -26,7 +26,7 @@
             <h1>Mese-Anno</h1>
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button" id="prev" class="btn btn-default btn-arrow-left">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                 </button>
                 <button type="button" id="monthMode" class="btn btn-default">Mese</button>
                 <button type="button" id="today" class="btn btn-default">Oggi</button>
@@ -39,7 +39,7 @@
 
         <div class="row">
             <div class="table-responsive">
-                
+
                 <!-- MONTHLY CALENDAR -->
                 <table id="monthly-table" class="table">
                     <caption class="sr-only">TipoCalendario-Mese-Anno</caption>
@@ -64,7 +64,21 @@
 
             </div>
         </div>
-    </main>
+
+        <div class="row" id="bottomTable">
+            <div class="btn-group dropup ">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Anno <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+
+</main>
 </body>
 
 </html>

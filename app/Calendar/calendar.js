@@ -30,6 +30,7 @@ $(function(){
         var info = monthNames[currentMonth] + " " + currentYear;
         $("#topTable h1").text(info);        
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
+       // $("#bottomTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
     // Creo il thead della table interessata ed aggiorno la caption
@@ -136,6 +137,7 @@ $(function(){
     }
 
     function showMonth() {
+        $("#bottomTable").fadeOut();
         $("#weekly-table").fadeOut("fast", function() {
             $("#monthly-table").fadeIn();
         });
@@ -176,6 +178,7 @@ $(function(){
 
         $("#monthly-table").fadeOut("fast", function() {
             $("#weekly-table").fadeIn();    
+            $("#bottomTable").fadeIn();
         });
         
         pickToday();

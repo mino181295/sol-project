@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
 $cond = isset($_GET["fDay"]) && isset($_GET["lDay"]) &&
         isset($_GET["idCorso"]) && isset($_GET["year"]) &&
         isset($_GET["session"]);
@@ -10,13 +8,13 @@ if ($cond) {
 
     $idCorso = $_GET["idCorso"]; 
     $year = $_GET["year"];
-    $session = $_GET["session"];
+    $session = $_GET["session"]; // indica il semestre
     $fDay = $_GET["fDay"];
     $lDay = $_GET["lDay"];
 
 
 
-    include("database_connection.php");
+    include("db_connect.php");
 /*
     $sql = "SELECT * FROM Notifiche WHERE (Matricola_dest = '" 
     . $_SESSION['matricola'] . "' AND Materia ='" 
