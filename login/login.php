@@ -115,6 +115,10 @@
 	              <div class="form-group">
 	                <button type="submit" class="btn btn-default btn-lg btn-block btn-success" onclick="formhash(this.form, this.form.password);">Accedi</button>
 	              </div>
+	              <div class="form-group last-row">
+                    <span id="message"></span>
+                    <a href="https://account.unibo.it/Recovery.aspx" class="pull-right">Hai dimenticato la password?</a>
+                  </div>
 	            </form>
 	        </div>
 	    </div>

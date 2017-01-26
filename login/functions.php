@@ -26,7 +26,7 @@
           // password corretta            
           $user_browser = $_SERVER['HTTP_USER_AGENT']; // recupero il parametro 'user-agent' relativo all'utente corrente
           $user_id = preg_replace("/[^0-9]+/", "", $user_id); // protezione da un attacco XSS
-          $_SESSION['user_id'] = $user_id; 
+          $_SESSION['matricola'] = $user_id; 
           $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $tipo); // protezione da un attacco XSS
           $_SESSION['tipo'] = $tipo;
           $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nome); // protezione da un attacco XSS

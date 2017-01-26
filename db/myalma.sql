@@ -3,12 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 25, 2017 alle 16:46
+-- Creato il: Gen 26, 2017 alle 17:22
 -- Versione del server: 5.7.14
 -- Versione PHP: 5.6.25
-
-create database MYALMA;
-use MYALMA;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -104,28 +101,15 @@ CREATE TABLE `lezione` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `notificainviata`
+-- Struttura della tabella `notifica`
 --
 
-CREATE TABLE `notificainviata` (
-  `Utente` varchar(20) NOT NULL,
-  `Numero` int(11) NOT NULL,
-  `Oggetto` varchar(30) NOT NULL,
-  `Messaggio` varchar(4096) NOT NULL,
-  `DataInvio` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `notificaricevuta`
---
-
-CREATE TABLE `notificaricevuta` (
-  `Mittente` varchar(20) NOT NULL,
-  `Numero` int(11) NOT NULL,
-  `Utente` varchar(20) NOT NULL,
-  `Vista` char(1) NOT NULL
+CREATE TABLE `notifica` (
+  `ID` int(11) NOT NULL,
+  `Matricola_mit` char(10) NOT NULL,
+  `Matricola_dest` char(10) NOT NULL,
+  `Testo` varchar(255) NOT NULL,
+  `Orario` timestamp NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -196,17 +180,10 @@ ALTER TABLE `lezione`
   ADD KEY `FKesecuzione` (`CodiceCorso`,`IDCorsoStudi`);
 
 --
--- Indici per le tabelle `notificainviata`
+-- Indici per le tabelle `notifica`
 --
-ALTER TABLE `notificainviata`
-  ADD PRIMARY KEY (`Utente`,`Numero`);
-
---
--- Indici per le tabelle `notificaricevuta`
---
-ALTER TABLE `notificaricevuta`
-  ADD PRIMARY KEY (`Utente`,`Mittente`,`Numero`),
-  ADD KEY `FKNotifica` (`Mittente`,`Numero`);
+ALTER TABLE `notifica`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `utente`
@@ -230,10 +207,10 @@ ALTER TABLE `evento`
 ALTER TABLE `lezione`
   MODIFY `Numero` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT per la tabella `notificainviata`
+-- AUTO_INCREMENT per la tabella `notifica`
 --
-ALTER TABLE `notificainviata`
-  MODIFY `Numero` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `notifica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
