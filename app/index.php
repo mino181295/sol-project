@@ -60,7 +60,25 @@
                                             <p class="dropdown-header">Notifiche</p>
                                         </li>
                                         <div id="notification-container" class="scrollable-menu">
-                                            <li>
+                                            <script type="text/javascript">
+                                                $("ul").click(function(){
+                                                    $.get("../notification/notifications.php", function(data){
+                                                        //alert("data: " + data);
+                                                        //$( ".result" ).html( data );
+                                                        //document.write(data);
+                                                        $("#notification-container").html(data);
+                                                    });
+                                                   /* $.ajax({
+                                                        url: "../notification/notifications.php";
+                                                        success: function(data) {
+                                                            //$(".notification-container").html(data);
+                                                            alert(data);
+                                                        }
+                                                    });*/
+                                                });
+                                                
+                                            </script>
+                                            <!--<li>
                                                 <p class="dropdown-item">Notifica 1</p>
                                             </li>
                                             <li>
@@ -83,7 +101,7 @@
                                             </li>
                                             <li>
                                                 <p class="dropdown-item">Notifica 4</p>
-                                            </li>
+                                            </li>-->
 
                                         </div>
                                         <li>
