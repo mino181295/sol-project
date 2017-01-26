@@ -116,6 +116,14 @@ CREATE TABLE `notifica` (
   `Orario` timestamp NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `notifica`
+--
+
+INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`) VALUES
+(1, '2', '1', 'ciao', '2017-01-26 22:24:49'),
+(2, '2', '1', 'mi chiama', '2017-01-26 22:26:44');
+
 -- --------------------------------------------------------
 
 --
@@ -137,7 +145,8 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `Salt`, `Matricola`) VALUES
-('mario.rossi@studio.unibo.it', 's', 'Mario', 'Rossi', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '1234567890');
+('mario.rossi@studio.unibo.it', 's', 'Mario', 'Rossi', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '1'),
+('gino.pino@unibo.it', 'd', 'Gino', 'Pino', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '2');
 
 --
 -- Indici per le tabelle scaricate
@@ -214,10 +223,11 @@ ALTER TABLE `lezione`
 -- AUTO_INCREMENT per la tabella `notifica`
 --
 ALTER TABLE `notifica`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 
 CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
