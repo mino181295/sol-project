@@ -42,7 +42,7 @@ $(function(){
         
         // se devo creare calendario settimanale
         if (currState == state.weekly) {
-            row.append($("<th></th>").text("Ora"));
+            row.append($("<th></th>").text("Ora").addClass('hour'));
             length -= 2; //escludo il sabato e la domenica
             table = "weekly-table";
             caption = "Calendario settimanale ";
@@ -63,7 +63,8 @@ $(function(){
 
             // nel calendario settimanale
             if (currState == state.weekly) {
-                content += daysInWeek[i];            // aggiungo il numero del giorno nell'intestazione
+                //cell.attr('colspan', '2');
+                content += " " + daysInWeek[i];            // aggiungo il numero del giorno nell'intestazione
                 if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
                     cell.addClass('currDay');
             }
@@ -135,32 +136,48 @@ $(function(){
     }
 
     function showMonth() {
-        $("#weekly-table").fadeOut();
-        $("#monthly-table").fadeIn();
+        $("#weekly-table").fadeOut("fast", function() {
+            $("#monthly-table").fadeIn();
+        });
+        
     }
 
     function showWeek() {
-        var content = "";
-
         // prendo gli estremi della settimana corrente
         week = $("#monthly-table tbody tr").eq(currentWeek-1);
         fDay = week.children().first().text();
         lDay = week.children().last().text();
 
-        console.log("week-" + currentWeek + "; fDay: " + fDay + "; fDay: " + lDay);
+        var id = "1"; //il valore lo prendo dalla selezione fatta dall'utente i corsi di laurea che segue
+        var year = "3"; // il valore lo prendo dall'anno che l'utente sceglie (1-2-3[-4-5])
+        var session = currentMonth <=6 ? 1 : 2;
 
-        // RICHIESTA TRAMITE AJAX: mando giorni estremi della settimana interessata
-        $.getJSON('weekGen.php', {'fDay': fDay, 'lDay': lDay}, function(json) {
-          //  alert(json.result);
-      });        
+        // RICHIESTA TRAMITE AJAX
+        var result;
+        $.getJSON('query.php', {idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay}, function(json) {
+            console.log(json.result);
+            result = json.result;
+        }); 
 
-        $("#weekly-table tbody").html(content);
+        // $("#weekly-table tbody").load("weekGen.php", {idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay});
+
+        var fHour = 8; // ipotizzo che le lezioni inizino alle 8 (minimo) e ad ore "spaccate" i.e. (HH:00)
+        for (var i = 0; i < 10; i++) { // ipotizzo 10 ore di scuola
+            var th = $("<th></th>").addClass('hour').text((fHour + i) + ":00");
+            var row = $("<tr></tr>").append(th);
+            for (var j=0; j < 5; j++) {  //Ipotizzo scuola dal lunedì al venerdì
+                row.append($("<td></td>").text("testo"));
+            }
+            $("#weekly-table tbody").append(row);
+        }
 
         createTHead();
         updateTopBar();
 
-        $("#monthly-table").fadeOut();
-        $("#weekly-table").fadeIn();
+        $("#monthly-table").fadeOut("fast", function() {
+            $("#weekly-table").fadeIn();    
+        });
+        
         pickToday();
     }
 
@@ -256,11 +273,11 @@ $(function(){
     ************************************/
     if (matchMedia) {
         var mq = window.matchMedia("(max-width: 768px)");
-        mq.addListener(WidthChange);
-        WidthChange(mq);
-    }
+            mq.addListener(WidthChange);
+            WidthChange(mq);
+        }
 
-    function WidthChange(mq) {
+        function WidthChange(mq) {
         tinyScreen = mq.matches; // variabile globale di default
         createTHead();
         $("#weekMode").text(tinyScreen ? "Sett." : "Settimana");
@@ -279,6 +296,7 @@ $(function(){
     var currState = state.monthly;
     var fDay;
     var lDay;
+
     goToday();
 
 });

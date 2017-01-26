@@ -7,8 +7,8 @@ td:hover {
     background-color: #eeeeee;
 }
 
-td {
-    height: 120px;
+tbody tr {
+    height: 30%;
 }
 
 main {
@@ -19,23 +19,54 @@ main {
 #topTable {
     padding-bottom: 1%;
 }
-
+/*
 #today {
-        width: 80px;
-    }
-
+    width: 80px;
+}
+*/
 .notCurrMonth {
     color: #c9c9c9
 }
+
+
+
+
+tbody {
+    display:block;
+    height:400px;
+    overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.hour {
+    width: 12%;      
+}
+
+
+td {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-break: break-all;
+}
+
 
 
 /****************************
 *       MEDIA QUERIES
 *****************************/
 @media (max-width: 768px) {
-    td {
-        height: 60px;
+   tbody tr {
+        height: 14%;
     }
+
+     #weekly-table td {
+        font-size: 80%;
+     }
 
     button {
         height: 50px;

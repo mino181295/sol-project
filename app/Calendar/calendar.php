@@ -2,7 +2,7 @@
 <html lang="it">
 <?php 
     session_start();
-    $_SESSION["nome"] = "ciao";
+    $_SESSION["name"] = "ciao";
 ?>
 <head>
     <title>Calendario</title>
