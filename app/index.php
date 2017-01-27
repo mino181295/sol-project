@@ -53,7 +53,13 @@
                                         <span id="notification-label" class="glyphicon glyphicon-bell"></span>
 
                                         <label class="sr-only" for="#notification-number">Numero notifiche</label>
-                                        <span id="notification-number" class="badge badge-notify">3</span>
+                                        <span id="notification-number" class="badge badge-notify">
+                                            <!-- Numero notifiche -->
+                                            <?php 
+                                                include '../notification/getNumNotifications.php'; 
+                                                echo getNumNotifications(); 
+                                            ?>
+                                        </span>
                                     </a>
                                     <ul class="dropdown-menu " role="menu" aria-labelledby="#notification-reference">
                                         <li>

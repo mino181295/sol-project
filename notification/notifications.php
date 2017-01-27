@@ -4,7 +4,7 @@
 	if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
 
 		include '../login/db_connect.php';
-		$sql = "SELECT Matricola_mit, Matricola_dest, Testo, Orario FROM notifica WHERE (Matricola_dest = '" . $_SESSION['matricola'] ."') ORDER BY `Orario` DESC";
+		$sql = "SELECT Matricola_mit, Matricola_dest, Testo, Orario FROM notifica WHERE (Matricola_dest = '" . $_SESSION['matricola'] ."' AND Stato = '1') ORDER BY `Orario` DESC";
 				 
 				$result = $mysqli->query($sql);
 
