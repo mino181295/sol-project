@@ -30,7 +30,6 @@ $(function(){
         var info = monthNames[currentMonth] + " " + currentYear;
         $("#topTable h1").text(info);        
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
-       // $("#bottomTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
     // Creo il thead della table interessata ed aggiorno la caption
@@ -139,9 +138,8 @@ $(function(){
     }
 
     function showMonth() {
-        $("#bottomTable").fadeOut();
-        $("#weekly-table").fadeOut("fast", function() {
-            $("#monthly-table").fadeIn();
+        $(".weekView").fadeOut("fast", function() {
+            $(".monthView").fadeIn();
         });
         
     }
@@ -175,24 +173,20 @@ $(function(){
         fDay = week.children().first().text();
         lDay = week.children().last().text();
 
-        fillWeeklyCal(); // dopo aver creato la struttura la riempio
-
-        $("#monthly-table").fadeOut("fast", function() {
-            $("#weekly-table").fadeIn();    
-            $("#bottomTable").fadeIn();
+        $(".monthView").fadeOut("fast", function() {
+            $(".weekView").fadeIn();   
+            $("#sel-corsostudi").trigger("change");
         });
         
         pickToday();
     }
 
     function fillWeeklyCal() {
-        var id = "1"; //il valore lo prendo dalla selezione fatta dall'utente i corsi di laurea che segue
-        var year = "3"; // il valore lo prendo dall'anno che l'utente sceglie (1-2-3[-4-5])
         var session = currentMonth <=6 ? 1 : 2;
 
         // RICHIESTA TRAMITE AJAX
         var result; // mappa dei risultati nel formato numeroGiorno-ora: materia-aula
-        $.getJSON('query.php', {type: "getHours", idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay}, function(json) {
+        $.getJSON('query.php', {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDay: fDay, lDay: lDay}, function(json) {
             console.log(json.result);
             result = json.result;
         }); 
@@ -294,9 +288,9 @@ $(function(){
     // Gestione orario settimanale
     $("#sel-corsostudi").change(function() {
         var year = $("#sel-anno").val();
+        idCorso = $(this).val().split("-")[1];
         if(year == null) { // fillo il select dell'anno
             // RICHIESTA TRAMITE AJAX
-            var idCorso = $(this).val().split("-")[1];
             $.getJSON('query.php', {type: "getYears", idCorso: idCorso}, function(json) {
                 $("#sel-anno").empty();
                 var years = json.result[0];
@@ -306,10 +300,16 @@ $(function(){
             }); 
         }
         // aggiorno la vista degli orari
-        fillWeeklyCal();
+         $("#sel-anno").trigger("change");
     });
 
-    $("#sel-anno").on('change', fillWeeklyCal);
+    $("#sel-anno").change(function(event) {
+        var val = $(this).val(); 
+        // controllo se il valore è null poiché quando trigghero 
+        // la call back il valore potrebbe non essersi aggiornato ancora
+        selectedYear = val == null ? $(this).children("option").first().val() : val;
+        fillWeeklyCal();
+    });
 
 
 
@@ -342,6 +342,8 @@ $(function(){
     var currState = state.monthly;
     var fDay;
     var lDay;
+    var idCorso;
+    var selectedYear;
 
     goToday();
 

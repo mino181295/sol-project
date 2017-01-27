@@ -43,7 +43,7 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
             <div class="table-responsive">
 
                 <!-- MONTHLY CALENDAR -->
-                <table id="monthly-table" class="table">
+                <table id="monthly-table" class="table monthView">
                     <caption class="sr-only">TipoCalendario-Mese-Anno</caption>
                     <thead>
                         <!-- CODE AUTOMATICALLY GENERATED HERE -->
@@ -54,7 +54,7 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
                 </table>
 
                 <!-- WEEKLY CALENDAR -->
-                <table id="weekly-table" class="table">
+                <table id="weekly-table" class="table weekView">
                     <caption class="sr-only">TipoCalendario-Mese-Anno</caption>
                     <thead>
                         <!-- CODE AUTOMATICALLY GENERATED HERE -->
@@ -67,7 +67,7 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
             </div>
         </div>
         
-        <div class="row" id="bottomTable" style="display: none;">
+        <div class="row weekView">
             <div class="container">
                 <form>
                     <div class="form-group">
@@ -92,6 +92,7 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
 
                         <label>Anno:
                             <select class="selectpicker" id="sel-anno">
+                            <!-- CODE AUTOMATICALLY GENERATED HERE -->
                             </select>
                         </label>
                     </div>
