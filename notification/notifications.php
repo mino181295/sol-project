@@ -27,6 +27,13 @@
 					}
 				} else {
 					
-					echo '<p class="dropdown-item">Nessuna notifica presente</p>';
-				}}
+					echo '<p class="dropdown-item">Nessuna nuova notifica</p>';
+				}
+
+		// si presuppone che abbiamo appena letto le notifiche -> passano allo stato di lette
+		include 'notificationsFunctions.php';
+		updateStateNotifications();
+	}
+
+
 ?>
