@@ -113,16 +113,21 @@ CREATE TABLE `notifica` (
   `Matricola_mit` char(10) NOT NULL,
   `Matricola_dest` char(10) NOT NULL,
   `Testo` varchar(255) NOT NULL,
-  `Orario` timestamp NOT NULL
+  `Orario` timestamp NOT NULL,
+  `Stato` char(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `notifica`
 --
 
-INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`) VALUES
-(1, '2', '1', 'ciao', '2017-01-26 22:24:49'),
-(2, '2', '1', 'mi chiama', '2017-01-26 22:26:44');
+INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`, `Stato`) VALUES
+(1, '2', '1', 'ciao', '2017-01-26 22:24:49', '1'),
+(2, '2', '1', 'mi chiama', '2017-01-26 22:26:44', '1'),
+(3, '2', '1', 'Ha caricato un file sul cloud', '2017-01-03 23:00:00', '1'),
+(4, '2', '1', 'notifica 4', '2017-01-03 23:00:00', '1'),
+(5, '2', '1', 'notifica', '2017-01-27 13:42:11', '1'),
+(6, '2', '1', 'notifica2', '2017-01-27 13:42:25', '1');
 
 -- --------------------------------------------------------
 
@@ -223,11 +228,10 @@ ALTER TABLE `lezione`
 -- AUTO_INCREMENT per la tabella `notifica`
 --
 ALTER TABLE `notifica`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 
 CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
