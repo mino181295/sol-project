@@ -65,12 +65,15 @@ td {
     }
 
      #weekly-table td {
-        font-size: 80%;
+        font-size: 85%;
      }
+
+    #topTable button {
+        width: 70px;
+    }
 
     button {
         height: 50px;
-        width: 70px;
     }
 }
 

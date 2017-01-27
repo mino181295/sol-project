@@ -43,7 +43,7 @@ $(function(){
         
         // se devo creare calendario settimanale
         if (currState == state.weekly) {
-            row.append($("<th></th>").text("Ora").addClass('hour'));
+            row.append($("<th></th>").text("Ora").addClass('hour').attr('id', 'hour'));
             length -= 2; //escludo il sabato e la domenica
             table = "weekly-table";
             caption = "Calendario settimanale ";
@@ -59,23 +59,25 @@ $(function(){
         // creo le colonne di intestazione con i nomi dei giorni
         for (i=0; i<length; i++) {
             var dayName = dayNames[i];
-            var cell = $("<th></th>").attr('id', dayName + "-" + table);
+            var id = dayName;
+            var cell = $("<th></th>");
             var content = dayName.substring(0, (tinyScreen ? 3 : dayName.length)); // uso abbreviazioni per schermi piccoli
 
             // nel calendario settimanale
             if (currState == state.weekly) {
-                //cell.attr('colspan', '2');
-                content += " " + daysInWeek[i];            // aggiungo il numero del giorno nell'intestazione
+                var dayNum = daysInWeek[i];
+                content += " " + dayNum;            // aggiungo il numero del giorno nell'intestazione
+                id += "-" + dayNum;
                 if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
                     cell.addClass('currDay');
             }
 
-            row.append(cell.text(content));
+            row.append(cell.text(content).attr('id', id));
         }
 
         // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
         var info = monthNames[currentMonth] + " " + currentYear;
-        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
+        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + (lDay-2) + "." : "";
         $("#" + table + " caption").text(info);
         $("#" + table + " thead").html(row);
     }
@@ -145,36 +147,35 @@ $(function(){
     }
 
     function showWeek() {
+        createTHead();
+        updateTopBar();
+
+        // creo la struttura del calendario settimanale
+        var tBody = $("<tbody></tbody>");
+        var fHour = 8; // ipotizzo che le lezioni inizino alle 8 (minimo) e ad ore "spaccate" i.e. (HH:00)
+        for (var i = 0; i < 10; i++) { // ipotizzo 10 ore di scuola
+            var hour = fHour + i;
+            var th = $("<th></th>").addClass('hour').attr('id', hour).attr({
+                id: ("ore-" + hour),
+                headers: 'hour'
+            }).text(hour + ":00");
+            var row = $("<tr></tr>").append(th);
+            for (var j=0; j < 5; j++) {  //Ipotizzo scuola dal lunedì al venerdì
+                var header = $("#weekly-table thead th").eq(j+1).attr('id');
+                row.append($("<td></td>").addClass(hour).attr('headers', "ore-" + hour + " " + header));
+            }
+            tBody.append(row);
+        }
+        $("#weekly-table tbody").remove();
+        $("#weekly-table thead").after(tBody);
+
+
         // prendo gli estremi della settimana corrente
         week = $("#monthly-table tbody tr").eq(currentWeek-1);
         fDay = week.children().first().text();
         lDay = week.children().last().text();
 
-        var id = "1"; //il valore lo prendo dalla selezione fatta dall'utente i corsi di laurea che segue
-        var year = "3"; // il valore lo prendo dall'anno che l'utente sceglie (1-2-3[-4-5])
-        var session = currentMonth <=6 ? 1 : 2;
-
-        // RICHIESTA TRAMITE AJAX
-        var result;
-        $.getJSON('query.php', {idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay}, function(json) {
-            console.log(json.result);
-            result = json.result;
-        }); 
-
-        // $("#weekly-table tbody").load("weekGen.php", {idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay});
-
-        var fHour = 8; // ipotizzo che le lezioni inizino alle 8 (minimo) e ad ore "spaccate" i.e. (HH:00)
-        for (var i = 0; i < 10; i++) { // ipotizzo 10 ore di scuola
-            var th = $("<th></th>").addClass('hour').text((fHour + i) + ":00");
-            var row = $("<tr></tr>").append(th);
-            for (var j=0; j < 5; j++) {  //Ipotizzo scuola dal lunedì al venerdì
-                row.append($("<td></td>").text("testo"));
-            }
-            $("#weekly-table tbody").append(row);
-        }
-
-        createTHead();
-        updateTopBar();
+        fillWeeklyCal(); // dopo aver creato la struttura la riempio
 
         $("#monthly-table").fadeOut("fast", function() {
             $("#weekly-table").fadeIn();    
@@ -182,6 +183,26 @@ $(function(){
         });
         
         pickToday();
+    }
+
+    function fillWeeklyCal() {
+        var id = "1"; //il valore lo prendo dalla selezione fatta dall'utente i corsi di laurea che segue
+        var year = "3"; // il valore lo prendo dall'anno che l'utente sceglie (1-2-3[-4-5])
+        var session = currentMonth <=6 ? 1 : 2;
+
+        // RICHIESTA TRAMITE AJAX
+        var result; // mappa dei risultati nel formato numeroGiorno-ora: materia-aula
+        $.getJSON('query.php', {type: "getHours", idCorso: id, year: year, session: session, fDay: fDay, lDay: lDay}, function(json) {
+            console.log(json.result);
+            result = json.result;
+        }); 
+
+        //riempio il calendario settimanale con i valori della query
+        $("#weekly-table td").each(function(index, el) {
+            var headers = $(el).attr('headers').split(/[ -]+/); // mi servono i valori agli indici 1 e 3
+            //prendo la materia-aula da result se li colloco nel td corrispettivo
+        });
+
     }
 
     function goToday() {
@@ -268,6 +289,28 @@ $(function(){
         currState = state.weekly;
         showWeek(); // sfrutto il calendario mensile già creato.
     });
+
+
+    // Gestione orario settimanale
+    $("#sel-corsostudi").change(function() {
+        var year = $("#sel-anno").val();
+        if(year == null) { // fillo il select dell'anno
+            // RICHIESTA TRAMITE AJAX
+            var idCorso = $(this).val().split("-")[1];
+            $.getJSON('query.php', {type: "getYears", idCorso: idCorso}, function(json) {
+                $("#sel-anno").empty();
+                var years = json.result[0];
+                for(var i=1; i<=years; i++) {
+                    $("#sel-anno").append($("<option></option>").attr('value', i).text(i));
+                }      
+            }); 
+        }
+        // aggiorno la vista degli orari
+        fillWeeklyCal();
+    });
+
+    $("#sel-anno").on('change', fillWeeklyCal);
+
 
 
 

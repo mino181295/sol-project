@@ -2,7 +2,7 @@
 <html lang="it">
 <?php 
 session_start();
-$_SESSION["nome"] = "ciao";
+$_SESSION["email"] = "mario.rossi@studio.unibo.it";
 ?>
 <head>
     <title>Calendario</title>
@@ -23,18 +23,20 @@ $_SESSION["nome"] = "ciao";
 <body>
     <main class="container-fluid">        
         <header id="topTable" class="row">
-            <h1>Mese-Anno</h1>
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" id="prev" class="btn btn-default btn-arrow-left">
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                </button>
-                <button type="button" id="monthMode" class="btn btn-default">Mese</button>
-                <button type="button" id="today" class="btn btn-default">Oggi</button>
-                <button type="button" id="weekMode" class="btn btn-default">Settimana</button>
-                <button type="button" id="next" class="btn btn-default btn-arrow-right">
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                </button>
-            </div>
+            <form>
+                <h1>Mese-Anno</h1>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" id="prev" value="mese precedente" class="btn btn-default btn-arrow-left">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" id="monthMode" value="Mese" class="btn btn-default">Mese</button>
+                    <button type="button" id="today" value="Oggi" class="btn btn-default">Oggi</button>
+                    <button type="button" id="weekMode" value="Settimana" class="btn btn-default">Settimana</button>
+                    <button type="button" id="next" value="mese successivo" class="btn btn-default btn-arrow-right">
+                        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
         </header>
 
         <div class="row">
@@ -64,21 +66,41 @@ $_SESSION["nome"] = "ciao";
 
             </div>
         </div>
+        
+        <div class="row" id="bottomTable" style="display: none;">
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label>Corso di studi:
+                        <select class="selectpicker" id="sel-corsostudi" data-dropup-auto="true">
+                                <?php
+                                include("db_connect.php");
+                                $sql = "SELECT ID, Denominazione FROM utente u, corsostudi c, iscrizione i WHERE (Email = '" . $_SESSION['email'] . "' AND TipoUtente = 's' AND 
+                                Email = Studente AND ID = IDCorsoStudi AND AnnoAccademico >= (SELECT MAX(AnnoAccademico) FROM iscrizione)) ORDER BY 'Denominazione'";
 
-        <div class="row" id="bottomTable">
-            <div class="btn-group dropup ">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Anno <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-            </ul>
+                                $result = $mysqli->query($sql);
+
+                                if($result->num_rows >= 1) {
+                                    while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                                        $val = $row["Denominazione"] . "-" . $row["ID"];
+                                        echo '<option value="' . $val . '">' . $val . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </label>
+
+                        <label>Anno:
+                            <select class="selectpicker" id="sel-anno">
+                            </select>
+                        </label>
+                    </div>
+                </form>
+            </div> 
+
         </div>
-    </div>
 
-</main>
+    </main>
 </body>
 
 </html>
