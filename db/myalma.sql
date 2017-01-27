@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Creato il: Gen 26, 2017 alle 17:22
--- Versione del server: 5.7.14
--- Versione PHP: 5.6.25
+-- Host: localhost
+-- Creato il: Gen 27, 2017 alle 21:43
+-- Versione del server: 10.1.16-MariaDB
+-- Versione PHP: 5.6.24
 
 CREATE DATABASE `myalma`;
 USE `myalma`;
@@ -32,7 +32,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `assegnamento` (
   `CodiceCorso` char(5) NOT NULL,
   `IDCorsoStudi` char(5) NOT NULL,
-  `Docente` varchar(20) NOT NULL
+  `Docente` varchar(40) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -44,9 +44,9 @@ CREATE TABLE `assegnamento` (
 CREATE TABLE `corso` (
   `Codice` char(5) NOT NULL,
   `IDCorsoStudi` char(5) NOT NULL,
-  `Denominazione` varchar(20) NOT NULL,
-  `Anno` int(11) NOT NULL,
-  `Ciclo` char(1) NOT NULL
+  `Denominazione` varchar(40) NOT NULL,
+  `Anno` int(1) NOT NULL,
+  `Ciclo` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -57,8 +57,8 @@ CREATE TABLE `corso` (
 
 CREATE TABLE `corsostudi` (
   `ID` char(5) NOT NULL,
-  `Denominazione` varchar(20) NOT NULL,
-  `DurataAnni` int(11) NOT NULL
+  `Denominazione` varchar(40) NOT NULL,
+  `DurataAnni` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,8 +68,8 @@ CREATE TABLE `corsostudi` (
 --
 
 CREATE TABLE `evento` (
-  `Utente` varchar(20) NOT NULL,
-  `Numero` int(11) NOT NULL,
+  `Utente` varchar(40) NOT NULL,
+  `Numero` int(4) NOT NULL,
   `Inizio` date NOT NULL,
   `Fine` date NOT NULL,
   `Descrizione` varchar(200) NOT NULL
@@ -83,7 +83,7 @@ CREATE TABLE `evento` (
 
 CREATE TABLE `iscrizione` (
   `IDCorsoStudi` char(5) NOT NULL,
-  `Studente` varchar(20) NOT NULL,
+  `Studente` varchar(40) NOT NULL,
   `AnnoAccademico` varchar(9) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -94,10 +94,10 @@ CREATE TABLE `iscrizione` (
 --
 
 CREATE TABLE `lezione` (
-  `Numero` int(11) NOT NULL,
+  `Numero` int(3) NOT NULL,
   `OraInizio` date NOT NULL,
   `OraFine` date NOT NULL,
-  `Aula` varchar(20) NOT NULL,
+  `Aula` varchar(40) NOT NULL,
   `CodiceCorso` char(5) NOT NULL,
   `IDCorsoStudi` char(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -113,7 +113,7 @@ CREATE TABLE `notifica` (
   `Matricola_mit` char(10) NOT NULL,
   `Matricola_dest` char(10) NOT NULL,
   `Testo` varchar(255) NOT NULL,
-  `Orario` timestamp NOT NULL,
+  `Orario` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Stato` char(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -136,10 +136,10 @@ INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orari
 --
 
 CREATE TABLE `utente` (
-  `Email` varchar(60) NOT NULL,
+  `Email` varchar(40) NOT NULL,
   `TipoUtente` char(1) NOT NULL,
-  `Nome` varchar(20) NOT NULL,
-  `Cognome` varchar(20) NOT NULL,
+  `Nome` varchar(40) NOT NULL,
+  `Cognome` varchar(40) NOT NULL,
   `Password` varchar(128) NOT NULL,
   `Salt` char(128) NOT NULL,
   `Matricola` char(10) DEFAULT NULL
@@ -194,7 +194,7 @@ ALTER TABLE `iscrizione`
 -- Indici per le tabelle `lezione`
 --
 ALTER TABLE `lezione`
-  ADD PRIMARY KEY (`Numero`),
+  ADD PRIMARY KEY (`Numero`,`CodiceCorso`,`IDCorsoStudi`),
   ADD KEY `FKesecuzione` (`CodiceCorso`,`IDCorsoStudi`);
 
 --
@@ -218,12 +218,12 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `Numero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Numero` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT per la tabella `lezione`
 --
 ALTER TABLE `lezione`
-  MODIFY `Numero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Numero` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT per la tabella `notifica`
 --
@@ -232,7 +232,6 @@ ALTER TABLE `notifica`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
 GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
