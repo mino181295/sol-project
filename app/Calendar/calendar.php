@@ -72,7 +72,8 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
                 <form>
                     <div class="form-group">
                         <label>Corso di studi:
-                        <select class="selectpicker" id="sel-corsostudi" data-dropup-auto="true">
+                        <select class="selectpicker" id="sel-corsostudi" selected_index="-1" data-dropup-auto="true">
+                                <option value="" selected="true"></option>
                                 <?php
                                 include("db_connect.php");
                                 $sql = "SELECT ID, Denominazione FROM utente u, corsostudi c, iscrizione i WHERE (Email = '" . $_SESSION['email'] . "' AND TipoUtente = 's' AND 
@@ -92,7 +93,7 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
 
                         <label>Anno:
                             <select class="selectpicker" id="sel-anno">
-                            <!-- CODE AUTOMATICALLY GENERATED HERE -->
+                                <!-- CODE AUTOMATICALLY GENERATED HERE -->
                             </select>
                         </label>
                     </div>

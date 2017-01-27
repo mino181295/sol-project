@@ -175,7 +175,6 @@ $(function(){
 
         $(".monthView").fadeOut("fast", function() {
             $(".weekView").fadeIn();   
-            $("#sel-corsostudi").trigger("change");
         });
         
         pickToday();
@@ -285,29 +284,25 @@ $(function(){
     });
 
 
-    // Gestione orario settimanale
+    // Filtri per orario settimanale
     $("#sel-corsostudi").change(function() {
         var year = $("#sel-anno").val();
         idCorso = $(this).val().split("-")[1];
-        if(year == null) { // fillo il select dell'anno
-            // RICHIESTA TRAMITE AJAX
-            $.getJSON('query.php', {type: "getYears", idCorso: idCorso}, function(json) {
-                $("#sel-anno").empty();
-                var years = json.result[0];
-                for(var i=1; i<=years; i++) {
-                    $("#sel-anno").append($("<option></option>").attr('value', i).text(i));
-                }      
-            }); 
-        }
-        // aggiorno la vista degli orari
-         $("#sel-anno").trigger("change");
+        
+        // fillo il select dell'anno tramite ajax
+        $.getJSON('query.php', {type: "getYears", idCorso: idCorso}, function(json) {
+            $("#sel-anno").empty();
+            var years = json.result[0];
+            for(var i=1; i<=years; i++) {
+                $("#sel-anno").append($("<option></option>").attr('value', i).text(i));
+            }
+            // aggiorno la vista degli orari
+            $("#sel-anno").trigger('change');
+        }); 
     });
 
     $("#sel-anno").change(function(event) {
-        var val = $(this).val(); 
-        // controllo se il valore è null poiché quando trigghero 
-        // la call back il valore potrebbe non essersi aggiornato ancora
-        selectedYear = val == null ? $(this).children("option").first().val() : val;
+        selectedYear = $(this).val(); 
         fillWeeklyCal();
     });
 
@@ -319,11 +314,11 @@ $(function(){
     ************************************/
     if (matchMedia) {
         var mq = window.matchMedia("(max-width: 768px)");
-            mq.addListener(WidthChange);
-            WidthChange(mq);
-        }
+        mq.addListener(WidthChange);
+        WidthChange(mq);
+    }
 
-        function WidthChange(mq) {
+    function WidthChange(mq) {
         tinyScreen = mq.matches; // variabile globale di default
         createTHead();
         $("#weekMode").text(tinyScreen ? "Sett." : "Settimana");

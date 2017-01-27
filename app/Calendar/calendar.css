@@ -54,6 +54,10 @@ td {
     word-break: break-all;
 }
 
+label {
+    margin-left: 5%;
+    margin-right: 5%;
+}
 
 
 /****************************
@@ -74,6 +78,11 @@ td {
 
     button {
         height: 50px;
+    }
+
+    label {
+        margin-left: 1%;
+        margin-right: 1%;
     }
 }
 
