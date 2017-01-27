@@ -54,37 +54,27 @@
                                         <span id="notification-label" class="glyphicon glyphicon-bell"></span>
 
                                         <label class="sr-only" for="#notification-number">Numero notifiche</label>
-                                        <span id="notification-number" class="badge badge-notify">3</span>
+                                        <span id="notification-number" class="badge badge-notify">
+                                            <!-- Numero notifiche -->
+                                            <?php 
+                                                include '../notification/notificationsFunctions.php'; 
+                                                echo getNumNotifications(); 
+                                            ?>
+                                        </span>
                                     </a>
                                     <ul class="dropdown-menu " role="menu" aria-labelledby="#notification-reference">
                                         <li>
                                             <p class="dropdown-header">Notifiche</p>
                                         </li>
                                         <div id="notification-container" class="scrollable-menu">
-                                            <li>
-                                                <p class="dropdown-item">Notifica 1</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 2</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 3</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 4</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 1</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 2</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 3</p>
-                                            </li>
-                                            <li>
-                                                <p class="dropdown-item">Notifica 4</p>
-                                            </li>
+                                            <script type="text/javascript">
+                                                $("ul").click(function(){
+                                                    $.get("../notification/notifications.php", function(data){
+                                                        $("#notification-container").html(data);
+                                                    });
+                                                });
+                                                
+                                            </script>
 
                                         </div>
                                         <li>
