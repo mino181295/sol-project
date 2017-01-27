@@ -72,6 +72,7 @@
                                                     $.get("../notification/notifications.php", function(data){
                                                         $("#notification-container").html(data);
                                                     });
+                                                    $("#notification-number").replaceWith('<span id="notification-number" class="badge badge-notify">0</span>');
                                                 });
                                                 
                                             </script>
