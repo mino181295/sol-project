@@ -76,7 +76,7 @@ $(function(){
 
         // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
         var info = monthNames[currentMonth] + " " + currentYear;
-        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + (lDay-2) + "." : "";
+        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
         $("#" + table + " caption").text(info);
         $("#" + table + " thead").html(row);
     }
@@ -171,7 +171,7 @@ $(function(){
         // prendo gli estremi della settimana corrente
         week = $("#monthly-table tbody tr").eq(currentWeek-1);
         fDay = week.children().first().text();
-        lDay = week.children().last().text();
+        lDay = week.children().last().text()-2; // considero da lunedì-venerdì
 
         $(".monthView").fadeOut("fast", function() {
             $(".weekView").fadeIn();   
@@ -185,7 +185,10 @@ $(function(){
 
         // RICHIESTA TRAMITE AJAX
         var result; // mappa dei risultati nel formato numeroGiorno-ora: materia-aula
-        $.getJSON('query.php', {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDay: fDay, lDay: lDay}, function(json) {
+        var fDate = JSON.stringify(new Date(currentYear, currentMonth, fDay)).replace(/[T,Z]/g, " ");
+        var lDate = JSON.stringify(new Date(currentYear, currentMonth, lDay)).replace(/[T,Z]/g, " ");
+        var data = {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDate: fDate, lDate: lDate};
+        $.getJSON('query.php', data, function(json) {
             console.log(json.result);
             result = json.result;
         }); 
