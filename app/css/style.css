@@ -95,7 +95,7 @@ body {
     #navbar-notification {
         width: 80px;
         height: 20px;
-        margin-left: 13%;
+        margin-left: 0px !important;
     }
 }
 
@@ -258,6 +258,13 @@ body {
     margin-top: 20px;
 }
 
+#navigation-buttons {
+    margin-top: 20px;
+}
+
+#navigation-buttons .btn {
+	background-color: #7f0000;
+}
 
 /*Bottoni*/
 
@@ -358,12 +365,27 @@ body {
     color: #7f0000;
 }
 
-.panel-heading {
+#page-container .panel-heading {
     font-size: 1.5em;
     color: white !important;
     background-color: #7f0000 !important;
 }
 
-#accordin .panel-heading {
-    background-color: #999999 !important;
+#page-container .panel-body {
+    padding: 0px;
 }
+#page-container .list-group {
+    margin: 0px;
+}
+
+#page-container .list-group-item {
+    background: whitesmoke;
+    color: black;
+    cursor: pointer;
+}
+
+#page-container .list-group-item:hover {
+    background: #4d0000;
+    color: white;
+}
+

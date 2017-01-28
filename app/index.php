@@ -2,7 +2,6 @@
         include '../login/functions.php';
         include '../login/db_connect.php';
         include '../notification/notificationsFunctions.php'; 
-
         include 'php/functions.php';
         // link calendar to all buttons
         sec_session_start();
@@ -45,10 +44,11 @@
                             <div class="nav navbar-text pull-left" id="toggle-button" data-toggle="tooltip" title="Tutte le opzioni">
                                 <a href="#" id="menu-toggle">
                                     <i class="fa fa-cogs" id="sidebar-btn" aria-hidden="true"></i>
+                                    <label class="sr-only" for="sidebar-btn">Apri/Chiudi impostazioni</label>
                                 </a>
                             </div>
                             <!--Titolo-->
-                            <a class="navbar-brand" id="sol-label" href="#">Studenti Online</a>
+                            <a class="navbar-brand home-link" id="sol-label" href="#">Studenti Online</a>
                             <p class="navbar-text" id="school-information"><?php echo getNomeScuola(); ?></p>
                             <!--Dropdown notifiche-->
                             <ul class="nav navbar-nav pull-left" id="navbar-notification">
@@ -114,7 +114,7 @@
                 <div id="sidebar-wrapper">
                     <nav>
                         <ul class="nav sidebar-nav">
-                            <li><a href="#">Home<span class="glyphicon glyphicon-home pull-right"></span></a></li>
+                            <li><a class="home-link" href="#">Home<span class="glyphicon glyphicon-home pull-right"></span></a></li>
 
                             <li><a href="#" id="subscribing-menu" data-toggle="collapse" data-target="#submenu1">
                                 Iscrizioni<span class="glyphicon glyphicon-plus pull-right"></span></a>
@@ -163,152 +163,14 @@
                     <div class="container-fluid" id="fluid-page-wrapper">
                         <!-- Una colonna dedicata al bottone della sidebar-->
                         <div class="row">
-
                             <div class="col-xs-12 col-md-12" id="page-container">
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="pill" href="#anno1">Anno 1</a></li>
-                                    <li><a data-toggle="pill" href="#anno2">Anno 2</a></li>
-                                    <li><a data-toggle="pill" href="#anno3">Anno 3</a></li>
-                                </ul>
+                               
 
-                                <div class="tab-content">
-                                    <div id="anno1" class="tab-pane fade in active">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Primo Semestre</div>
-                                            <div class="panel-body">
-                                                
-                                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                            <h4 class="panel-title">
-                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                    <i class="more-less glyphicon glyphicon-plus pull-right"></i>
-                                                                    Analisi
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                            <div class="panel-body">
-                                                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="headingTwo">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                    <i class="more-less glyphicon glyphicon-plus pull-right"></i>
-                                                                    Programmazione
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                            <div class="panel-body">
-                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="headingThree">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                    <i class="more-less glyphicon glyphicon-plus pull-right"></i>
-                                                                    Inglese
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                            <div class="panel-body">
-                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div><!-- panel-group -->        
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Secondo Semestre</div>
-                                            <div class="panel-body">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="anno2" class="tab-pane fade">
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Primo Semestre</div>
-                                            <div class="panel-body">
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Secondo Semestre</div>
-                                            <div class="panel-body">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="anno3" class="tab-pane fade">
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Primo Semestre</div>
-                                            <div class="panel-body">
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">Secondo Semestre</div>
-                                            <div class="panel-body">
-                                            </div>
-                                        </div>
-                                </div>  
-                            <!--
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <h1>Calendario</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <h1>Profilo</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-etsy" aria-hidden="true"></i>
-                                    <h1>Esami</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                                    <h1>Libretto Online</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-folder-o" aria-hidden="true"></i>
-                                    <h1>Servizio Studio</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    <h1>Preferiti</h1>
-                                </a>
-                                <a href="#" class="btn btn-sq">
-                                    <i class="fa fa-wrench" aria-hidden="true"></i>
-                                    <h1>Impostazioni</h1>
-                                </a>
-                            </div>
-                            -->
-                            <!--buttons-container-->
+                           </div>
                         </div>
-                        <!--row-->
-                   
-                    </div>
                     <!--page content wrapper-->
+                    </div>
                 </div>
-            </div>
             <!-- Modal notifications -->
             <?php 
                 include '../notification/allNotifications.php';
