@@ -23,11 +23,18 @@ $(document).ready(function () {
     }
 
 
-    loadContent($('#page-container'), 'snippets/servizio-snippet.php');
+    loadContent($('#page-container'), 'snippets/home-snippet.html');
 
     $('.home-link').click(function () {
         loadContent($('#page-container'), 'snippets/home-snippet.html');
+    });
 
+    $(document).on("click", ".service-link", function () {
+        loadContent($('#page-container'), 'snippets/servizio-snippet.php');
+    });
+
+    $(document).on("click", "#page-container .list-group-item", function () {
+        loadContent($('#page-container'), 'snippets/materia-snippet.php?materia='+$(this).text());
     });
     //Controllo nel resize se c'è da cambiare la label brand
     $(window).resize(function () {
@@ -61,7 +68,7 @@ $(document).ready(function () {
             $(this).delay(eT).fadeIn('fast').addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)]);
             eT += 350;
         });
-        $('.btn-sq').click(function () {
+        $(document).on("click", ".btn-sq *, .btn-sq", function () {
             $('.btn-sq').stop(true, true).fadeIn();
         });
         //Cambio background dei bottoni

@@ -139,7 +139,7 @@
                                     <li class="sidebar-submenu"><a href="#">Calendario</a></li>
                                     <li class="sidebar-submenu"><a href="#">Bandi</a></li>
                                     <li class="sidebar-submenu"><a href="#">Tirocini</a></li>
-                                    <li class="sidebar-submenu"><a href="#">Servizio studio</a></li>
+                                    <li class="sidebar-submenu service-link"><a href="#">Servizio studio</a></li>
                                 </ul>
                             </li>
                             <li><a href="#" id="unsubscribing-menu" data-toggle="collapse" data-target="#submenu4">
