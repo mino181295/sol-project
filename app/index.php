@@ -1,9 +1,10 @@
     <?php
         include '../login/functions.php';
         include '../login/db_connect.php';
+        include '../notification/notificationsFunctions.php'; 
 
         include 'php/functions.php';
-        //getNomeUtente, getSchool, link logout to all the buttons, link calendar to all buttons
+        // link calendar to all buttons
         sec_session_start();
 
         if (isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
@@ -59,10 +60,7 @@
                                         <label class="sr-only" for="#notification-number">Numero notifiche</label>
                                         <span id="notification-number" class="badge badge-notify">
                                             <!-- Numero notifiche -->
-                                            <?php 
-                                                include '../notification/notificationsFunctions.php'; 
-                                                echo getNumNotifications(); 
-                                            ?>
+                                            <?php echo getNumNotifications(); ?>
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu " role="menu" aria-labelledby="#notification-reference">
@@ -100,7 +98,7 @@
                                         <li><a href="#"><span class="fa fa-question-circle"></span>Aiuto</a></li>
                                         <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+                                        <li><a href="../login/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -152,7 +150,7 @@
                                 </ul>
                             </li>
                             
-                            <li><a href="#">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                            <li><a href="../login/logout.php">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
                         </ul>
                     </nav>
                 </div>
