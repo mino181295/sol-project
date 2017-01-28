@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Gen 27, 2017 alle 21:43
+-- Creato il: Gen 28, 2017 alle 10:49
 -- Versione del server: 10.1.16-MariaDB
 -- Versione PHP: 5.6.24
 
@@ -187,7 +187,7 @@ ALTER TABLE `evento`
 -- Indici per le tabelle `iscrizione`
 --
 ALTER TABLE `iscrizione`
-  ADD PRIMARY KEY (`IDCorsoStudi`,`Studente`,`AnnoAccademico`),
+  ADD PRIMARY KEY (`Studente`,`AnnoAccademico`),
   ADD KEY `FKUtente` (`Studente`);
 
 --
