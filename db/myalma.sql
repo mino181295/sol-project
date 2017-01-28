@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Gen 28, 2017 alle 10:49
+-- Creato il: Gen 28, 2017 alle 17:52
 -- Versione del server: 10.1.16-MariaDB
 -- Versione PHP: 5.6.24
 
@@ -35,6 +35,14 @@ CREATE TABLE `assegnamento` (
   `Docente` varchar(40) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `assegnamento`
+--
+
+INSERT INTO `assegnamento` (`CodiceCorso`, `IDCorsoStudi`, `Docente`) VALUES
+('1', '2', 'gino.pino@unibo.it'),
+('1', '1', 'stefano.rizzi@unibo.it');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +57,14 @@ CREATE TABLE `corso` (
   `Ciclo` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `corso`
+--
+
+INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`) VALUES
+('1', '1', 'Ingegneria del software', 3, 1),
+('1', '2', 'Statistica Psicometrica', 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -60,6 +76,15 @@ CREATE TABLE `corsostudi` (
   `Denominazione` varchar(40) NOT NULL,
   `DurataAnni` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `corsostudi`
+--
+
+INSERT INTO `corsostudi` (`ID`, `Denominazione`, `DurataAnni`) VALUES
+('1', 'Ingegneria e scienze informatiche', 3),
+('2', 'Spicologia', 3),
+('3', 'Ingegneria e scienze informatiche LM', 2);
 
 -- --------------------------------------------------------
 
@@ -87,6 +112,14 @@ CREATE TABLE `iscrizione` (
   `AnnoAccademico` varchar(9) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `iscrizione`
+--
+
+INSERT INTO `iscrizione` (`IDCorsoStudi`, `Studente`, `AnnoAccademico`) VALUES
+('1', 'paolo.venturi9@studio.unibo.it', '2016-2017'),
+('1', 'mario.rossi@studio.unibo.it', '2016-2017');
+
 -- --------------------------------------------------------
 
 --
@@ -95,12 +128,20 @@ CREATE TABLE `iscrizione` (
 
 CREATE TABLE `lezione` (
   `Numero` int(3) NOT NULL,
-  `OraInizio` date NOT NULL,
-  `OraFine` date NOT NULL,
+  `OraInizio` datetime NOT NULL,
+  `OraFine` datetime NOT NULL,
   `Aula` varchar(40) NOT NULL,
   `CodiceCorso` char(5) NOT NULL,
   `IDCorsoStudi` char(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `lezione`
+--
+
+INSERT INTO `lezione` (`Numero`, `OraInizio`, `OraFine`, `Aula`, `CodiceCorso`, `IDCorsoStudi`) VALUES
+(1, '2017-01-23 08:00:00', '2017-01-23 09:00:00', 'A', '1', '1'),
+(2, '2017-01-24 10:00:00', '2017-01-24 12:00:00', 'B', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -151,7 +192,9 @@ CREATE TABLE `utente` (
 
 INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `Salt`, `Matricola`) VALUES
 ('mario.rossi@studio.unibo.it', 's', 'Mario', 'Rossi', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '1'),
-('gino.pino@unibo.it', 'd', 'Gino', 'Pino', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '2');
+('gino.pino@unibo.it', 'd', 'Gino', 'Pino', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '2'),
+('paolo.venturi9@studio.unibo.it', 's', 'Paolo', 'Venturi', 'pw', '37EA0B7500FBDD7E6B3C21673E1C5C0FE4EF9FD459E11CA95ADA52D8CC6ADFAB83FFBF7A5EE1595FB76B79B2D7F61D84575B992029574278477B408882CCA4EA', '0000731072'),
+('rizzi.stefano@unibo.it', 'd', 'Stefano', 'Rizzi', 'qwerty', '4EE92C7C7909DC2A1DDAEFE93ED97EFA27A9B8CAB8F1B90C199F917756D00F940155BADE0DA13E717F0C4A1069DE9582E0DD5B1AFFEF427FC7303AA9B593740C', NULL);
 
 --
 -- Indici per le tabelle scaricate
@@ -223,7 +266,7 @@ ALTER TABLE `evento`
 -- AUTO_INCREMENT per la tabella `lezione`
 --
 ALTER TABLE `lezione`
-  MODIFY `Numero` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `Numero` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `notifica`
 --
