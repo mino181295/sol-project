@@ -13,7 +13,7 @@
           $(document).ready(ajustamodal);
           $(window).resize(ajustamodal);
           function ajustamodal() {
-            var altezza = $(window).height() - $(window).height()/2; //value corresponding to the modal heading + footer
+            var altezza = $(window).height()/2; //value corresponding to the modal heading + footer
             $(".my-scroll").css({"height":altezza,"overflow-y":"auto"});
           }
         </script>
@@ -41,7 +41,7 @@
                 echo '<h4 class="mb-1">' . $mitrow['Nome'] . " " . $mitrow['Cognome'] . "</h4>";
                 echo '</div>';
                 echo '<p class="mb-1">' . $row['Testo'] . '</p>';
-                echo '<small>3 days ago.</small></a>';
+                echo '<small>' . $row['Orario'] . '</small></a>';
               }
               
             }
