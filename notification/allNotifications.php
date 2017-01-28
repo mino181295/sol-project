@@ -13,40 +13,10 @@
           $(document).ready(ajustamodal);
           $(window).resize(ajustamodal);
           function ajustamodal() {
-            var altezza = $(window).height() - 300; //value corresponding to the modal heading + footer
+            var altezza = $(window).height() - $(window).height()/2; //value corresponding to the modal heading + footer
             $(".my-scroll").css({"height":altezza,"overflow-y":"auto"});
           }
         </script>
-        <!--<ul class="list-group">
-        <?php  
-        if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
-
-          include '../login/db_connect.php';
-          $sql = "SELECT Matricola_mit, Matricola_dest, Testo, Orario FROM notifica WHERE (Matricola_dest = '" . $_SESSION['matricola'] ."') ORDER BY `Orario` DESC";
-
-          $result = $mysqli->query($sql);
-
-          if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-
-              $mittente = $row['Matricola_mit'];
-
-              $sql = "SELECT * from utente WHERE (Matricola='". $mittente ."')";
-
-              $mitresult = $mysqli->query($sql);
-              if($mitresult->num_rows == 1) {
-                $mitrow = $mitresult->fetch_assoc();
-                echo '<li class="list-group-item"><b>' . $mitrow['Nome'] . " " . $mitrow['Cognome'] . ":</b> ";
-              }
-              echo $row['Testo'] . '</li>';
-            }
-          } else {
-
-            echo '<p id="no_notifications">Nessuna notifica presente.</p>';
-          }
-        }
-        ?>
-        </ul>-->
 
         <?php  
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
