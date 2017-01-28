@@ -33,20 +33,18 @@ function getHours() {
         $idCorso = $_GET["idCorso"] == null? $_SESSION["idCorso"] : $_GET["idCorso"]; // nel caso dello studente sarà presente in sessione, per il professore viene passata.
         $year = $_GET["year"];
         $session = $_GET["session"]; // indica il semestre
-        $fDate = $_GET["fDate"];
-        $lDate = $_GET["lDate"];
+        $fDate = substr($_GET["fDate"], 1, -6);
+        $lDate = substr($_GET["lDate"], 1, -6);
         $stmt->execute();
         $stmt->bind_result($day, $oraI, $oraF, $aula, $denom);
 
         // genero la mappa {DayNum-Ora: Materia-Aula}
-        $map = "{";
+        $map=[];
         while($stmt->fetch()){
             for(; $oraI < $oraF; $oraI++) {
-                $map .= '"' . $day . '-'. $oraI . '": ';
-                $map .= '"' . $denom . '-'. $aula . '", ';
+                $map[$day . "-" . $oraI] = $denom . '-'. $aula;
             }
         }
-        $map .= "}";
 
         echo '{ "result": ' . json_encode($map) . '}';
 

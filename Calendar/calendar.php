@@ -2,9 +2,12 @@
 <html lang="it">
 <?php 
 session_start();
+
+$_SESSION["email"] = "mario.rossi@studio.unibo.it";
 $_SESSION["email"] = "gino.pino@unibo.it";
 $_SESSION["email"] = "paolo.venturi9@studio.unibo.it";
-$_SESSION["tipoUtente"] = 's';
+$_SESSION["email"] = "stefano.rizzi@unibo.it";
+$_SESSION["tipoUtente"] = 'd';
 ?>
 <head>
     <title>Calendario</title>

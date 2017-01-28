@@ -173,32 +173,33 @@ $(function(){
         fDay = week.children().first().text();
         lDay = week.children().last().text()-2; // considero da lunedì-venerdì
 
+        fillWeeklyCal();
+        
         $(".monthView").fadeOut("fast", function() {
             $(".weekView").fadeIn();   
         });
-        
+
         pickToday();
     }
 
     function fillWeeklyCal() {
         var session = currentMonth <=6 ? 1 : 2;
-
-        // RICHIESTA TRAMITE AJAX
-        var result; // mappa dei risultati nel formato numeroGiorno-ora: materia-aula
         var fDate = JSON.stringify(new Date(currentYear, currentMonth, fDay)).replace(/[T,Z]/g, " ");
         var lDate = JSON.stringify(new Date(currentYear, currentMonth, lDay)).replace(/[T,Z]/g, " ");
         var data = {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDate: fDate, lDate: lDate};
+
+        // RICHIESTA TRAMITE AJAX
         $.getJSON('queries.php', data, function(json) {
-            console.log(json.result);
-            result = json.result;
+            var result = json.result;       // Mappa dei risultati nel formato numeroGiorno-ora: denomCorso-aula
+
+            // Riempio il calendario settimanale con i valori della query.
+            $("#weekly-table td").each(function(index, el) {
+                var headers = $(el).attr('headers').split(/[ -]+/); // Mi servono i valori agli indici 1 e 3 corrispondenti ad ora-giorno.
+                var field = headers[3] + "-" + headers[1];          // Prendo la materia-aula da result se li colloco nel td corrispettivo.
+                $(el).text(""); // "pulisco la cella".
+                $(el).text(result[field]);
+            });
         }); 
-
-        //riempio il calendario settimanale con i valori della query
-        $("#weekly-table td").each(function(index, el) {
-            var headers = $(el).attr('headers').split(/[ -]+/); // mi servono i valori agli indici 1 e 3
-            //prendo la materia-aula da result se li colloco nel td corrispettivo
-        });
-
     }
 
     function goToday() {
@@ -215,6 +216,13 @@ $(function(){
 
     function pickToday() {
         $(".currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
+    }
+
+    function removeDefaultOptions() {
+        if (fistTime) {
+            fistTime = false;
+            $('.weekView option[selected="true"]').remove();
+        }
     }
 
 
@@ -287,9 +295,9 @@ $(function(){
     });
 
 
-    // Filtri per orario settimanale
+    // Filtri per orario settimanale OCCORRE AGGIORNARE LA CAPTION!
     $("#sel-corsostudi").change(function() { //Usato dai professori
-        var year = $("#sel-anno").val();
+        removeDefaultOptions();
         idCorso = $(this).val().split("-")[1];
         
         // fillo il select dell'anno tramite ajax
@@ -306,6 +314,7 @@ $(function(){
 
     // Usato sia da professori che studenti
     $("#sel-anno").change(function(event) {
+        removeDefaultOptions();
         selectedYear = $(this).val(); 
         fillWeeklyCal();
     });
@@ -343,6 +352,7 @@ $(function(){
     var lDay;
     var idCorso = null;
     var selectedYear;
+    var fistTime = true; //Flag usato per rimuovere le option vuote di default nei select.
 
     goToday();
 
