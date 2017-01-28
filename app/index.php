@@ -80,13 +80,14 @@
 
                                         </div>
                                         <li>
-                                            <a href="#" class="dropdown-item" id="see-all-button">Vedi tutte</a>
+                                            <a href="#" class="dropdown-item" id="see-all-button" data-toggle="modal" data-target="#myModal">Vedi tutte</a>
                                         </li>
 
                                     </ul>
                                 </li>
                             </ul>
                         </div>
+
                         <!-- Menu con il logout -->
                         <div class="collapse navbar-collapse" id="collapse-form">
                             <ul class="nav navbar-nav navbar-right">
@@ -242,6 +243,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div id="anno2" class="tab-pane fade">
 
                                         <div class="panel panel-default">
@@ -302,17 +304,15 @@
                             <!--buttons-container-->
                         </div>
                         <!--row-->
-                    
-                            
-                            
-                            
-                            
-                            
+                   
                     </div>
                     <!--page content wrapper-->
                 </div>
             </div>
-
+            <!-- Modal notifications -->
+            <?php 
+                include '../notification/allNotifications.php';
+            ?>
         </body>
 
     </html>
