@@ -166,9 +166,9 @@ INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orari
 (1, '2', '1', 'Ha caricato nuovo materiale', '2016-10-05 09:24:39', '1'),
 (2, '2', '1', 'Ha annullato la lezione', '2016-12-06 11:37:18', '1'),
 (3, '2', '1', 'Ha fissato orario esame', '2017-01-17 08:16:41', '1'),
-(4, '2', '1', 'Ha modificato materiale', '2016-10-25 08:16:37', '1'),
-(5, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-24 13:42:11', '1'),
-(6, '2', '1', 'Ha caricato nuovo materiale', '2016-11-09 13:53:25', '1');
+(4, '2', '1', 'Ha modificato materiale', '2016-10-25 08:16:37', '0'),
+(5, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-24 13:42:11', '0'),
+(6, '2', '1', 'Ha caricato nuovo materiale', '2016-11-09 13:53:25', '0');
 
 -- --------------------------------------------------------
 
