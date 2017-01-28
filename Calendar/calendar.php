@@ -2,7 +2,9 @@
 <html lang="it">
 <?php 
 session_start();
-$_SESSION["email"] = "mario.rossi@studio.unibo.it";
+$_SESSION["email"] = "gino.pino@unibo.it";
+$_SESSION["email"] = "paolo.venturi9@studio.unibo.it";
+$_SESSION["tipoUtente"] = 's';
 ?>
 <head>
     <title>Calendario</title>
@@ -10,13 +12,13 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- JQUERY + JAVASCRIPT -->
-    <script type="text/javascript" src="../lib/jQuery/jquery.min.js"></script>
+    <script type="text/javascript" src="../app/lib/jQuery/jquery.min.js"></script>
     <script type="text/javascript" src="calendar.js"></script>
     
     <!-- BOOTSTRAP + CSS -->
     
-    <link type="text/css" rel="stylesheet" href="../lib/Bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="../lib/Bootstrap/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../app/lib/Bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="../app/lib/Bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="calendar.css" />
 
 </head>
@@ -71,38 +73,42 @@ $_SESSION["email"] = "mario.rossi@studio.unibo.it";
             <div class="container">
                 <form>
                     <div class="form-group">
-                        <label>Corso di studi:
-                        <select class="selectpicker" id="sel-corsostudi" selected_index="-1" data-dropup-auto="true">
-                                <option value="" selected="true"></option>
-                                <?php
-                                include("db_connect.php");
-                                $sql = "SELECT ID, Denominazione FROM utente u, corsostudi c, iscrizione i WHERE (Email = '" . $_SESSION['email'] . "' AND TipoUtente = 's' AND 
-                                Email = Studente AND ID = IDCorsoStudi AND AnnoAccademico >= (SELECT MAX(AnnoAccademico) FROM iscrizione)) ORDER BY 'Denominazione'";
-
-                                $result = $mysqli->query($sql);
-
-                                if($result->num_rows >= 1) {
-                                    while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                                        $val = $row["Denominazione"] . "-" . $row["ID"];
-                                        echo '<option value="' . $val . '">' . $val . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </label>
+                        <?php
+                        // Nel caso di account docente viene automaticamente riempito il select per i corsi di laurea in cui insegna.
+                        if(isset($_SESSION["tipoUtente"]) && $_SESSION["tipoUtente"] == 'd') {
+                            ?>
+                            <label>Corso di studi:
+                                <select class="selectpicker" id="sel-corsostudi" data-dropup-auto="true">
+                                    <option value="" selected="true"></option>
+                                    <?php 
+                                    include("functions.php");
+                                    fillTheachersCourses(); 
+                                    ?>
+                                </select>
+                            </label>
+                            <?php
+                        }
+                        ?>
 
                         <label>Anno:
                             <select class="selectpicker" id="sel-anno">
-                                <!-- CODE AUTOMATICALLY GENERATED HERE -->
-                            </select>
-                        </label>
-                    </div>
-                </form>
-            </div> 
+                                <option value="" selected="true"></option>
+                                <?php 
+                                // Nel caso di account studente viene automaticamente riempito il select per gli anni e viene mostrato solo questo (dato che uno studente può essere inscritto annualmente ad un solo corso di laurea).
+                                if (isset($_SESSION["tipoUtente"]) && $_SESSION["tipoUtente"] == 's') {
+                                   include("functions.php");
+                                   fillStudentYears();
+                               }
+                               ?>
+                           </select>
+                       </label>
+                   </div>
+               </form>
+           </div> 
 
-        </div>
+       </div>
 
-    </main>
+   </main>
 </body>
 
 </html>

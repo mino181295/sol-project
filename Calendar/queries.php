@@ -4,8 +4,11 @@
 *            FUNCTIONS
 ************************************/
 
+session_start();
+
 // Query per ottenere l'orario settimanale.
 function getHours() {
+    include("db_connect.php");
     $cond = isset($_GET["fDate"]) && isset($_GET["lDate"]) &&
     isset($_GET["idCorso"]) && isset($_GET["year"]) &&
     isset($_GET["session"]);
@@ -27,11 +30,11 @@ function getHours() {
         $stmt->bind_param("siissss", $idCorso, $session, $year, $fDate, $lDate, $fDate, $lDate);
 
         // set parameters and execute
-        $idCorso = $_GET["idCorso"]; 
+        $idCorso = $_GET["idCorso"] == null? $_SESSION["idCorso"] : $_GET["idCorso"]; // nel caso dello studente sarà presente in sessione, per il professore viene passata.
         $year = $_GET["year"];
         $session = $_GET["session"]; // indica il semestre
-        $fDate = $_GET["fDay"];
-        $lDate = $_GET["lDay"];
+        $fDate = $_GET["fDate"];
+        $lDate = $_GET["lDate"];
         $stmt->execute();
         $stmt->bind_result($day, $oraI, $oraF, $aula, $denom);
 
@@ -43,7 +46,7 @@ function getHours() {
                 $map .= '"' . $denom . '-'. $aula . '", ';
             }
         }
-        $map = "}";
+        $map .= "}";
 
         echo '{ "result": ' . json_encode($map) . '}';
 
@@ -59,6 +62,7 @@ function getHours() {
 
 // Query per ottenere gli anni di durata di un dato corso universitario.
 function getYears() {
+    include("db_connect.php");
     //query tramite prepared statement
     if (isset($_GET["idCorso"])) {
         // prepare and bind
@@ -94,8 +98,6 @@ function getYears() {
 
 if (isset($_GET["type"])) {
     $queryType = $_GET["type"];
-    
-    include("db_connect.php");
 
     if ($queryType == "getHours")
         getHours();

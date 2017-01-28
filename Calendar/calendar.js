@@ -188,7 +188,7 @@ $(function(){
         var fDate = JSON.stringify(new Date(currentYear, currentMonth, fDay)).replace(/[T,Z]/g, " ");
         var lDate = JSON.stringify(new Date(currentYear, currentMonth, lDay)).replace(/[T,Z]/g, " ");
         var data = {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDate: fDate, lDate: lDate};
-        $.getJSON('query.php', data, function(json) {
+        $.getJSON('queries.php', data, function(json) {
             console.log(json.result);
             result = json.result;
         }); 
@@ -288,12 +288,12 @@ $(function(){
 
 
     // Filtri per orario settimanale
-    $("#sel-corsostudi").change(function() {
+    $("#sel-corsostudi").change(function() { //Usato dai professori
         var year = $("#sel-anno").val();
         idCorso = $(this).val().split("-")[1];
         
         // fillo il select dell'anno tramite ajax
-        $.getJSON('query.php', {type: "getYears", idCorso: idCorso}, function(json) {
+        $.getJSON('queries.php', {type: "getYears", idCorso: idCorso}, function(json) {
             $("#sel-anno").empty();
             var years = json.result[0];
             for(var i=1; i<=years; i++) {
@@ -304,6 +304,7 @@ $(function(){
         }); 
     });
 
+    // Usato sia da professori che studenti
     $("#sel-anno").change(function(event) {
         selectedYear = $(this).val(); 
         fillWeeklyCal();
@@ -340,7 +341,7 @@ $(function(){
     var currState = state.monthly;
     var fDay;
     var lDay;
-    var idCorso;
+    var idCorso = null;
     var selectedYear;
 
     goToday();
