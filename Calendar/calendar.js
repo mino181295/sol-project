@@ -32,33 +32,37 @@ $(function(){
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
-    function updateCaption(selector, content, override = false) {
-        var text = override ? permContent = content : permContent + content; // se override = false: appendo il contenuto attuale a quello passato come argomento.
-        $(sele1ctor).text(text);                                             // se = true: sovrascrivo il testo e lo salvo per eventuali successivi append;
+    function goToday() {
+        currentYear = date.getFullYear();
+        currentMonth = date.getMonth();
+        currentDay = date.getDate(); // RIMANE FISSO INDIPENDENTEMENTE DAL MESE-ANNO!
+        createMonthBody(true); // rigenero il calendario mensile del giorno corrente (lo rigenero sempre in quando quello settimanale SI BASA su quello mensile)
+        if (currState == state.weekly) {
+            showWeek();  // rigenero il calendario settimanale del giorno corrente.
+        } else {
+            showMonth();
+        }
     }
 
-    // Creo il thead della table interessata ed aggiorno la caption
-    function createTHead() {
+    function pickToday() {
+        $(".currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
+    }
+
+    function removeDefaultOptions() {
+        if (fistTime) {
+            fistTime = false;
+            $('.weekView option[selected="true"]').remove();
+        }
+    }
+
+    
+
+    /************************************
+    *            MONTH-VIEW
+    ************************************/
+    function createMonthHead() {
         var row = $("<tr></tr>"); // creo la riga
         var length = dayNames.length;
-        var table = "monthly-table";
-        var caption = "Calendario mensile ";
-        var daysInWeek = new Array();
-        
-        // se devo creare calendario settimanale
-        if (currState == state.weekly) {
-            row.append($("<th></th>").text("Ora").addClass('hour').attr('id', 'hour'));
-            length -= 2; //escludo il sabato e la domenica
-            table = "weekly-table";
-            caption = "Calendario settimanale ";
-            id = ""
-
-            // recupero i numeri dei giorni della settimana corrente
-            var week = $("#monthly-table tbody tr").eq(currentWeek-1);
-            $.each(week.children(), function() {
-                daysInWeek.push($(this).text());
-            });
-        }
 
         // creo le colonne di intestazione con i nomi dei giorni
         for (i=0; i<length; i++) {
@@ -67,30 +71,17 @@ $(function(){
             var cell = $("<th></th>");
             var content = dayName.substring(0, (tinyScreen ? 3 : dayName.length)); // uso abbreviazioni per schermi piccoli
 
-            // nel calendario settimanale
-            if (currState == state.weekly) {
-                var dayNum = daysInWeek[i];
-                content += " " + dayNum;            // aggiungo il numero del giorno nell'intestazione
-                id += "-" + dayNum;
-                if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
-                    cell.addClass('currDay');
-            }
-
             row.append(cell.text(content).attr('id', id));
         }
 
         // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
-        var info = monthNames[currentMonth] + " " + currentYear;
-        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
-        $("#" + table + " caption").text(info);
-        $("#" + table + " thead").html(row);
+        var caption = "Calendario mensile " + monthNames[currentMonth] + " " + currentYear;
+        $("#monthly-table caption").text(caption);
+        $("#monthly-table thead").html(row);
     }
 
     // updateWeekNo==true -> setto il numero di settimana SOLO quando scorro i mesi e quando tornon al giorno corrente.
-    function createMonth(updateWeekNo) {
-        createTHead();
-        updateTopBar();
-        
+    function createMonthBody(updateWeekNo) {
         //setto di default la settimana iniziale a 1 poi la imposterò eventualmente a quella del giorno corrente
         if (updateWeekNo)
             currentWeek = 1; 
@@ -142,17 +133,70 @@ $(function(){
         pickToday();
     }
 
+    // Prima occorre creare il lBody e poi chiamare show
     function showMonth() {
+        createMonthHead();
+        updateTopBar();
         $(".weekView").fadeOut("fast", function() {
             $(".monthView").fadeIn();
         });
         
     }
 
-    function showWeek() {
-        createTHead();
-        updateTopBar();
 
+
+    /************************************
+    *            WEEK-VIEW
+    ************************************/
+    function createWeekHead() {
+        var row = $("<tr></tr>"); // creo la riga
+        var length = dayNames.length-2; //escludo il sabato e la domenica
+        var daysInWeek = new Array();
+
+        // prendo gli estremi della settimana corrente
+        week = $("#monthly-table tbody tr").eq(currentWeek-1);
+        fDay = week.children().first().text();
+        lDay = week.children().last().text(); // considero tutta la settimana anche se poi mostro da lunedì-venerdì
+        
+        // se devo creare calendario settimanale
+        row.append($("<th></th>").text("Ora").addClass('hour').attr('id', 'hour'));
+        table = "weekly-table";
+
+        // recupero i numeri dei giorni della settimana corrente NB: siccome li recupero dal calendario mensile si presuppone che questo sia stato prima aggiornato.
+        var week = $("#monthly-table tbody tr").eq(currentWeek-1);
+        $.each(week.children(), function() {
+            daysInWeek.push($(this).text());
+        });
+
+
+        // creo le colonne di intestazione con i nomi dei giorni
+        for (i=0; i<length; i++) {
+            var dayName = dayNames[i];
+            var id = dayName;
+            var cell = $("<th></th>");
+            var content = dayName.substring(0, (tinyScreen ? 3 : dayName.length)); // uso abbreviazioni per schermi piccoli
+
+            // nel calendario settimanale
+            if (currState == state.weekly) {
+                var dayNum = daysInWeek[i];
+                content += " " + dayNum;            // aggiungo il numero del giorno nell'intestazione
+                id += "-" + dayNum;
+                if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
+                    cell.addClass('currDay');
+            }
+
+            row.append(cell.text(content).attr('id', id));
+        }
+
+        // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
+        var caption = "Calendario settimanale " + monthNames[currentMonth] + " " + currentYear +
+                                ": settimana da lunedì " + fDay + " a venerdì " + lDay + ".";
+        $("#" + table + " caption").text(caption);
+
+        $("#" + table + " thead").html(row);
+    }
+
+    function createWeekBody() {
         // creo la struttura del calendario settimanale
         var tBody = $("<tbody></tbody>");
         var fHour = 8; // ipotizzo che le lezioni inizino alle 8 (minimo) e ad ore "spaccate" i.e. (HH:00)
@@ -172,17 +216,7 @@ $(function(){
         $("#weekly-table tbody").remove();
         $("#weekly-table thead").after(tBody);
 
-
-        // prendo gli estremi della settimana corrente
-        week = $("#monthly-table tbody tr").eq(currentWeek-1);
-        fDay = week.children().first().text();
-        lDay = week.children().last().text()-2; // considero da lunedì-venerdì
-
         fillWeeklyCal();
-        
-        $(".monthView").fadeOut("fast", function() {
-            $(".weekView").fadeIn();   
-        });
 
         pickToday();
     }
@@ -207,28 +241,84 @@ $(function(){
         }); 
     }
 
-    function goToday() {
-        currentYear = date.getFullYear();
-        currentMonth = date.getMonth();
-        currentDay = date.getDate(); // RIMANE FISSO INDIPENDENTEMENTE DAL MESE-ANNO!
-        createMonth(true); // rigenero il calendario mensile del giorno corrente (lo rigenero sempre in quando quello settimanale SI BASA su quello mensile)
+    /* A differenza del calendario mensile, il settimanale lo genero contestualmente alla "visione",
+    quello mensile separatamente poiché la creazione di questo potrebbe essere solo per fare da
+    supporto alla creazione del settimanale */
+    function showWeek() {
+        createWeekHead();
+        createWeekBody();
+        updateTopBar();   
+        $(".monthView").fadeOut("fast", function() {
+            $(".weekView").fadeIn();   
+        });
+    }
+
+    function updateCaption(selector, content, override = false) {
+        var text = override ? permContent = content : permContent + content; // se override = false: appendo il contenuto attuale a quello passato come argomento.
+        $(sele1ctor).text(text);                                             // se = true: sovrascrivo il testo e lo salvo per eventuali successivi append;
+    }
+
+    function updateWeekCapiton(content = null) {
+        if (content != null) {
+            permContent = content; // Sovrascrivo il valore della caption.
+        } 
+        var year = selectedYear == null ? "" : selectedYear;
+        var course = $("#sel-corsostudi").val();
+        $("#weekly-table caption").text(permContent + " " + year + "o anno " + course == null ? "" : course);
+    }
+
+
+/*
+    // Creo il thead della table interessata ed aggiorno la caption
+    function createTHead() {
+        var row = $("<tr></tr>"); // creo la riga
+        var length = dayNames.length;
+        var table = "monthly-table";
+        var caption = "Calendario mensile ";
+        var daysInWeek = new Array();
+        
+        // se devo creare calendario settimanale
         if (currState == state.weekly) {
-            showWeek();  // rigenero il calendario settimanale del giorno corrente.
-        } else {
-            showMonth();
-        }
-    }
+            row.append($("<th></th>").text("Ora").addClass('hour').attr('id', 'hour'));
+            length -= 2; //escludo il sabato e la domenica
+            table = "weekly-table";
+            caption = "Calendario settimanale ";
+            id = ""
 
-    function pickToday() {
-        $(".currDay").css("background-color", "#EEEEEE"); // va bene sia per mensile che settimanale.
-    }
-
-    function removeDefaultOptions() {
-        if (fistTime) {
-            fistTime = false;
-            $('.weekView option[selected="true"]').remove();
+            // recupero i numeri dei giorni della settimana corrente
+            var week = $("#monthly-table tbody tr").eq(currentWeek-1);
+            $.each(week.children(), function() {
+                daysInWeek.push($(this).text());
+            });
         }
+
+        // creo le colonne di intestazione con i nomi dei giorni
+        for (i=0; i<length; i++) {
+            var dayName = dayNames[i];
+            var id = dayName;
+            var cell = $("<th></th>");
+            var content = dayName.substring(0, (tinyScreen ? 3 : dayName.length)); // uso abbreviazioni per schermi piccoli
+
+            // nel calendario settimanale
+            if (currState == state.weekly) {
+                var dayNum = daysInWeek[i];
+                content += " " + dayNum;            // aggiungo il numero del giorno nell'intestazione
+                id += "-" + dayNum;
+                if(daysInWeek[i] == currentDay)      // evidenzio la cella di intestazione del giorno corrente
+                    cell.addClass('currDay');
+            }
+
+            row.append(cell.text(content).attr('id', id));
+        }
+
+        // aggiorno la caption della table con indicazione del mese, dell'anno e dell'eventuale settimana
+        var info = monthNames[currentMonth] + " " + currentYear;
+        info += currState == state.weekly ? ": settimana da lunedì " + fDay + " a venerdì " + lDay + "." : "";
+        $("#" + table + " caption").text(info);
+        $("#" + table + " thead").html(row);
     }
+*/
+
 
 
 
@@ -252,7 +342,7 @@ $(function(){
         if (nextM || monthly) {
             currentMonth = getNextMonth();
             currentYear += currentMonth == 0 ? 1 : 0
-            createMonth(monthly); // creo solo
+            createMonthBody(monthly); // creo solo
         }
 
         if (currState == state.weekly)
@@ -274,7 +364,7 @@ $(function(){
         if (prevM || monthly) {
             currentMonth = getPrevMonth();
             currentYear -= currentMonth == 11 ? 1 : 0
-            createMonth(monthly); // creo solo
+            createMonthBody(monthly); // creo solo
         }
 
         if (currState == state.weekly) {
@@ -290,7 +380,7 @@ $(function(){
 
     $("#monthMode").click(function() {
         currState = state.monthly;
-        createMonth(true);
+        createMonthBody(true);
         showMonth();
     });
     
@@ -322,6 +412,7 @@ $(function(){
         removeDefaultOptions();
         selectedYear = $(this).val(); 
         fillWeeklyCal();
+     //   updateWeekCaption();
     });
 
 
@@ -338,7 +429,10 @@ $(function(){
 
     function WidthChange(mq) {
         tinyScreen = mq.matches;
-        createTHead();
+        if (currState == state.monthly)
+            createMonthHead();
+        else
+            createWeekHead();
         $("#weekMode").text(tinyScreen ? "Sett." : "Settimana");
     }
 

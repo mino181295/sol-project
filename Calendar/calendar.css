@@ -28,6 +28,10 @@ main {
     width: 12%;      
 }
 
+.weekView {
+    display: none;
+}
+
 td {
     overflow:hidden;
     text-overflow:ellipsis;
