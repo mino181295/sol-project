@@ -32,6 +32,11 @@ $(function(){
         $("#topTable").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
     }
 
+    function updateCaption(selector, content, override = false) {
+        var text = override ? permContent = content : permContent + content; // se override = false: appendo il contenuto attuale a quello passato come argomento.
+        $(sele1ctor).text(text);                                             // se = true: sovrascrivo il testo e lo salvo per eventuali successivi append;
+    }
+
     // Creo il thead della table interessata ed aggiorno la caption
     function createTHead() {
         var row = $("<tr></tr>"); // creo la riga
@@ -332,7 +337,7 @@ $(function(){
     }
 
     function WidthChange(mq) {
-        tinyScreen = mq.matches; // variabile globale di default
+        tinyScreen = mq.matches;
         createTHead();
         $("#weekMode").text(tinyScreen ? "Sett." : "Settimana");
     }

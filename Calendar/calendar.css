@@ -19,34 +19,14 @@ main {
 #topTable {
     padding-bottom: 1%;
 }
-/*
-#today {
-    width: 80px;
-}
-*/
+
 .notCurrMonth {
     color: #c9c9c9
-}
-
-
-
-
-tbody {
-    display:block;
-    height:400px;
-    overflow:auto;
-}
-
-thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
 }
 
 .hour {
     width: 12%;      
 }
-
 
 td {
     overflow:hidden;
@@ -60,17 +40,31 @@ label {
 }
 
 
+/* Tbody scrolling setup */
+tbody {
+    display:block;
+    height:400px;
+    overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+
 /****************************
 *       MEDIA QUERIES
 *****************************/
 @media (max-width: 768px) {
-   tbody tr {
+    tbody tr {
         height: 14%;
     }
 
-     #weekly-table td {
+    #weekly-table td {
         font-size: 85%;
-     }
+    }
 
     #topTable button {
         width: 70px;
