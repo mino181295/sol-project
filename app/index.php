@@ -1,5 +1,8 @@
     <?php
         include '../login/functions.php';
+        include '../login/db_connect.php';
+
+        include 'php/functions.php';
         //getNomeUtente, getSchool, link logout to all the buttons, link calendar to all buttons
         sec_session_start();
 
@@ -45,7 +48,7 @@
                             </div>
                             <!--Titolo-->
                             <a class="navbar-brand" id="sol-label" href="#">Studenti Online</a>
-                            <p class="navbar-text" id="school-information">Ingegneria e Scienze Informatiche</p>
+                            <p class="navbar-text" id="school-information"><?php echo getNomeScuola(); ?></p>
                             <!--Dropdown notifiche-->
                             <ul class="nav navbar-nav pull-left" id="navbar-notification">
                                 <li class="dropdown">
@@ -91,7 +94,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <img src="image/male-user-shadow_318-34042.jpg" class="img-circle image-profile pull-left" alt="Immagine di profilo">
-                                    <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                                 Matteo Minardi <span class="caret"></span>
+                                    <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                                 <?php echo getNomeUtente();?> <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#"><span class="fa fa-question-circle"></span>Aiuto</a></li>
