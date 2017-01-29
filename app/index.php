@@ -21,13 +21,15 @@
 
         <link type="text/css" rel="stylesheet" href="lib\Bootstrap\css\bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet" type="text/css" />
         <link type="text/css" rel="stylesheet" href="css\animate.css">
         <link type="text/css" rel="stylesheet" href="css\style.css">
 
         <script type="text/javascript" src="lib\jQuery\jquery.min.js"></script>
         <script type="text/javascript" src="lib\Bootstrap\js\bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
         <script type="text/javascript" src="js\main.js"></script>
-
+        
         <body>
             <header id="navbar-container">
                 <nav class="navbar navbar-inverse navbar-fixed-top">

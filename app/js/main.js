@@ -1,9 +1,13 @@
 $(document).ready(function () {
 
+
     function loadContent(selector, path) {
         selector.html("").load(path);
     }
 
+    function replaceAll(str, find, replace) {
+        return str.replace(new RegExp(find, 'g'), replace);
+    }
 
     var docHeight = $(document).height();
     var docWidth = $(document).width();
@@ -29,12 +33,14 @@ $(document).ready(function () {
         loadContent($('#page-container'), 'snippets/home-snippet.html');
     });
 
-    $(document).on("click", ".service-link", function () {
+    $(document).on("click", ".service-link, #back-to-service", function () {
         loadContent($('#page-container'), 'snippets/servizio-snippet.php');
     });
 
+
     $(document).on("click", "#page-container .list-group-item", function () {
-        loadContent($('#page-container'), 'snippets/materia-snippet.php?materia='+$(this).text());
+
+        loadContent($('#page-container'), 'snippets/materia-snippet.php?materia=' + replaceAll($(this).text(), " ", "%20"));
     });
     //Controllo nel resize se c'è da cambiare la label brand
     $(window).resize(function () {

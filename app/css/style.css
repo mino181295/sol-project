@@ -263,8 +263,9 @@ body {
 }
 
 #navigation-buttons .btn {
-	background-color: #7f0000;
+    background-color: #7f0000;
 }
+
 
 /*Bottoni*/
 
@@ -374,6 +375,7 @@ body {
 #page-container .panel-body {
     padding: 0px;
 }
+
 #page-container .list-group {
     margin: 0px;
 }
@@ -387,4 +389,93 @@ body {
 #page-container .list-group-item:hover {
     background: #4d0000;
     color: white;
+}
+
+
+/*table layout - last column*/
+
+table tr td:last-child {
+    white-space: nowrap;
+    width: 1px;
+    text-align: right;
+}
+
+
+/* layout.css Style */
+
+.upload-drop-zone {
+    height: 200px;
+    border-width: 2px;
+    margin-bottom: 20px;
+}
+
+
+/* skin.css Style*/
+
+.upload-drop-zone {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+}
+
+.upload-drop-zone.drop {
+    color: #222;
+    border-color: #222;
+}
+
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.image-preview-input input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.image-preview-input-title {
+    margin-left: 2px;
+}
+
+tbody td a {
+    color: black;
+}
+
+tbody .btn-primary {
+    background-color: #990012;
+    border: none;
+}
+
+tbody .btn-primary:hover {
+    background-color: #999012;
+    border-bottom-color: black;
+}
+
+#back-to-service {
+    font-size: 1.6em;
+    padding: 10%;
+    margin: 15px;
+}
+
+#back-to-service:hover {
+    color: white;
+    background-color: #990012;
+}
+
+#downloads-panel {
+    height: 100px;
+    overflow: auto;
 }
