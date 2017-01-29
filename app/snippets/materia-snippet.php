@@ -22,68 +22,55 @@
 
     <div class="row text-center">
 
-        <div class="container-fluid">
-            <br />
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Upload files</strong> <small> </small></div>
-                        <div class="panel-body">
+    <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Upload files</strong> <small> </small></div>
+                    <div class="panel-body">
+                        <!-- Drop Zone -->
+                        <script type="text/javascript">
+                            $('#drop-zone').dropzone({
+                                addRemoveLinks: true,
+                                paramName: "file",
+                                dictDefaultMessage: "Trascina o clicca per caricare",
+                                maxFilesize: 10000,
+                                maxThumbnailFilesize: 3,
+                                init: function () {
+                                    this.on('complete', function (file) {});
+                                    this.on('success', function (file, json) {});
+                                    this.on('addedfile', function (file) {});
+                                    this.on("dragenter", function () {
+                                        $('#drop-zone').toggleClass(".drag-over");
+                                    });
+                                    this.on("dragleave", function () {
+                                        $('#drop-zone').toggleClass(".drag-over");
+                                    });
+                                }
+                            });
+                        </script>
 
+                        <form action="php/upload.php?path=<?php echo $materia;?>" class="dropzone dz-clickable upload-drop-zone" drop-zone="" id="drop-zone">
+                        </form>
+                        <!-- Upload Finished -->
 
-                            <!-- Drop Zone -->
-                            <script type="text/javascript">
-                            
-                                $('#drop-zone').dropzone({
-                                    maxFilesize: 10000,
-                                    maxThumbnailFilesize: 5,
-                                    init: function () {
-                                        this.on('complete', function(file){
-                                            this.removeFile(file);
-                                        });
-                                        this.on('success', function (file, json) {
-                                        });
-
-                                        this.on('addedfile', function (file) {
-                                        });
-
-                                        this.on('drop', function (file) {
-                                        });
-                                    }
-                                });
-                                
-                                $('#drop-zone').dragster({
-                                    enter: function() {
-                                        $(this).css('border-color','darkred');
-                                    }, 
-                                    leave: function(e) {
-                                        e.stopPropagation();
-                                        $(this).css('border-color','yellow');
-                                    } 
-                                });
-                            </script>
-
-                            <form action="php/upload.php?path=<?php echo $materia;?>" class="dropzone dz-clickable upload-drop-zone" drop-zone="" id="drop-zone">
-                                <div class="dz-default "><span>Drop files here to upload</span></div>
-                            </form>
-                            <!-- Upload Finished -->
-
-                        </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Download files</strong> <small> </small></div>
-                        <div class="panel-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th data-sortable="true" class="column-01">File </th>
-                                        <th data-sortable="true" class="column-02">Download</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="downloads-panel">
-                                    <?php
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Download files</strong> <small> </small></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true" class="column-01">File </th>
+                                    <th data-sortable="true" class="column-02">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody id="downloads-panel">
+                                <?php
                                         foreach($files as $name){
                                            echo '<tr>'; 
                                            echo '<td class="column-01"><a data-toggle="tooltip" title="'.$name.'" href="#">'.substr($name, 0, strpos($name, ".")).'</a></td>';
@@ -96,56 +83,56 @@
                                         }
                                     ?>
 
-                                </tbody>
-                            </table>
-                            <br />
-                        </div>
+                            </tbody>
+                        </table>
+                        <br />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Campus File</strong> <small> </small></div>
-                        <div class="panel-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th data-sortable="true" class="column-01">File </th>
-                                        <th data-sortable="true" class="column-02">Download</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Catalogue</a></td>
-                                        <td class="column-02">
-                                            <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Delta</a></td>
-                                        <td class="column-02">
-                                            <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
-                                        <td class="column-02">
-                                            <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
-                                        <td class="column-02">
-                                            <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br />
-                        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Campus File</strong> <small> </small></div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true" class="column-01">File </th>
+                                    <th data-sortable="true" class="column-02">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Catalogue</a></td>
+                                    <td class="column-02">
+                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Delta</a></td>
+                                    <td class="column-02">
+                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
+                                    <td class="column-02">
+                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
+                                    <td class="column-02">
+                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

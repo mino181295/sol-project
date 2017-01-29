@@ -10,6 +10,21 @@ body {
 
 /*Navbar*/
 
+#sol-logo {
+    height: auto;
+    width: auto;
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 10px;
+    margin-top: -5px;
+}
+
+@media only screen and (min-width: 769px) {
+    #sol-logo {
+        margin-left: 35px;
+    }
+}
+
 .navbar-brand {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -241,7 +256,7 @@ body {
 
 #toggle-button {
     margin: 15px;
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 #toggle-button i {
@@ -406,14 +421,14 @@ table tr td:last-child {
 .upload-drop-zone {
     height: 200px;
     border-width: 2px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 
 /* skin.css Style*/
 
 .upload-drop-zone {
-    color: #ccc;
+    color: dimgrey;
     border-style: dashed;
     border-color: #ccc;
     line-height: 200px;
@@ -478,4 +493,16 @@ tbody .btn-primary:hover {
 #downloads-panel {
     height: 100px;
     overflow: auto;
+}
+
+.dz-message,
+.dz-default {
+    margin-top: 0px;
+    color: black;
+    font-size: 0.9em;
+}
+
+.drag-over {
+    background-color: lightcoral;
+    color: darkred;
 }

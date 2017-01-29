@@ -1,4 +1,4 @@
-    <?php
+<?php
         include '../login/functions.php';
         include '../login/db_connect.php';
         include '../notification/notificationsFunctions.php'; 
@@ -19,17 +19,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 
-        <link type="text/css" rel="stylesheet" href="lib\Bootstrap\css\bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="lib/Bootstrap/css/bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet" type="text/css" />
-        <link type="text/css" rel="stylesheet" href="css\animate.css">
-        <link type="text/css" rel="stylesheet" href="css\style.css">
+        <link type="text/css" rel="stylesheet" href="css/animate.css">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
 
-        <script type="text/javascript" src="lib\jQuery\jquery.min.js"></script>
-        <script type="text/javascript" src="lib\Bootstrap\js\bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
-        <script type="text/javascript" src="js\main.js"></script>
-        
+        <script type="text/javascript" src="js/main.js"></script>
+
         <body>
             <header id="navbar-container">
                 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,41 +46,36 @@
                             <div class="nav navbar-text pull-left" id="toggle-button" data-toggle="tooltip" title="Tutte le opzioni">
                                 <a href="#" id="menu-toggle">
                                     <i class="fa fa-cogs" id="sidebar-btn" aria-hidden="true"></i>
-                                    <label class="sr-only" for="sidebar-btn">Apri/Chiudi impostazioni</label>
                                 </a>
                             </div>
                             <!--Titolo-->
-                            <a class="navbar-brand home-link" id="sol-label" href="#">Studenti Online</a>
-                            <p class="navbar-text" id="school-information"><?php echo getNomeScuola(); ?></p>
+                            <div class="navbar-brand home-link">
+                                <img id="sol-logo" class="pull-left" src="image/logo_unibo.png" alt="">
+                                <p id="sol-label" class="pull-right">Studenti Online</p>
+                            </div>
+                            <p class="navbar-text" id="school-information">
+                                <?php echo getNomeScuola(); ?>
+                            </p>
                             <!--Dropdown notifiche-->
                             <ul class="nav navbar-nav pull-left" id="navbar-notification">
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown">
-                                        <label class="sr-only" id="notification-reference" for="notification-label">Notifiche</label>
                                         <span id="notification-label" class="glyphicon glyphicon-bell"></span>
 
-                                        <label class="sr-only" for="#notification-number">Numero notifiche</label>
                                         <span id="notification-number" class="badge badge-notify">
                                             <!-- Numero notifiche -->
                                             <?php echo getNumNotifications(); ?>
                                         </span>
                                     </a>
-                                    <ul class="dropdown-menu " role="menu" aria-labelledby="#notification-reference">
+                                    <ul class="dropdown-menu " role="menu" aria-labelledby="notification-label">
                                         <li>
                                             <p class="dropdown-header">Notifiche</p>
                                         </li>
-                                        <div id="notification-container" class="scrollable-menu">
-                                            <script type="text/javascript">
-                                                $("ul").click(function(){
-                                                    $.get("../notification/notifications.php", function(data){
-                                                        $("#notification-container").html(data);
-                                                    });
-                                                    $("#notification-number").replaceWith('<span id="notification-number" class="badge badge-notify">0</span>');
-                                                });
-                                                
-                                            </script>
+                                        <li>
+                                            <div id="notification-container" class="scrollable-menu">
 
-                                        </div>
+                                            </div>
+                                        </li>
                                         <li>
                                             <a href="#" class="dropdown-item" id="see-all-button" data-toggle="modal" data-target="#myModal">Vedi tutte</a>
                                         </li>
@@ -94,8 +89,9 @@
                         <div class="collapse navbar-collapse" id="collapse-form">
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <img src="image/male-user-shadow_318-34042.jpg" class="img-circle image-profile pull-left" alt="Immagine di profilo">
-                                    <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                                 <?php echo getNomeUtente();?> <span class="caret"></span>
+                                    <img src="image/profile_pics/<?php echo getProfilePic(); ?>" class="img-circle image-profile pull-left" alt="Immagine di profilo">
+                                    <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo getNomeUtente();?> <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#"><span class="fa fa-question-circle"></span>Aiuto</a></li>
@@ -111,7 +107,7 @@
                     <!-- container-fluid -->
                 </nav>
             </header>
-            <div id="wrapper" class="">
+            <div id="wrapper">
                 <!-- Sidebar -->
                 <div id="sidebar-wrapper">
                     <nav>
@@ -135,9 +131,9 @@
                                     <li class="sidebar-submenu"><a href="#">Presenta domanda di laurea</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#" id="manage-menu" data-toggle="collapse" data-target="#submenu3">
+                            <li><a href="#" id="service-menu" data-toggle="collapse" data-target="#submenu3">
                                 Servizi<span class="glyphicon glyphicon-plus pull-right"></span></a>
-                                <ul class="nav collapse" id="submenu3" role="menu" aria-labelledby="manage-menu">
+                                <ul class="nav collapse" id="submenu3" role="menu" aria-labelledby="service-menu">
                                     <li class="sidebar-submenu"><a href="#">Calendario</a></li>
                                     <li class="sidebar-submenu"><a href="#">Bandi</a></li>
                                     <li class="sidebar-submenu"><a href="#">Tirocini</a></li>
@@ -152,7 +148,7 @@
                                     <li class="sidebar-submenu"><a href="#">Rinuncia agli studi</a></li>
                                 </ul>
                             </li>
-                            
+
                             <li><a href="../login/logout.php">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
                         </ul>
                     </nav>
@@ -166,14 +162,16 @@
                         <!-- Una colonna dedicata al bottone della sidebar-->
                         <div class="row">
                             <div class="col-xs-12 col-md-12" id="page-container">
-                               
 
-                           </div>
+
+                            </div>
                         </div>
-                    <!--page content wrapper-->
+                        <!--page content wrapper-->
                     </div>
                 </div>
-            <!-- Modal notifications -->
+                <!-- Modal notifications -->
+            </div>
+
             <?php 
                 include '../notification/allNotifications.php';
             ?>
