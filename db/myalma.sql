@@ -112,8 +112,8 @@ INSERT INTO `corsostudi` (`ID`, `Denominazione`, `DurataAnni`) VALUES
 CREATE TABLE `evento` (
   `Utente` varchar(40) NOT NULL,
   `Numero` int(4) NOT NULL,
-  `Inizio` date NOT NULL,
-  `Fine` date NOT NULL,
+  `Inizio` datetime NOT NULL,
+  `Fine` datetime NOT NULL,
   `Descrizione` varchar(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
