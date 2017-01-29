@@ -7,6 +7,10 @@
 -- Versione del server: 5.7.14
 -- Versione PHP: 5.6.25
 
+CREATE DATABASE `myalma`;
+
+USE `myalma`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -177,12 +181,12 @@ CREATE TABLE `notifica` (
 --
 
 INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`, `Stato`) VALUES
-(1, '2', '1', 'ciao', '2017-01-28 22:17:25', '0'),
-(2, '2', '1', 'mi chiama', '2017-01-28 22:17:25', '0'),
-(3, '2', '1', 'Ha caricato un file sul cloud', '2017-01-28 22:17:25', '0'),
-(4, '2', '1', 'notifica 4', '2017-01-28 22:17:25', '0'),
-(5, '2', '1', 'notifica', '2017-01-28 22:17:25', '0'),
-(6, '2', '1', 'notifica2', '2017-01-28 22:17:25', '0');
+(1, '2', '1', 'Ha caricato nuovo materiale', '2016-10-05 09:24:39', '0'),
+(2, '2', '1', 'Ha modificato materiale', '2016-10-25 08:16:37', '0'),
+(3, '2', '1', 'Ha caricato nuovo materiale', '2016-11-09 13:53:25', '0'),
+(4, '2', '1', 'Ha annullato la lezione', '2016-12-06 11:37:18', '1'),
+(5, '2', '1', 'Ha fissato orario esame', '2017-01-17 08:16:41', '1'),
+(6, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-24 13:42:11', '1');
 
 -- --------------------------------------------------------
 
@@ -289,3 +293,6 @@ ALTER TABLE `notifica`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
+GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
