@@ -1,7 +1,6 @@
 <?php
     $materia = $_GET['materia'];
 
-
     $files_directory = "../files/".$materia;
     $absolute_path = "./files/".$materia."/";
     if (!file_exists($files_directory)) {
@@ -10,13 +9,13 @@
     $files = array_diff(scandir($files_directory), array('.', '..'));
 
 ?>
-
+    
     <div class="row">
         <div class="col-xs-1 col-md-1">
             <button type="button" class="btn btn-labeled" id="back-to-service"> <span class="btn-label"><i class="glyphicon glyphicon-arrow-left"></i> </span> </button>
         </div>
         <div class="col-xs-10 col-md-10 text-center">
-            <h1><?php echo ucfirst($materia); count($files)?></h1>
+            <h1><?php echo ucfirst($materia);?></h1>
         </div>
     </div>
 
@@ -82,10 +81,9 @@
                                            echo '</tr>'; 
                                         }
                                     ?>
-
                             </tbody>
                         </table>
-                        <br />
+                        <br/>
                     </div>
                 </div>
             </div>
@@ -129,7 +127,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br />
+                        <br/>
                     </div>
                 </div>
             </div>

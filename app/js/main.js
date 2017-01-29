@@ -1,16 +1,17 @@
 $(document).ready(function () {
+    
+    //Ottenimento dei valori dell'altezza
+    var docHeight = $(document).height();
+    var docWidth = $(document).width();
 
-
+    //Carica dentro un selettore un certo html
     function loadContent(selector, path) {
         selector.html("").load(path);
     }
-
+    //Rimpiazza per uno script
     function replaceAll(str, find, replace) {
         return str.replace(new RegExp(find, 'g'), replace);
     }
-
-    var docHeight = $(document).height();
-    var docWidth = $(document).width();
     //Controllo per la label brand
     if (docWidth < 769) {
         $("#sol-label").text("SOL");
@@ -18,40 +19,38 @@ $(document).ready(function () {
     } else {
         $("#sol-label").text("Studenti Online");
     }
-
     //Controllo per il toggle
-
     if (!$("#wrapper").hasClass("toggled") && docWidth > 769) {
         $("#sidebar-btn").removeClass("fa-cogs");
         $("#sidebar-btn").addClass("fa-arrow-left");
     }
-
-
+    //Carica il contenuto principale home inizialmente
     loadContent($('#page-container'), 'snippets/home-snippet.html');
 
+    //bind del tasto home
     $('.home-link').click(function () {
         loadContent($('#page-container'), 'snippets/home-snippet.html');
     });
 
+    //Click binding del servizio
     $(document).on("click", ".service-link, #back-to-service", function () {
         loadContent($('#page-container'), 'snippets/servizio-snippet.php');
     });
 
-
+    //Bind dei tasti di una materia 
     $(document).on("click", "#page-container .list-group-item", function () {
-
         loadContent($('#page-container'), 'snippets/materia-snippet.php?materia=' + replaceAll($(this).text(), " ", "%20"));
     });
     //Controllo nel resize se c'è da cambiare la label brand
     $(window).resize(function () {
+        
         docHeight = $(document).height();
         docWidth = $(document).width();
+        
         if (!$("#wrapper").hasClass("toggled") && docWidth > 769) {
-            $("#sidebar-btn").removeClass("fa-cogs");
-            $("#sidebar-btn").addClass("fa-arrow-left");
+            $("#sidebar-btn").removeClass("fa-cogs").addClass("fa-arrow-left");
         } else {
-            $("#sidebar-btn").removeClass("fa-arrow-left");
-            $("#sidebar-btn").addClass("fa-cogs");
+            $("#sidebar-btn").removeClass("fa-arrow-left").addClass("fa-cogs");
         }
 
         if (docWidth < 769) {
@@ -62,11 +61,9 @@ $(document).ready(function () {
             $("#sol-label").text("Studenti Online");
             $("#school-information").show();
         }
-
     });
 
     //Fade in dei bottoni
-
     $(document).on('DOMNodeInserted', '.btn-sq', function () {
         var eT = 0;
         var randomEffectVector = ["flipInY", "flipInX"];
@@ -74,6 +71,7 @@ $(document).ready(function () {
             $(this).delay(eT).fadeIn('fast').addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)]);
             eT += 350;
         });
+        
         $(document).on("click", ".btn-sq *, .btn-sq", function () {
             $('.btn-sq').stop(true, true).fadeIn();
         });
@@ -95,7 +93,6 @@ $(document).ready(function () {
         $("#notification-label, #notification-number").addClass("animated shake");
     }, function () {
         $("#notification-label, #notification-number").removeClass("animated shake");
-
     });
 
     //Cambio al click della sidebar
@@ -107,13 +104,9 @@ $(document).ready(function () {
         setTimeout(function () {
             $("#sidebar-btn").removeClass('animated rotateIn');
         }, 1300);
-
-        console.log("Fade out");
-
         $("#sidebar-btn").toggleClass("fa-cogs fa-arrow-left");
-
     });
-
+    //Calcolo notifiche
     $("#navbar-notification .dropdown").click(function () {
         console.log("Ciao");
         $.get("../notification/notifications.php", function (data) {

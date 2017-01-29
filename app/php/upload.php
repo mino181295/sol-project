@@ -1,7 +1,4 @@
 <?php
-
-
-
 $ds = DIRECTORY_SEPARATOR;  //1
  
 $storeFolder = '../files'.$ds.$_GET['path'];   //2
@@ -15,6 +12,5 @@ if (!empty($_FILES)) {
     $targetFile =  $targetPath. $_FILES['file']['name'];  //5
     echo '<h1>CIAONE</h1>';
     move_uploaded_file($tempFile,$targetFile); //6
-     
 }
 ?>    

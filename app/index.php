@@ -24,7 +24,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet" type="text/css" />
         <link type="text/css" rel="stylesheet" href="css/animate.css">
         <link type="text/css" rel="stylesheet" href="css/style.css">
-
+        <link rel="icon" href="image/logo_unibo.png">
         <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
         <script type="text/javascript" src="lib/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
@@ -107,9 +107,9 @@
                     <!-- container-fluid -->
                 </nav>
             </header>
-            <div id="wrapper">
+            <main id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
+                <section id="sidebar-wrapper">
                     <nav>
                         <ul class="nav sidebar-nav">
                             <li><a class="home-link" href="#">Home<span class="glyphicon glyphicon-home pull-right"></span></a></li>
@@ -152,25 +152,24 @@
                             <li><a href="../login/logout.php">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
                         </ul>
                     </nav>
-                </div>
+                </section>
                 <!-- sidebar-wrapper -->
 
                 <!-- Page Content -->
-                <div id="page-content-wrapper">
+                <section id="page-content-wrapper">
                     <!--Container del contenuto centrale-->
                     <div class="container-fluid" id="fluid-page-wrapper">
                         <!-- Una colonna dedicata al bottone della sidebar-->
                         <div class="row">
                             <div class="col-xs-12 col-md-12" id="page-container">
-
-
+                                
                             </div>
                         </div>
                         <!--page content wrapper-->
                     </div>
-                </div>
+                </section>
                 <!-- Modal notifications -->
-            </div>
+            </main>
 
             <?php 
                 include '../notification/allNotifications.php';
