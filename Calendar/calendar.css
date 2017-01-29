@@ -16,11 +16,15 @@ main {
     padding: auto;
 }
 
-#topTable {
+#top-table {
     padding-bottom: 1%;
 }
 
-.notCurrMonth {
+h1 {
+    margin-top: 0%;
+}
+
+.not-curr-month a {
     color: #c9c9c9
 }
 
@@ -28,8 +32,17 @@ main {
     width: 12%;      
 }
 
-.weekView {
+.panel-body {
+    padding-top: 0%;
+    padding-bottom: 0%;
+}
+
+.weekView, #event-panel {
     display: none;
+}
+
+.form-group {
+    margin-bottom: 0%;
 }
 
 td {
@@ -43,12 +56,26 @@ label {
     margin-right: 5%;
 }
 
+.panel-default {
+    margin-bottom: 0%;
+}
+
+list-group li {
+    align-content: left;
+}
 
 /* Tbody scrolling setup */
 tbody {
     display:block;
-    height:400px;
     overflow:auto;
+}
+
+#monthly-table tbody {
+    height: 450px;
+}
+
+#weekly-table tbody {
+    height: 400px;
 }
 
 thead, tbody tr {
@@ -63,18 +90,18 @@ thead, tbody tr {
 *****************************/
 @media (max-width: 768px) {
     tbody tr {
-        height: 14%;
+        height: 18%;
     }
 
     #weekly-table td {
         font-size: 85%;
     }
 
-    #topTable button {
+    #top-table button {
         width: 70px;
     }
 
-    button {
+    #top-table button {
         height: 50px;
     }
 
@@ -83,4 +110,3 @@ thead, tbody tr {
         margin-right: 1%;
     }
 }
-
