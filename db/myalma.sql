@@ -1,14 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Creato il: Gen 28, 2017 alle 17:52
--- Versione del server: 10.1.16-MariaDB
--- Versione PHP: 5.6.24
-
-CREATE DATABASE `myalma`;
-USE `myalma`;
+-- Host: 127.0.0.1
+-- Creato il: Gen 29, 2017 alle 01:12
+-- Versione del server: 5.7.14
+-- Versione PHP: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -63,7 +60,24 @@ CREATE TABLE `corso` (
 
 INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`) VALUES
 ('1', '1', 'Ingegneria del software', 3, 1),
-('1', '2', 'Statistica Psicometrica', 1, 2);
+('1', '2', 'Statistica Psicometrica', 1, 2),
+('2', '1', 'Analisi Matematica', 1, 1),
+('3', '1', 'Idoneita Inglese', 1, 1),
+('4', '1', 'Programmazione', 1, 1),
+('5', '1', 'Algebra e Geometria', 1, 2),
+('6', '1', 'Algoritmi e Strutture dati', 1, 2),
+('7', '1', 'Architetture degli Elaboratori', 1, 2),
+('8', '1', 'Programmazione ad Oggetti', 2, 1),
+('9', '1', 'Sistemi Operativi', 2, 1),
+('10', '1', 'Algoritmi Numerici', 2, 2),
+('11', '1', 'Basi di dati', 2, 2),
+('12', '1', 'Fisica', 2, 2),
+('13', '1', 'Reti di Telecomunicaizoni', 2, 2),
+('14', '1', 'Programmazione di Reti', 3, 1),
+('15', '1', 'Tecnologie Web', 3, 1),
+('16', '1', 'Tirocinio', 3, 1),
+('17', '1', 'Laboratorio di Basi di dati', 3, 2),
+('18', '1', 'Ricerca Operativa', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -163,12 +177,12 @@ CREATE TABLE `notifica` (
 --
 
 INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`, `Stato`) VALUES
-(1, '2', '1', 'Ha caricato nuovo materiale', '2016-10-05 09:24:39', '1'),
-(2, '2', '1', 'Ha annullato la lezione', '2016-12-06 11:37:18', '1'),
-(3, '2', '1', 'Ha fissato orario esame', '2017-01-17 08:16:41', '1'),
-(4, '2', '1', 'Ha modificato materiale', '2016-10-25 08:16:37', '0'),
-(5, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-24 13:42:11', '0'),
-(6, '2', '1', 'Ha caricato nuovo materiale', '2016-11-09 13:53:25', '0');
+(1, '2', '1', 'ciao', '2017-01-28 22:17:25', '0'),
+(2, '2', '1', 'mi chiama', '2017-01-28 22:17:25', '0'),
+(3, '2', '1', 'Ha caricato un file sul cloud', '2017-01-28 22:17:25', '0'),
+(4, '2', '1', 'notifica 4', '2017-01-28 22:17:25', '0'),
+(5, '2', '1', 'notifica', '2017-01-28 22:17:25', '0'),
+(6, '2', '1', 'notifica2', '2017-01-28 22:17:25', '0');
 
 -- --------------------------------------------------------
 
@@ -275,6 +289,3 @@ ALTER TABLE `notifica`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
-GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
