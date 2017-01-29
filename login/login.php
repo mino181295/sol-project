@@ -11,7 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<meta charset="utf-8">
 	<script type="text/javascript" src="sha512.js"></script>
 	<script type="text/javascript" src="forms.js"></script>		
 
@@ -26,7 +27,7 @@
 	<div class="container">
 	    <div class="row login">
 	        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 well">
-	            <form role="form" action="process_login.php" method="post" name="login_form">
+	            <form action="process_login.php" method="post" name="login_form">
 	              <div class="form-group text-center">
 	              	<!-- LOGO UNIBO -->
 	                <div class="logo">
