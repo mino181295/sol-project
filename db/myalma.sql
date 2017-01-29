@@ -3,13 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 29, 2017 alle 01:12
+-- Creato il: Gen 29, 2017 alle 17:50
 -- Versione del server: 5.7.14
 -- Versione PHP: 5.6.25
-
-CREATE DATABASE `myalma`;
-
-USE `myalma`;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -184,9 +180,9 @@ INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orari
 (1, '2', '1', 'Ha caricato nuovo materiale', '2016-10-05 09:24:39', '0'),
 (2, '2', '1', 'Ha modificato materiale', '2016-10-25 08:16:37', '0'),
 (3, '2', '1', 'Ha caricato nuovo materiale', '2016-11-09 13:53:25', '0'),
-(4, '2', '1', 'Ha annullato la lezione', '2016-12-06 11:37:18', '1'),
-(5, '2', '1', 'Ha fissato orario esame', '2017-01-17 08:16:41', '1'),
-(6, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-24 13:42:11', '1');
+(4, '2', '1', 'Ha annullato la lezione', '2017-01-29 17:10:57', '0'),
+(5, '2', '1', 'Ha fissato orario esame', '2017-01-29 17:10:57', '0'),
+(6, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-29 17:10:57', '0');
 
 -- --------------------------------------------------------
 
@@ -200,6 +196,7 @@ CREATE TABLE `utente` (
   `Nome` varchar(40) NOT NULL,
   `Cognome` varchar(40) NOT NULL,
   `Password` varchar(128) NOT NULL,
+  `ImmagineProfilo` varchar(255) NOT NULL,
   `Salt` char(128) NOT NULL,
   `Matricola` char(10) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -208,11 +205,11 @@ CREATE TABLE `utente` (
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `Salt`, `Matricola`) VALUES
-('mario.rossi@studio.unibo.it', 's', 'Mario', 'Rossi', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '1'),
-('gino.pino@unibo.it', 'd', 'Gino', 'Pino', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '2'),
-('paolo.venturi9@studio.unibo.it', 's', 'Paolo', 'Venturi', 'pw', '37EA0B7500FBDD7E6B3C21673E1C5C0FE4EF9FD459E11CA95ADA52D8CC6ADFAB83FFBF7A5EE1595FB76B79B2D7F61D84575B992029574278477B408882CCA4EA', '0000731072'),
-('rizzi.stefano@unibo.it', 'd', 'Stefano', 'Rizzi', 'qwerty', '4EE92C7C7909DC2A1DDAEFE93ED97EFA27A9B8CAB8F1B90C199F917756D00F940155BADE0DA13E717F0C4A1069DE9582E0DD5B1AFFEF427FC7303AA9B593740C', NULL);
+INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `ImmagineProfilo`, `Salt`, `Matricola`) VALUES
+('mario.rossi@studio.unibo.it', 's', 'Mario', 'Rossi', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', 'mario_rossi.jpeg', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '1'),
+('gino.pino@unibo.it', 'd', 'Gino', 'Pino', '00807432eae173f652f2064bdca1b61b290b52d40e429a7d295d76a71084aa96c0233b82f1feac45529e0726559645acaed6f3ae58a286b9f075916ebf66cacc', '', 'f9aab579fc1b41ed0c44fe4ecdbfcdb4cb99b9023abb241a6db833288f4eea3c02f76e0d35204a8695077dcf81932aa59006423976224be0390395bae152d4ef', '2'),
+('paolo.venturi9@studio.unibo.it', 's', 'Paolo', 'Venturi', 'pw', '', '37EA0B7500FBDD7E6B3C21673E1C5C0FE4EF9FD459E11CA95ADA52D8CC6ADFAB83FFBF7A5EE1595FB76B79B2D7F61D84575B992029574278477B408882CCA4EA', '0000731072'),
+('rizzi.stefano@unibo.it', 'd', 'Stefano', 'Rizzi', 'qwerty', '', '4EE92C7C7909DC2A1DDAEFE93ED97EFA27A9B8CAB8F1B90C199F917756D00F940155BADE0DA13E717F0C4A1069DE9582E0DD5B1AFFEF427FC7303AA9B593740C', NULL);
 
 --
 -- Indici per le tabelle scaricate
@@ -293,6 +290,3 @@ ALTER TABLE `notifica`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
-GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
