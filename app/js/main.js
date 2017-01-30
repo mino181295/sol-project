@@ -114,5 +114,5 @@ $(document).ready(function () {
         });
         $("#notification-number").replaceWith('<span id="notification-number" class="badge badge-notify">0</span>');
     });
-
+    
 });

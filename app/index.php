@@ -28,6 +28,7 @@
         <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
         <script type="text/javascript" src="lib/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
         <body>
@@ -162,7 +163,7 @@
                         <!-- Una colonna dedicata al bottone della sidebar-->
                         <div class="row">
                             <div class="col-xs-12 col-md-12" id="page-container">
-                                
+
                             </div>
                         </div>
                         <!--page content wrapper-->
