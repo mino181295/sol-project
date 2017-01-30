@@ -33,7 +33,6 @@
           $_SESSION['nome'] = $nome;
           $cognome = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $cognome); // protezione da un attacco XSS
           $_SESSION['cognome'] = $cognome;
-          $email = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $email); // protezione da un attacco XSS
           $_SESSION['email'] = $email;
           $_SESSION['login_string'] = hash('sha512', $password.$user_browser);
 
