@@ -14,6 +14,7 @@
         $stmt->bind_param("i", $_SESSION['matricola']);
         $stmt->execute();
         $stmt->store_result();
+        
         $num_of_rows = $stmt->num_rows;
         $stmt->bind_result($anni,$ID);     
 

@@ -12,7 +12,7 @@
         }
     ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="it">
 
     <head>
         <title>Studenti Online</title>
@@ -159,9 +159,9 @@
                 <!-- Page Content -->
                 <section id="page-content-wrapper">
                     <!--Container del contenuto centrale-->
-                    <div class="container-fluid" id="fluid-page-wrapper">
+                    <div class="container-fluid " id="fluid-page-wrapper">
                         <!-- Una colonna dedicata al bottone della sidebar-->
-                        <div class="row">
+                        <div class="row text-center">
                             <div class="col-xs-12 col-md-12" id="page-container">
 
                             </div>

@@ -67,9 +67,20 @@ $(document).ready(function () {
     $(document).on('DOMNodeInserted', '#buttons-container', function () {
         var eT = 0;
         var randomEffectVector = ["flipInY", "flipInX"];
+        $('.btn-sq i').css({
+            opacity: '0'
+        });
         $('.btn-sq').hide().each(function () {
-            $(this).delay(eT).fadeIn('fast').addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)]);
-            eT += 350;
+            $(this).delay(eT).fadeIn('slow')/*.addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)])*/;
+            eT += 250;
+        });
+
+        var eT2 = 300;
+        $('.btn-sq i').each(function () {
+            $(this).delay(eT2).fadeTo(0, 1, function() {
+                $(this).addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)])
+            });
+            eT2 += 250;
         });
         
         $(document).on("click", ".btn-sq *, .btn-sq", function () {
@@ -78,7 +89,8 @@ $(document).ready(function () {
         //Cambio background dei bottoni
         $(".btn-sq *, .btn-sq").hover(function () {
             $(this).closest(".btn-sq").css("background-color", "#660000");
-            $(this).closest(".btn-sq").children("i").addClass("animated pulse");
+            $(this).closest(".btn-sq").children("i").removeClass("animated flipInX flipInY")
+                                                    .addClass("animated pulse");
 
         }, function () {
             $(this).closest(".btn-sq").css("background-color", "#7f0000");
