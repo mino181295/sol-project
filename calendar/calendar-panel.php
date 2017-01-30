@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<!--
-<?php 
-session_start(); // METTERE sec_session_start
-
-$_SESSION["email"] = "mario.rossi@studio.unibo.it";
-$_SESSION["email"] = "gino.pino@unibo.it";
-$_SESSION["email"] = "paolo.venturi9@studio.unibo.it";
-$_SESSION["email"] = "paolo.venturi9@studio.unibo.it";
-$_SESSION["email"] = "paolo.venturi9@studio.unibo.it";
-$_SESSION["email"] = "stefano.rizzi@unibo.it";
-$_SESSION["tipo"] = 'd';
-?>
--->
-<head>
-    <title>Calendario</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- JQUERY + JAVASCRIPT -->
-    <script type="text/javascript" src="../app/lib/jQuery/jquery.min.js"></script>
-    <script type="text/javascript" src="calendar.js"></script>
-    <!-- Include jQuery ScrollTo -->
-    <script src="jquery-scrollto/lib/jquery-scrollto.js"></script>
-    
-    <!-- BOOTSTRAP + CSS -->
-    
-    <link type="text/css" rel="stylesheet" href="../app/lib/Bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="../app/lib/Bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="calendar.css" />
-
-</head>
-<body>
-    <main class="container-fluid">       
+    <div class="container-fluid" id="calendar-panel">       
         <div class="panel panel-default">
             <div class="panel-heading" id="top-table">
                 <h1>Mese-Anno</h1>
@@ -99,7 +65,7 @@ $_SESSION["tipo"] = 'd';
                                     <?php 
                                     // Nel caso di account studente viene automaticamente riempito il select per gli anni e viene mostrato solo questo (dato che uno studente può essere inscritto annualmente ad un solo corso di laurea).
                                     if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 's') {
-                                     include("functions.php");
+                                     include("../calendar/functions.php");
                                      fillStudentYears();
                                  }
                                  ?>
@@ -127,6 +93,4 @@ $_SESSION["tipo"] = 'd';
             </div>
         </div>
     </div>
-</main>
-</body>
-</html>
+</div>

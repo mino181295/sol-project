@@ -1,4 +1,4 @@
-$(function(){
+//$(function(){
 
     /************************************
     *            GLOBAL VARS
@@ -203,7 +203,7 @@ $(function(){
         lDate = lDate.toJSON().replace(/[T,Z]/g, " ");
 
         // RICHIESTA TRAMITE AJAX
-        $.getJSON('queries.php', {type: "getEvents", fDate: fDate, lDate: lDate}, function(json) {
+        $.getJSON('../calendar/queries.php', {type: "getEvents", fDate: fDate, lDate: lDate}, function(json) {
 
             // Riempio la lista con eventi per il giorno selezionato.
             var ul = $("<ul></ul>").addClass("list-group");
@@ -335,7 +335,7 @@ $(function(){
         
         var data = {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDate: fDate, lDate: lDate};
         // RICHIESTA TRAMITE AJAX
-        $.getJSON('queries.php', data, function(json) {
+        $.getJSON('../calendar/queries.php', data, function(json) {
             var result = json.result;       // Mappa dei risultati nel formato numeroGiorno-ora: denomCorso-aula
             
             // Riempio il calendario settimanale con i valori della query.
@@ -443,7 +443,7 @@ $(function(){
         idCorso = $(this).val().split("-")[1];
         
         // fillo il select dell'anno tramite ajax
-        $.getJSON('queries.php', {type: "getYears", idCorso: idCorso}, function(json) {
+        $.getJSON('../calendar/queries.php', {type: "getYears", idCorso: idCorso}, function(json) {
             $("#sel-anno").empty();
             var years = json.result[0];
             for(var i=1; i<=years; i++) {
@@ -494,4 +494,4 @@ $(function(){
     ************************************/
     goToday();
 
-});
+//});

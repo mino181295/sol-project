@@ -24,12 +24,15 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet" type="text/css" />
         <link type="text/css" rel="stylesheet" href="css/animate.css">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="../calendar/calendar.css" />
+
         <link rel="icon" href="image/logo_unibo.png">
         <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
         <script type="text/javascript" src="lib/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        <!-- Include jQuery ScrollTo -->
+        <script src="../calendar/jquery-scrollto/lib/jquery-scrollto.js"></script>
 
         <body>
             <header id="navbar-container">
@@ -135,7 +138,7 @@
                             <li><a href="#" id="service-menu" data-toggle="collapse" data-target="#submenu3">
                                 Servizi<span class="glyphicon glyphicon-plus pull-right"></span></a>
                                 <ul class="nav collapse" id="submenu3" role="menu" aria-labelledby="service-menu">
-                                    <li class="sidebar-submenu"><a href="#">Calendario</a></li>
+                                    <li class="sidebar-submenu calendar-service"><a href="#">Calendario</a></li>
                                     <li class="sidebar-submenu"><a href="#">Bandi</a></li>
                                     <li class="sidebar-submenu"><a href="#">Tirocini</a></li>
                                     <li class="sidebar-submenu service-link"><a href="#">Servizio studio</a></li>

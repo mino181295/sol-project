@@ -37,6 +37,10 @@ $(document).ready(function () {
         loadContent($('#page-container'), 'snippets/servizio-snippet.php');
     });
 
+    $(document).on("click", ".calendar-service", function () {
+        loadContent($('#page-container'), '../calendar/calendar-panel.php');
+    });
+
     //Bind dei tasti di una materia 
     $(document).on("click", "#page-container .list-group-item", function () {
         loadContent($('#page-container'), 'snippets/materia-snippet.php?materia=' + replaceAll($(this).text(), " ", "%20"));
@@ -98,6 +102,15 @@ $(document).ready(function () {
 
         });
 
+    });
+    var i = true;
+    $(document).on('DOMNodeInserted', '#calendar-panel', function () {
+        if (i){
+            console.log("ciao");
+            $.getScript('../calendar/calendar.js', function(data, textStatus) {
+            });
+            i = false;
+        }
     });
 
     //Shake delle notifiche
