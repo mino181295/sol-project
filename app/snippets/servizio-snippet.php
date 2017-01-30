@@ -1,6 +1,6 @@
 <?php
-        include '../login/functions.php';
-        include '../login/db_connect.php';
+        include '../../login/functions.php';
+        include '../../login/db_connect.php';
 
         sec_session_start();
 
