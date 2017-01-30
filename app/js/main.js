@@ -62,9 +62,9 @@ $(document).ready(function () {
             $("#school-information").show();
         }
     });
-
+    
     //Fade in dei bottoni
-    $(document).on('DOMNodeInserted', '.btn-sq', function () {
+    $(document).on('DOMNodeInserted', '#buttons-container', function () {
         var eT = 0;
         var randomEffectVector = ["flipInY", "flipInX"];
         $('.btn-sq').hide().each(function () {
@@ -108,7 +108,6 @@ $(document).ready(function () {
     });
     //Calcolo notifiche
     $("#navbar-notification .dropdown").click(function () {
-        console.log("Ciao");
         $.get("../notification/notifications.php", function (data) {
             $("#notification-container").html(data);
         });
