@@ -27,13 +27,24 @@
           $user_browser = $_SERVER['HTTP_USER_AGENT']; // recupero il parametro 'user-agent' relativo all'utente corrente
           $user_id = preg_replace("/[^0-9]+/", "", $user_id); // protezione da un attacco XSS
           $_SESSION['matricola'] = $user_id; 
-          $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $tipo); // protezione da un attacco XSS
+          $tipo = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $tipo); // protezione da un attacco XSS
           $_SESSION['tipo'] = $tipo;
-          $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nome); // protezione da un attacco XSS
+          $nome = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nome); // protezione da un attacco XSS
           $_SESSION['nome'] = $nome;
-          $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $cognome); // protezione da un attacco XSS
+          $cognome = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $cognome); // protezione da un attacco XSS
           $_SESSION['cognome'] = $cognome;
+          $email = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $email); // protezione da un attacco XSS
+          $_SESSION['email'] = $email;
           $_SESSION['login_string'] = hash('sha512', $password.$user_browser);
+
+          /*if($tipo == "s") {
+            $sql = '';
+            $sql->exectute();
+            $sql->store_result();
+            $sql->bind_result($user_id, $tipo, $nome, $cognome, $db_password, $salt);
+            $stmt->fetch();
+          }*/
+
           // login eseguito con successo.
           return true;
         } else {
