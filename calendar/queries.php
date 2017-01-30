@@ -8,7 +8,7 @@
 
 // Query per ottenere l'orario settimanale.
 function getHours() {
-    include("db_connect.php");
+    include("../login/db_connect.php");
     $cond = isset($_GET["fDate"]) && isset($_GET["lDate"]) &&
     isset($_GET["idCorso"]) && isset($_GET["year"]) &&
     isset($_GET["session"]);
@@ -60,7 +60,7 @@ function getHours() {
 
 // Query per ottenere gli anni di durata di un dato corso universitario.
 function getYears() {
-    include("db_connect.php");
+    include("../login/db_connect.php");
     //query tramite prepared statement
     if (isset($_GET["idCorso"])) {
         // prepare and bind
@@ -90,7 +90,7 @@ function getYears() {
 
 // Query per ottenere tutti gli eventi di un dato giorno
 function getEvents() {
-    include("db_connect.php");
+    include("../login/db_connect.php");
     $cond = isset($_GET["fDate"]) && isset($_GET["lDate"]) && isset($_SESSION['email']);
 
     //query tramite prepared statement

@@ -5,7 +5,7 @@
 function fillStudentYears() {
     if(!isset($_SESSION['email'])
         return;
-    include("db_connect.php");
+    include("../login/db_connect.php");
     $sql = "SELECT DurataAnni, ID FROM corsostudi c JOIN iscrizione i WHERE (Studente = '" . $_SESSION['email'] . "' AND ID = IDCorsoStudi AND AnnoAccademico >= (SELECT MAX(AnnoAccademico) FROM iscrizione))";
 
     $result = $mysqli->query($sql);
@@ -24,7 +24,7 @@ function fillStudentYears() {
 function fillTheachersCourses() {
     if(!isset($_SESSION['email'])
         return;
-    include("db_connect.php");
+    include("../login/db_connect.php");
     $sql = "SELECT DISTINCT Denominazione, ID FROM assegnamento JOIN corsostudi WHERE (ID = IDCorsoStudi AND Docente = '" . $_SESSION['email'] . "') ORDER BY Denominazione";
 
     $result = $mysqli->query($sql);
