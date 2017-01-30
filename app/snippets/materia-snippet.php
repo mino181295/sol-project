@@ -93,41 +93,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><strong>Campus File</strong> <small> </small></div>
                     <div class="panel-body">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th data-sortable="true" class="column-01">File </th>
-                                    <th data-sortable="true" class="column-02">Download</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Catalogue</a></td>
-                                    <td class="column-02">
-                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Delta</a></td>
-                                    <td class="column-02">
-                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
-                                    <td class="column-02">
-                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="column-01"><a data-toggle="tooltip" title="Download <FileName>" href="#">Another file</a></td>
-                                    <td class="column-02">
-                                        <button type="button" class="btn btn-labeled btn-primary" data-toggle="tooltip" title="Download <FileName>"> <span class="btn-label"><i class="glyphicon glyphicon-download"></i> </span> </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br/>
+                    
                     </div>
                 </div>
             </div>
