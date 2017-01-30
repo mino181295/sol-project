@@ -1,0 +1,107 @@
+table, tr, th {
+    margin: auto;
+    text-align: center;
+}
+
+td:hover {
+    background-color: #eeeeee;
+}
+
+tbody tr {
+    height: 30%;
+}
+
+main {
+    text-align: center;
+}
+
+#top-table {
+    padding-bottom: 1%;
+}
+
+h1 {
+    margin-top: 0%;
+}
+
+.not-curr-month a {
+    color: #c9c9c9
+}
+
+.hour {
+    width: 12%;      
+}
+
+.panel-body {
+    padding-top: 0%;
+    padding-bottom: 0%;
+}
+
+.weekView, #event-panel {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 0%;
+}
+
+td {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-break: break-all;
+}
+
+label {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.panel-default {
+    margin-bottom: 0%;
+}
+
+/* Tbody scrolling setup */
+tbody {
+    display:block;
+    overflow:auto;
+}
+
+#monthly-table tbody {
+    height: 450px;
+}
+
+#weekly-table tbody {
+    height: 400px;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+
+/****************************
+*       MEDIA QUERIES
+*****************************/
+@media (max-width: 768px) {
+    tbody tr {
+        height: 18%;
+    }
+
+    #weekly-table td {
+        font-size: 85%;
+    }
+
+    #top-table button {
+        width: 70px;
+    }
+
+    #top-table button {
+        height: 50px;
+    }
+
+    label {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
