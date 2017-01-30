@@ -6,10 +6,14 @@ body {
     background-color: whitesmoke;
     font-family: 'Roboto', sans-serif;
 }
+
+
 /*Navbar*/
+
 .navbar-brand > * {
     cursor: pointer;
 }
+
 #sol-logo {
     height: auto;
     width: auto;
@@ -18,32 +22,38 @@ body {
     margin-right: 10px;
     margin-top: -5px;
 }
+
 @media only screen and (min-width: 767px) {
     #sol-logo {
         margin-left: 35px;
     }
 }
+
 .navbar-brand {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    margin-top: 3px;#
-    padding: 13px;
+    margin-top: 3px;
+    # padding: 13px;
 }
+
 .image-profile {
     margin: 12px;
     margin-right: 0px;
     height: 25px;
     width: 25px;
 }
+
 .badge-notify {
     background: darkred;
     position: relative;
     top: -14px;
     left: -13px;
 }
+
 .glyphicon-bell {
     font-size: 18px;
 }
+
 .dropdown-menu {
     padding-bottom: 0px;
     width: 300px;
@@ -52,16 +62,19 @@ body {
     border: 1px solid darkgrey;
     border-radius: 5px;
 }
+
 .dropdown-toggle {
     padding-right: 0px;
     padding-right: 0px;
 }
+
 .dropdown-header {
     font-size: 1.5em;
     text-align: center;
     padding-bottom: 10px;
     border-bottom: 1px solid darkgrey;
 }
+
 .dropdown-item {
     color: black;
     margin: 0px;
@@ -70,21 +83,25 @@ body {
     padding-right: 10px;
     border-bottom: 1px solid darkgrey;
 }
+
 .dropdown-item:hover {
     background: #7f0000;
     color: white;
 }
+
 .scrollable-menu {
     max-height: 400px;
     margin-right: -18px;
     overflow-y: scroll;
 }
+
 #see-all-button {
     margin: 0px;
     padding: 10px;
     border-top: 1px solid grey;
     text-align: center;
 }
+
 @media only screen and (max-width: 769px) {
     .dropdown-menu {
         border: 1px solid black;
@@ -100,11 +117,14 @@ body {
         margin-left: 0px !important;
     }
 }
+
+
 /*Sidebar*/
 
 body {
     overflow-x: hidden;
 }
+
 #wrapper {
     margin-top: 55px;
     padding-left: 0;
@@ -113,9 +133,11 @@ body {
     -o-transition: all 0.7s ease;
     transition: all 0.7s ease;
 }
+
 #wrapper.toggled {
     padding-left: 250px;
 }
+
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
@@ -130,17 +152,22 @@ body {
     -o-transition: all 0.7s ease;
     transition: all 0.7s ease;
 }
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
+
 #page-content-wrapper {
     width: 100%;
     padding: 15px;
 }
+
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -250px;
 }
+
+
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -151,44 +178,54 @@ body {
     margin: 0;
     top: 20px;
 }
+
 .sidebar-nav li {
     text-indent: 10px;
     line-height: 30px;
 }
+
 .sidebar-nav .sidebar-submenu {
     text-indent: 20px;
     line-height: 25px;
 }
+
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
 }
+
 .sidebar-nav li span {
     padding: 7px;
 }
+
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
     background: #7f0000;
 }
+
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     background: black;
     text-decoration: none;
 }
+
 .sidebar-nav > .sidebar-brand {
     height: 65px;
     font-size: 22px;
     line-height: 60px;
 }
+
 .sidebar-nav > .sidebar-brand a {
     color: #999999;
 }
+
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
 }
+
 @media(min-width:768px) {
     #wrapper {
         margin-top: 54px;
@@ -212,33 +249,43 @@ body {
         margin-right: 0;
     }
 }
+
+
 /*Content Wrapper*/
 
 #page-content-wrapper {
     padding: 0px;
     height: 500px;
 }
+
 #toggle-button {
     margin: 15px;
     margin-right: 10px;
 }
+
 #toggle-button i {
     color: #9d9d9d;
     font-size: 1.6em;
 }
+
 #toggle-button i:hover {
     color: whitesmoke;
     font-size: 1.6em;
 }
+
 #page-container {
     margin-top: 20px;
 }
+
 #navigation-buttons {
     margin-top: 20px;
 }
+
 #navigation-buttons .btn {
     background-color: #7f0000;
 }
+
+
 /*Bottoni*/
 
 .btn-sq {
@@ -248,16 +295,19 @@ body {
     padding: 0px;
     margin: 5px;
 }
+
 .btn-sq * {
     padding: 0px;
     margin: 0px;
 }
+
 .btn-sq i {
     font-size: 10em;
     color: white;
     height: 70%;
     padding: 10%;
 }
+
 .btn-sq h1 {
     background-color: rgba(180, 18, 18, 0.6);
     font-family: 'Roboto', sans-serif;
@@ -268,6 +318,8 @@ body {
     padding: 7%;
     color: white;
 }
+
+
 /*Telefono*/
 
 @media only screen and (max-width: 767px) {
@@ -283,6 +335,8 @@ body {
         font-size: 0.8em;
     }
 }
+
+
 /*Tablet*/
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -298,6 +352,8 @@ body {
         font-size: 1.5em;
     }
 }
+
+
 /*Desktop*/
 
 @media only screen and (min-width: 992px) {
@@ -306,46 +362,56 @@ body {
         height: 360px !important;
     }
 }
+
+
 /*Servizio*/
 
 #page-container .tab-content {
     margin-top: 30px;
 }
+
 #page-container .panel {
     border: 1px solid darkgrey;
 }
+
 .nav-tabs li > a {
     background-color: whitesmoke;
     font-size: 1.3em;
     color: #7f0000;
 }
+
 #page-container .panel-heading {
     font-size: 1.5em;
     color: white !important;
     background-color: #7f0000 !important;
 }
+
 #page-container .panel-body {
     padding: 0px;
 }
+
 #page-container .list-group {
     margin: 0px;
 }
+
 #page-container .list-group-item {
     background: whitesmoke;
     color: black;
     cursor: pointer;
 }
+
 #page-container .list-group-item:hover {
     background: #4d0000;
     color: white;
 }
-
 
 .upload-drop-zone {
     height: 200px;
     border-width: 2px;
     margin: 20px;
 }
+
+
 /* skin.css Style*/
 
 .upload-drop-zone {
@@ -355,10 +421,12 @@ body {
     line-height: 200px;
     text-align: center
 }
+
 .upload-drop-zone.drop {
     color: #222;
     border-color: #222;
 }
+
 .image-preview-input {
     position: relative;
     overflow: hidden;
@@ -367,6 +435,7 @@ body {
     background-color: #fff;
     border-color: #ccc;
 }
+
 .image-preview-input input[type=file] {
     position: absolute;
     top: 0;
@@ -378,38 +447,45 @@ body {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
 .image-preview-input-title {
     margin-left: 2px;
 }
+
 tbody td a {
     color: black;
 }
+
 tbody .btn-primary {
     background-color: #990012;
     border: none;
 }
+
 tbody .btn-primary:hover {
     background-color: #999012;
     border-bottom-color: black;
 }
+
 #back-to-service {
     font-size: 1em;
     width: 35px;
     height: 35px;
 }
+
 #back-to-service:hover {
     color: white;
     background-color: #990012;
 }
 
 .back-to-service {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 #downloads-panel {
     height: 100px;
     overflow: auto;
 }
+
 .dz-message,
 .dz-default {
     margin-top: 0px;

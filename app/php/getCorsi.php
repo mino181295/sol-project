@@ -32,11 +32,12 @@
         $stmt = $mysqli->prepare($query);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($result);     
+        $stmt->bind_result($result); 
+
         while ($stmt->fetch()) {
             array_push($array_result, $result);
         }
 
-        echo json_encode($array_result);
+        echo '{ "response" :'.json_encode($array_result).'}';
 
 ?>

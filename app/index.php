@@ -30,6 +30,8 @@
         <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
         <script type="text/javascript" src="lib/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <script type="text/javascript" src="js/main.js"></script>
         <!-- Include jQuery ScrollTo -->
         <script src="../calendar/jquery-scrollto/lib/jquery-scrollto.js"></script>

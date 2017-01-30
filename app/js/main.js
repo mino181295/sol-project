@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     //Ottenimento dei valori dell'altezza
     var docHeight = $(document).height();
     var docWidth = $(document).width();
@@ -47,10 +47,10 @@ $(document).ready(function () {
     });
     //Controllo nel resize se c'è da cambiare la label brand
     $(window).resize(function () {
-        
+
         docHeight = $(document).height();
         docWidth = $(document).width();
-        
+
         if (!$("#wrapper").hasClass("toggled") && docWidth > 769) {
             $("#sidebar-btn").removeClass("fa-cogs").addClass("fa-arrow-left");
         } else {
@@ -66,7 +66,7 @@ $(document).ready(function () {
             $("#school-information").show();
         }
     });
-    
+
     //Fade in dei bottoni
     $(document).on('DOMNodeInserted', '#buttons-container', function () {
         var eT = 0;
@@ -75,18 +75,18 @@ $(document).ready(function () {
             opacity: '0'
         });
         $('.btn-sq').hide().each(function () {
-            $(this).delay(eT).fadeIn('slow')/*.addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)])*/;
+            $(this).delay(eT).fadeIn('slow') /*.addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)])*/ ;
             eT += 250;
         });
 
         var eT2 = 300;
         $('.btn-sq i').each(function () {
-            $(this).delay(eT2).fadeTo(0, 1, function() {
+            $(this).delay(eT2).fadeTo(0, 1, function () {
                 $(this).addClass("animated " + randomEffectVector[Math.floor(Math.random() * 2)])
             });
             eT2 += 250;
         });
-        
+
         $(document).on("click", ".btn-sq *, .btn-sq", function () {
             $('.btn-sq').stop(true, true).fadeIn();
         });
@@ -94,7 +94,7 @@ $(document).ready(function () {
         $(".btn-sq *, .btn-sq").hover(function () {
             $(this).closest(".btn-sq").css("background-color", "#660000");
             $(this).closest(".btn-sq").children("i").removeClass("animated flipInX flipInY")
-                                                    .addClass("animated pulse");
+                .addClass("animated pulse");
 
         }, function () {
             $(this).closest(".btn-sq").css("background-color", "#7f0000");
@@ -105,7 +105,7 @@ $(document).ready(function () {
     });
     var i = true;
     $(document).on('DOMNodeInserted', '#calendar-panel', function () {
-        
+
     });
 
     //Shake delle notifiche
@@ -133,5 +133,5 @@ $(document).ready(function () {
         });
         $("#notification-number").replaceWith('<span id="notification-number" class="badge badge-notify">0</span>');
     });
-    
+
 });
