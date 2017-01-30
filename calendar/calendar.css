@@ -80,7 +80,6 @@
     table-layout:fixed;
 }
 
-
 /****************************
 *       MEDIA QUERIES
 *****************************/
@@ -94,7 +93,9 @@
     }
 
     #calendar-panel #top-table button {
-        width: 70px;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 50px;
     }
 
     #calendar-panel #top-table button {

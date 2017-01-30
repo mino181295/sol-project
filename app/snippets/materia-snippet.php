@@ -11,7 +11,7 @@
 ?>
     
     <div class="row">
-        <div class="col-xs-1 col-md-1">
+        <div class="col-xs-1 col-md-1 back-to-service">
             <button type="button" class="btn btn-labeled" id="back-to-service"> <span class="btn-label"><i class="glyphicon glyphicon-arrow-left"></i> </span> </button>
         </div>
         <div class="col-xs-10 col-md-10 text-center">
@@ -84,16 +84,6 @@
                             </tbody>
                         </table>
                         <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Campus File</strong> <small> </small></div>
-                    <div class="panel-body">
-                    
                     </div>
                 </div>
             </div>

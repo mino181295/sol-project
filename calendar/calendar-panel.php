@@ -94,3 +94,5 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="../calendar/calendar.js"></script>

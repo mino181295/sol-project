@@ -393,14 +393,19 @@ tbody .btn-primary:hover {
     border-bottom-color: black;
 }
 #back-to-service {
-    font-size: 1.6em;
-    padding: 10%;
-    margin: 15px;
+    font-size: 1em;
+    width: 35px;
+    height: 35px;
 }
 #back-to-service:hover {
     color: white;
     background-color: #990012;
 }
+
+.back-to-service {
+    margin-top:15px;
+}
+
 #downloads-panel {
     height: 100px;
     overflow: auto;
