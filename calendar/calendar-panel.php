@@ -43,6 +43,8 @@
                     <form>
                         <div class="form-group">
                             <?php
+                            include("../login/functions.php");
+                            sec_session_start();
                             // Nel caso di account docente viene automaticamente riempito il select per i corsi di laurea in cui insegna.
                             if(isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 'd') {
                                 ?>
@@ -50,7 +52,7 @@
                                     <select class="selectpicker" id="sel-corsostudi" data-dropup-auto="true">
                                         <option value="" selected="">&nbsp;</option>
                                         <?php 
-                                        include("functions.php");
+                                        include("../calendar/functions.php");
                                         fillTheachersCourses(); 
                                         ?>
                                     </select>
@@ -65,9 +67,9 @@
                                     <?php 
                                     // Nel caso di account studente viene automaticamente riempito il select per gli anni e viene mostrato solo questo (dato che uno studente può essere inscritto annualmente ad un solo corso di laurea).
                                     if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 's') {
-                                     include("../calendar/functions.php");
-                                     fillStudentYears();
-                                 }
+                                        include("../calendar/functions.php");
+                                        fillStudentYears();
+                                    } 
                                  ?>
                              </select>
                          </label>

@@ -4,10 +4,11 @@
 *            FUNCTIONS
 ************************************/
 
-//session_start(); // METTERE sec_session_start
-
 // Query per ottenere l'orario settimanale.
 function getHours() {
+    include("../login/functions.php");
+    sec_session_start();
+    
     include("../login/db_connect.php");
     $cond = isset($_GET["fDate"]) && isset($_GET["lDate"]) &&
     isset($_GET["idCorso"]) && isset($_GET["year"]) &&
@@ -60,7 +61,11 @@ function getHours() {
 
 // Query per ottenere gli anni di durata di un dato corso universitario.
 function getYears() {
+    include("../login/functions.php");
+    sec_session_start();
+
     include("../login/db_connect.php");
+
     //query tramite prepared statement
     if (isset($_GET["idCorso"])) {
         // prepare and bind
@@ -90,6 +95,9 @@ function getYears() {
 
 // Query per ottenere tutti gli eventi di un dato giorno
 function getEvents() {
+    include("../login/functions.php");
+    sec_session_start();
+
     include("../login/db_connect.php");
     $cond = isset($_GET["fDate"]) && isset($_GET["lDate"]) && isset($_SESSION['email']);
 
@@ -97,10 +105,16 @@ function getEvents() {
     if ($cond) {
         // prepare and bind
         $sql = "SELECT Descrizione FROM evento WHERE Utente = (?)
-                AND Inizio BETWEEN (?) AND (?)
-                OR Fine BETWEEN (?) AND (?)";
+                AND (
+                        (Inizio BETWEEN (?) AND (?)) 
+                        OR 
+                        (Fine BETWEEN (?) AND (?))
+                        OR 
+                        (Inizio <= (?) AND Fine >= (?))
+                    )";
+
         $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("sssss", $utente, $fDate, $lDate, $fDate, $lDate);
+        $stmt->bind_param("sssssss", $utente, $fDate, $lDate, $fDate, $lDate, $fDate, $lDate);
 
         // set parameters and execute
         $utente =  $_SESSION['email'];
