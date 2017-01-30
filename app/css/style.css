@@ -26,7 +26,7 @@ body {
 .navbar-brand {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    margin-top: 3px;
+    margin-top: 3px;#
     padding: 13px;
 }
 .image-profile {
@@ -241,11 +241,6 @@ body {
 }
 /*Bottoni*/
 
-#page-container .btn {
-    border-radius: 0px;
-    padding: 10px;
-    margin: 5px;
-}
 .btn-sq {
     background-color: #7f0000;
     width: 250px;
@@ -343,14 +338,7 @@ body {
     background: #4d0000;
     color: white;
 }
-/*table layout - last column*/
 
-table tr td:last-child {
-    white-space: nowrap;
-    width: 1px;
-    text-align: right;
-}
-/* layout.css Style */
 
 .upload-drop-zone {
     height: 200px;

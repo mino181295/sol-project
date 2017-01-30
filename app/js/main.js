@@ -105,12 +105,7 @@ $(document).ready(function () {
     });
     var i = true;
     $(document).on('DOMNodeInserted', '#calendar-panel', function () {
-        if (i){
-            console.log("ciao");
-            $.getScript('../calendar/calendar.js', function(data, textStatus) {
-            });
-            i = false;
-        }
+        
     });
 
     //Shake delle notifiche
