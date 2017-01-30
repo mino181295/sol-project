@@ -246,6 +246,7 @@ body {
     width: 250px;
     height: 250px;
     padding: 0px;
+    margin: 5px;
 }
 .btn-sq * {
     padding: 0px;
