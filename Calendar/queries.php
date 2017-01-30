@@ -4,7 +4,7 @@
 *            FUNCTIONS
 ************************************/
 
-session_start(); // METTERE sec_session_start
+//session_start(); // METTERE sec_session_start
 
 // Query per ottenere l'orario settimanale.
 function getHours() {
@@ -137,7 +137,7 @@ if (isset($_GET["type"])) {
             getHours();
             break;
         case "getYears":
-            getHours();
+            getYears();
             break;
         case "getEvents":
             getEvents();

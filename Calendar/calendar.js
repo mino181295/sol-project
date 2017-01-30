@@ -72,7 +72,7 @@ $(function(){
     function removeDefaultOptions() {
         if (fistTime) {
             fistTime = false;
-            $('.week-view option[selected="true"]').remove();
+            $('.week-view option[selected]').remove();
         }
     }
 
@@ -124,7 +124,6 @@ $(function(){
             var row = $("<tr></tr>");
             for (var j = 1; j <= 7; j++, cellsNo--) {
                 var cell = $("<td></td>").attr('headers', dayNames[j-1]);
-                //cell.on("click", showEventsPanel);
                 var link = $("<a></a>").attr('data-toggle', 'modal')
                 .attr('data-target', '#events-modal')
                 .attr('href', '#')
@@ -149,6 +148,7 @@ $(function(){
                         link.text(diff);
                         if (diff == currentDay && currentMonth == date.getMonth() && currentYear == date.getFullYear()) {
                             cell.addClass("curr-day");
+                            cell.attr('id', 'curr-day');
                             if (updateWeekNo) 
                                 currentWeek = i;
                         }
@@ -161,7 +161,6 @@ $(function(){
         };
         $("#monthly-table tbody").remove();
         $("#monthly-table thead").after(tBody);
-        pickToday();
     }
 
     // Prima occorre creare il lBody e poi chiamare show
@@ -170,6 +169,9 @@ $(function(){
         updateTopBar();
         $(".week-view").fadeOut("fast", function() {
             $(".month-view").fadeIn();
+            pickToday(); 
+            $("#curr-day").ScrollTo({duration: 500});
+            //$("#curr-day").trigger('focus');
         });
         
     }
@@ -300,37 +302,35 @@ $(function(){
         $("#weekly-table thead").after(tBody);
 
         fillWeeklyCal();
-
-        pickToday();
     }
 
     function fillWeeklyCal() {
         var session = currentMonth <=6 ? 1 : 2;
-       /* 
-        var day = $(event.target).text();
-        var year = currentYear;
-        var month = currentMonth;
-        var cell = $(event.target).parents("td").first();
-       
-        // Verifico se il giorno è nel mese/anno corrente oppure no
-        if (cell.attr('class') == "not-curr-month") {
-            if(day > 20) { // È nel mese precedente (eventualmente nell'anno precedente)
-                var prev = prevMonth({month: month, year: year});
-                month = prev.month;
-                year = prev.year;
-            } else if (day < 10) { // È nel mese seguente (eventualmente nell'anno seguente)
-                var next = nextMonth({month: month, year: year});
-                month = next.month;
-                year = next.year;
+
+        var fMonth = currentMonth;
+        var lMonth = fMonth;
+
+        var fYear = currentYear;
+        var lYear = fYear;
+        
+        // Verifico se il primo/ultimo giorno è nel mese/anno corrente oppure no
+        if (parseInt(fDay) > parseInt(lDay)) { // sono in una settimana tra due mesi
+            if(currentWeek <= 1) {
+                var prev = prevMonth({month: fMonth, year: fYear});
+                fMonth = prev.month;
+                fYear = prev.year;
+            } else { // È nel mese seguente
+                var next = nextMonth({month: lMonth, year: lYear});
+                lMonth = next.month;
+                lYear = next.year;
             }
         }
-        */
 
-        var fDate = new Date(currentYear, currentMonth, fDay);
-        var lDate = new Date(currentYear, currentMonth, lDay);
+        var fDate = new Date(fYear, fMonth, fDay);
+        var lDate = new Date(lYear, lMonth, lDay);
         fDate.setUTCHours(24,0,0,0);
         fDate = fDate.toJSON().replace(/[T,Z]/g, " ");
-        lDate.setUTCHours(23,59,0,0);
+        lDate.setUTCHours(24,0,0,0);
         lDate = lDate.toJSON().replace(/[T,Z]/g, " ");
         
         var data = {type: "getHours", idCorso: idCorso, year: selectedYear, session: session, fDate: fDate, lDate: lDate};
@@ -361,6 +361,7 @@ $(function(){
         updateTopBar();   
         $(".month-view").fadeOut("fast", function() {
             $(".week-view").fadeIn();   
+            pickToday();
         });
     }
 
@@ -472,7 +473,7 @@ $(function(){
     *   MEDIA QUERY EVENT HANDLER
     ************************************/
     if (matchMedia) {
-        var mq = window.matchMedia("{max-width: 768px}");
+        var mq = window.matchMedia('(max-width: 768px)');
         mq.addListener(WidthChange);
         WidthChange(mq);
     }
