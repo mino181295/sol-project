@@ -302,7 +302,7 @@ body {
 }
 
 .btn-sq i {
-    font-size: 10em;
+    font-size: 7em;
     color: white;
     height: 70%;
     padding: 10%;
@@ -358,8 +358,8 @@ body {
 
 @media only screen and (min-width: 992px) {
     .btn-sq {
-        width: 360px !important;
-        height: 360px !important;
+        width: 250px !important;
+        height: 250px !important;
     }
 }
 
