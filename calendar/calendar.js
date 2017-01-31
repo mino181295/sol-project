@@ -210,7 +210,8 @@
             if (json.result.length == 0)
                 ul.append($("<li></li>").addClass("list-group-item").text("Nessun evento disponibile."));
             $.each(json.result, function(index, el) {
-                var li = $("<li></li>").addClass("list-group-item").text(el);
+                var small = $("<small></small>").text(el[1]);
+                var li = $("<li></li>").addClass("list-group-item").text(el[0]).append(small);
                 ul.append(li);
             });
             $("#events-modal .modal-body").html(ul);

@@ -104,7 +104,7 @@ function getEvents() {
     //query tramite prepared statement
     if ($cond) {
         // prepare and bind
-        $sql = "SELECT Descrizione FROM evento WHERE Utente = (?)
+        $sql = "SELECT Descrizione, DATE_FORMAT(Inizio,'%H:%i') TIMEONLY, DATE_FORMAT(Fine,'%H:%i') TIMEONLY FROM evento WHERE Utente = (?)
                 AND (
                         (Inizio BETWEEN (?) AND (?)) 
                         OR 
@@ -121,10 +121,11 @@ function getEvents() {
         $fDate = substr($_GET["fDate"], 0, -5);
         $lDate = substr($_GET["lDate"], 0, -5);
         $stmt->execute();
-        $stmt->bind_result($val);
+        $stmt->bind_result($desc, $iniz, $fin);
         $result = [];
         while($stmt->fetch()){
-            $result[] = $val;
+            $time = " (" . $iniz . "-" . $fin . ")";
+            $result[] = [$desc, $time];
         }
 
         echo '{ "result": ' . json_encode($result) . '}';
