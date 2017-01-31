@@ -28,7 +28,7 @@
             $IDCorsoStudi = null;
         }
 ?>
-<div class="container-fluid">
+<div class="container-fluid" id="servizio-container">
     <div class="row">
         <ul class="nav nav-tabs">
             <?php

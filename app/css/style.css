@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 html,
 body {
-    height: 100%;
+    height: auto !important;
     width: 100%;
     background-color: whitesmoke;
     font-family: 'Roboto', sans-serif;
@@ -386,21 +386,21 @@ body {
     background-color: #7f0000 !important;
 }
 
-#page-container .panel-body {
+#servizio-container .panel-body {
     padding: 0px;
 }
 
-#page-container .list-group {
+#servizio-container .list-group {
     margin: 0px;
 }
 
-#page-container .list-group-item {
+#servizio-container .list-group-item {
     background: whitesmoke;
     color: black;
     cursor: pointer;
 }
 
-#page-container .list-group-item:hover {
+#servizio-container .list-group-item:hover {
     background: #4d0000;
     color: white;
 }
@@ -418,7 +418,6 @@ body {
     color: dimgrey;
     border-style: dashed;
     border-color: #ccc;
-    line-height: 200px;
     text-align: center
 }
 
