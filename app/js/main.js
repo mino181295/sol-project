@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
     //Bind dei tasti di una materia 
-    $(document).on("click", "#page-container .list-group-item", function () {
+    $(document).on("click", "#servizio-container .list-group-item", function () {
         loadContent($('#page-container'), 'snippets/materia-snippet.php?materia=' + replaceAll($(this).text(), " ", "%20"));
     });
     //Controllo nel resize se c'è da cambiare la label brand
