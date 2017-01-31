@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 html,
 body {
-    height: 90%;
+    height: auto !important;
     width: 100%;
     background-color: whitesmoke;
     font-family: 'Roboto', sans-serif;
