@@ -171,7 +171,7 @@
             $(".month-view").fadeIn();
             pickToday(); 
             $("#curr-day").ScrollTo({duration: 500});
-            //$("#curr-day").trigger('focus');
+            $("#curr-day a").trigger('focus');
         });
         
     }
@@ -343,12 +343,15 @@
                 var headers = $(el).attr('headers').split(/[ -]+/); // Mi servono i valori agli indici 1 e 3 corrispondenti ad ora-giorno.
                 var field = headers[3] + "-" + headers[1];          // Prendo la materia-aula da result se li colloco nel td corrispettivo.
                 var content = result[field];
+                $(el).html("");
                 if(content != null) {
                     content = content.replace("-", " - Aula ");
+                    $(el).html('<a href="#" data-toggle="tooltip" title="' + content + '">' + content + '</a>');
                 }
-                $(el).text(""); // "pulisco la cella".
-                $(el).text(content);
+                //$(el).text(""); // "pulisco la cella".
+                //$(el).text(content); 
             });
+            $('[data-toggle="tooltip"]').tooltip();
         }); 
     }
 

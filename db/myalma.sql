@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Gen 30, 2017 alle 13:25
--- Versione del server: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Jan 31, 2017 at 12:07 
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 CREATE DATABASE `myalma`;
 USE `myalma`;
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `assegnamento`
+-- Table structure for table `assegnamento`
 --
 
 CREATE TABLE `assegnamento` (
@@ -36,17 +36,20 @@ CREATE TABLE `assegnamento` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `assegnamento`
+-- Dumping data for table `assegnamento`
 --
 
 INSERT INTO `assegnamento` (`CodiceCorso`, `IDCorsoStudi`, `Docente`) VALUES
-('1', '2', 'franco.callegati@unibo.it'),
+('14', '1', 'franco.callegati@unibo.it'),
+('15', '1', 'franco.callegati@unibo.it'),
+('21', '3', 'franco.callegati@unibo.it'),
+('22', '3', 'franco.callegati@unibo.it'),
 ('1', '1', 'stefano.rizzi@unibo.it');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `corso`
+-- Table structure for table `corso`
 --
 
 CREATE TABLE `corso` (
@@ -58,7 +61,7 @@ CREATE TABLE `corso` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `corso`
+-- Dumping data for table `corso`
 --
 
 INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`) VALUES
@@ -75,7 +78,7 @@ INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`)
 ('10', '1', 'Algoritmi Numerici', 2, 2),
 ('11', '1', 'Basi di dati', 2, 2),
 ('12', '1', 'Fisica', 2, 2),
-('13', '1', 'Reti di Telecomunicaizoni', 2, 2),
+('13', '1', 'Reti di Telecomunicaizoni', 2, 1),
 ('14', '1', 'Programmazione di Reti', 3, 1),
 ('15', '1', 'Tecnologie Web', 3, 1),
 ('16', '1', 'Tirocinio', 3, 1),
@@ -84,7 +87,7 @@ INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`)
 ('19', '3', 'Idoneita Inglese B-2', 1, 1),
 ('20', '3', 'Machine Learning', 1, 1),
 ('21', '3', 'Sistemi Distribuiti', 1, 1),
-('22', '3', 'Sicurezza nelle Reti', 1, 0),
+('22', '3', 'Sicurezza nelle Reti', 2, 1),
 ('23', '3', 'Sistemi Informativi', 1, 2),
 ('24', '3', 'Programmazione Concorrente', 1, 2),
 ('25', '3', 'Instradamento e Trasporto', 2, 1),
@@ -93,7 +96,7 @@ INSERT INTO `corso` (`Codice`, `IDCorsoStudi`, `Denominazione`, `Anno`, `Ciclo`)
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `corsostudi`
+-- Table structure for table `corsostudi`
 --
 
 CREATE TABLE `corsostudi` (
@@ -103,7 +106,7 @@ CREATE TABLE `corsostudi` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `corsostudi`
+-- Dumping data for table `corsostudi`
 --
 
 INSERT INTO `corsostudi` (`ID`, `Denominazione`, `DurataAnni`) VALUES
@@ -114,7 +117,7 @@ INSERT INTO `corsostudi` (`ID`, `Denominazione`, `DurataAnni`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `evento`
+-- Table structure for table `evento`
 --
 
 CREATE TABLE `evento` (
@@ -125,10 +128,20 @@ CREATE TABLE `evento` (
   `Descrizione` varchar(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `evento`
+--
+
+INSERT INTO `evento` (`Utente`, `Numero`, `Inizio`, `Fine`, `Descrizione`) VALUES
+('mario.rossi@studio.unibo.it', 1, '2017-01-31 16:00:00', '2017-01-31 17:00:00', 'Discussione progetto TW!'),
+('mario.rossi@studio.unibo.it', 2, '2017-01-28 10:00:00', '2017-01-31 12:00:00', 'Corsa bici unibo!'),
+('franco.callegati@unibo.it', 1, '2017-01-25 10:00:00', '2017-01-25 12:00:00', 'Esame reti-1'),
+('franco.callegati@unibo.it', 2, '2017-01-30 08:00:00', '2017-01-30 10:00:00', 'Esame reti-2');
+
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `iscrizione`
+-- Table structure for table `iscrizione`
 --
 
 CREATE TABLE `iscrizione` (
@@ -138,7 +151,7 @@ CREATE TABLE `iscrizione` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `iscrizione`
+-- Dumping data for table `iscrizione`
 --
 
 INSERT INTO `iscrizione` (`IDCorsoStudi`, `Studente`, `AnnoAccademico`) VALUES
@@ -150,7 +163,7 @@ INSERT INTO `iscrizione` (`IDCorsoStudi`, `Studente`, `AnnoAccademico`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `lezione`
+-- Table structure for table `lezione`
 --
 
 CREATE TABLE `lezione` (
@@ -163,17 +176,28 @@ CREATE TABLE `lezione` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `lezione`
+-- Dumping data for table `lezione`
 --
 
 INSERT INTO `lezione` (`Numero`, `OraInizio`, `OraFine`, `Aula`, `CodiceCorso`, `IDCorsoStudi`) VALUES
 (1, '2017-01-23 08:00:00', '2017-01-23 09:00:00', 'A', '1', '1'),
-(2, '2017-01-24 10:00:00', '2017-01-24 12:00:00', 'B', '1', '1');
+(2, '2017-01-24 10:00:00', '2017-01-24 12:00:00', 'B', '1', '1'),
+(1, '2017-01-30 09:00:00', '2017-01-30 11:00:00', 'Magna', '14', '1'),
+(1, '2017-01-31 10:00:00', '2017-01-31 13:00:00', 'Magna', '15', '1'),
+(1, '2017-02-01 13:00:00', '2017-02-01 16:00:00', 'C', '13', '1'),
+(1, '2017-01-31 09:00:00', '2017-01-31 12:00:00', 'Z', '2', '1'),
+(1, '2017-01-30 08:00:00', '2017-01-30 13:00:00', 'A', '4', '1'),
+(1, '2017-02-03 11:00:00', '2017-02-03 16:00:00', 'MAGNA', '9', '1'),
+(1, '2017-02-02 08:00:00', '2017-02-02 15:00:00', 'A', '3', '1'),
+(1, '2017-01-30 08:00:00', '2017-01-30 12:00:00', 'N', '8', '1'),
+(2, '2017-02-01 08:00:00', '2017-02-01 11:00:00', 'MAGNA', '8', '1'),
+(1, '2017-01-31 08:00:00', '2017-01-31 10:00:00', 'MAGNA', '21', '3'),
+(1, '2017-02-03 08:00:00', '2017-02-03 11:00:00', 'MAGNA', '22', '3');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `notifica`
+-- Table structure for table `notifica`
 --
 
 CREATE TABLE `notifica` (
@@ -186,7 +210,7 @@ CREATE TABLE `notifica` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `notifica`
+-- Dumping data for table `notifica`
 --
 
 INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orario`, `Stato`) VALUES
@@ -195,12 +219,12 @@ INSERT INTO `notifica` (`ID`, `Matricola_mit`, `Matricola_dest`, `Testo`, `Orari
 (3, '5', '1', 'Ha caricato nuovo materiale', '2016-11-09 06:21:45', '1'),
 (4, '2', '1', 'Ha annullato la lezione', '2016-12-06 09:51:07', '1'),
 (5, '4', '1', 'Ha fissato orario esame', '2017-01-10 09:25:28', '1'),
-(6, '2', '1', 'Ha verbaliazzato il voto d\'esame', '2017-01-17 14:51:28', '1');
+(6, '2', '1', 'Ha verbaliazzato il voto d''esame', '2017-01-17 14:51:28', '1');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utente`
+-- Table structure for table `utente`
 --
 
 CREATE TABLE `utente` (
@@ -215,7 +239,7 @@ CREATE TABLE `utente` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `utente`
+-- Dumping data for table `utente`
 --
 
 INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `ImmagineProfilo`, `Salt`, `Matricola`) VALUES
@@ -226,85 +250,84 @@ INSERT INTO `utente` (`Email`, `TipoUtente`, `Nome`, `Cognome`, `Password`, `Imm
 ('luca.benini@studio.unibo.it', 's', 'Luca', 'Benini', 'de2c77702e05736c21f030100b2a008c050846e93bb02e27d7ff1edc61a6863c22f7dc9d4f45af2316ed7369a7f547e9d564ae96b17d3460ec0c928b5273e233', '', '2206e453020e2597d8ae5ec7df893d0bdcd0bb25423d03d808dcb8adac4d49e9ec4a3c7b0800d71da7f9259293d98a210d6bcefbd6c2a5cd07a6779fff9ae182', '5');
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `assegnamento`
+-- Indexes for table `assegnamento`
 --
 ALTER TABLE `assegnamento`
   ADD PRIMARY KEY (`Docente`,`CodiceCorso`,`IDCorsoStudi`),
   ADD KEY `FKCodiceCorso` (`CodiceCorso`,`IDCorsoStudi`);
 
 --
--- Indici per le tabelle `corso`
+-- Indexes for table `corso`
 --
 ALTER TABLE `corso`
   ADD PRIMARY KEY (`Codice`,`IDCorsoStudi`),
   ADD KEY `FKofferta` (`IDCorsoStudi`);
 
 --
--- Indici per le tabelle `corsostudi`
+-- Indexes for table `corsostudi`
 --
 ALTER TABLE `corsostudi`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indici per le tabelle `evento`
+-- Indexes for table `evento`
 --
 ALTER TABLE `evento`
   ADD PRIMARY KEY (`Utente`,`Numero`);
 
 --
--- Indici per le tabelle `iscrizione`
+-- Indexes for table `iscrizione`
 --
 ALTER TABLE `iscrizione`
   ADD PRIMARY KEY (`Studente`,`AnnoAccademico`),
   ADD KEY `FKUtente` (`Studente`);
 
 --
--- Indici per le tabelle `lezione`
+-- Indexes for table `lezione`
 --
 ALTER TABLE `lezione`
   ADD PRIMARY KEY (`Numero`,`CodiceCorso`,`IDCorsoStudi`),
   ADD KEY `FKesecuzione` (`CodiceCorso`,`IDCorsoStudi`);
 
 --
--- Indici per le tabelle `notifica`
+-- Indexes for table `notifica`
 --
 ALTER TABLE `notifica`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indici per le tabelle `utente`
+-- Indexes for table `utente`
 --
 ALTER TABLE `utente`
   ADD PRIMARY KEY (`Email`),
   ADD UNIQUE KEY `IDUtente_1` (`Matricola`);
 
 --
--- AUTO_INCREMENT per le tabelle scaricate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT per la tabella `evento`
+-- AUTO_INCREMENT for table `evento`
 --
 ALTER TABLE `evento`
   MODIFY `Numero` int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT per la tabella `lezione`
+-- AUTO_INCREMENT for table `lezione`
 --
 ALTER TABLE `lezione`
   MODIFY `Numero` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT per la tabella `notifica`
+-- AUTO_INCREMENT for table `notifica`
 --
 ALTER TABLE `notifica`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 CREATE USER 'secure_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
 GRANT SELECT, INSERT, UPDATE ON `myalma`.* TO 'secure_user'@'localhost';
