@@ -67,11 +67,11 @@
 }
 
 #calendar-panel #monthly-table tbody {
-    height: 450px;
+    height: 400px;
 }
 
 #calendar-panel #weekly-table tbody {
-    height: 400px;
+    height: 350px;
 }
 
 #calendar-panel thead, #calendar-panel tbody tr {

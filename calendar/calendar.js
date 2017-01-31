@@ -305,7 +305,7 @@
     }
 
     function fillWeeklyCal() {
-        var session = currentMonth <=6 ? 1 : 2;
+        var session = (currentMonth >= 8 || currentMonth < 2) ? 1 : 2; //semestre
 
         var fMonth = currentMonth;
         var lMonth = fMonth;
