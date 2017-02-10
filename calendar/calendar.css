@@ -80,6 +80,17 @@
     table-layout:fixed;
 }
 
+#calendar-panel .input-group {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#calendar-panel #startEvent, #calendar-panel #endEvent {
+    width: 50%;
+}
+
+
+
 /****************************
 *       MEDIA QUERIES
 *****************************/

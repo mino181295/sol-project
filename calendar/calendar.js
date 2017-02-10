@@ -128,7 +128,7 @@
                 .attr('data-target', '#events-modal')
                 .attr('href', '#')
                 .attr("data-keyboard","true")
-                .on('click', getEventsList);
+                .on('click', onModalShow);
                 cell.append(link);
                 
 
@@ -219,6 +219,10 @@
         
     }
 
+    function onModalShow() {
+        getEventsList();
+        $("#newEvent").focus();
+    }
 
 
     /************************************
@@ -466,10 +470,11 @@
         updateWeekCaption();
     });
 
-    $("#event-modal").on("shown-bs-modal", function() {
-      //$(".modal-body .list-group-item").first().focus();
-      $("#event-modal").focus();
-  });  
+    $("#calendar-panel #btn-addEvent").click(function() {
+        console.log("ciao");
+        $('#events-modal').modal('hide');
+    });
+
 
 
 
