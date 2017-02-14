@@ -88,20 +88,7 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio 
-                            <div class="btn-group" role="group" aria-label="Navigazione calendario">
-                                <button type="button" class="btn btn-default" aria-label="Modifica evento">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default" aria-label="Elimina evento">
-                                    <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        <!-- CODE AUTOMATICALLY GENERATED HERE -->
                     </ul>
                 </div>
                 <div class="modal-footer">

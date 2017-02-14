@@ -1,3 +1,4 @@
+
 #calendar-panel table, #calendar-panel tr, #calendar-panel th {
     margin: auto;
     text-align: center;
@@ -47,7 +48,7 @@
 #calendar-panel td {
     overflow:hidden;
     text-overflow:ellipsis;
-    word-break: break-all;
+    word-break: normal;
 }
 
 #calendar-panel label {
@@ -80,6 +81,7 @@
     table-layout:fixed;
 }
 
+/* Events Modal */
 #calendar-panel .input-group {
     width: 100%;
     border-radius: 10px;
@@ -89,18 +91,33 @@
     width: 50%;
 }
 
+#calendar-panel li .btn {
+    float: left;
+    display: inline;
+}
+
+#calendar-panel li {
+ /*   display: inline;
+    width: 90%;*/
+    text-align: left;
+}
+
 
 
 /****************************
 *       MEDIA QUERIES
 *****************************/
 @media (max-width: 768px) {
-    #calendar-panel tbody tr {
-        height: 18%;
+    #calendar-panel tbody tr, #calendar-panel tbody, #calendar-panel table  {
+        height: 16%;
+    }
+    #calendar-panel #weekly-table {
+        font-size: 85%;
     }
 
-    #calendar-panel #weekly-table td {
-        font-size: 85%;
+    #calendar-panel #weekly-table th {
+        padding-left:  0px;
+        padding-right: 0px;
     }
 
     #calendar-panel #top-table button {
@@ -113,8 +130,27 @@
         height: 50px;
     }
 
+    .btn {
+        text-align: center;
+        padding: 0px;
+    }
+
     #calendar-panel label {
         margin-left: 1%;
         margin-right: 1%;
     }
+
+    #calendar-panel #monthly-table tbody {
+        height: 300px;
+    }
+
+    #calendar-panel #weekly-table tbody {
+        height: 250px;
+    }
+
+    #calendar-panel .panel-body {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
 }
+

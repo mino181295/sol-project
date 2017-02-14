@@ -128,7 +128,7 @@
                 .attr('data-target', '#events-modal')
                 .attr('href', '#')
                 .attr("data-keyboard","true")
-                .on('click', onModalShow);
+                .on('click', getEventsList);
                 cell.append(link);
                 
 
@@ -213,16 +213,24 @@
                 var small = $("<small></small>").text(el[1]);
                 var li = $("<li></li>").addClass("list-group-item").text(el[0]).append(small);
                 ul.append(li);
+                //ul.append(eventsCtrls());
             });
             $("#events-modal .modal-body").html(ul);
         });
         
     }
 
-    function onModalShow() {
-        getEventsList();
-        $("#newEvent").focus();
+    function eventsCtrls() {
+        return '<div class="btn-group" role="group" aria-label="Navigazione calendario">' +
+                    '<button type="button" class="btn btn-default" aria-label="Modifica evento">' +
+                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-default" aria-label="Elimina evento">' +
+                        '<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>' +
+                    '</button>' +
+                '</div>';
     }
+
 
 
     /************************************
@@ -351,12 +359,9 @@
                 $(el).html("");
                 if(content != null) {
                     content = content.replace("-", " - Aula ");
-                    $(el).html('<a href="#" data-toggle="tooltip" title="' + content + '">' + content + '</a>');
+                    $(el).html('<a href="#" title="' + content + '">' + content + '</a>');  
                 }
-                //$(el).text(""); // "pulisco la cella".
-                //$(el).text(content); 
             });
-            $('[data-toggle="tooltip"]').tooltip();
         }); 
     }
 
@@ -471,7 +476,7 @@
     });
 
     $("#calendar-panel #btn-addEvent").click(function() {
-        console.log("ciao");
+        $('#events-modal .form-control').val("");
         $('#events-modal').modal('hide');
     });
 
