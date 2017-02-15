@@ -66,6 +66,11 @@ $(document).ready(function () {
             $("#school-information").show();
         }
     });
+    //Aggiunta redirection materia
+    $(document).on('click', '#weekly-table td a', function(){
+        var nomeMateria = this.text();
+        loadContent($('#page-container'), 'php/materia-snippet.php?materia='+nomeMateria);       
+    });
 
     //Fade in dei bottoni
     $(document).on('DOMNodeInserted', '#buttons-container', function () {
