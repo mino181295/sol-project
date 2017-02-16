@@ -69,9 +69,8 @@ $(document).ready(function () {
 
     //Aggiunta redirection materia
     $(document).on('click', '#weekly-table td a', function(){
-        var nomeMateria = $(this).text().split(" - ")[0].replace("/ /g", "+");
-        // console.log(nomeMateria);
-        loadContent($('#page-container'), 'php/materia-snippet.php?materia='+nomeMateria);       
+        var nomeMateria = $(this).text().split(" - ")[0].replace(/ /g, "%20");
+        loadContent($('#page-container'), 'snippets/materia-snippet.php?materia='+nomeMateria);       
     });
 
     //Fade in dei bottoni
