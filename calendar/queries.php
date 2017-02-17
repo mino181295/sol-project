@@ -104,14 +104,14 @@ function getEvents() {
     //query tramite prepared statement
     if ($cond) {
         // prepare and bind
-        $sql = "SELECT Descrizione, DATE_FORMAT(Inizio,'%H:%i') TIMEONLY, DATE_FORMAT(Fine,'%H:%i') TIMEONLY FROM evento WHERE Utente = (?)
+        $sql = "SELECT Descrizione, DATE_FORMAT(Inizio,'%H:%i') Inizio, DATE_FORMAT(Fine,'%H:%i') Fine FROM evento WHERE Utente = (?)
                 AND (
                         (Inizio BETWEEN (?) AND (?)) 
                         OR 
                         (Fine BETWEEN (?) AND (?))
                         OR 
                         (Inizio <= (?) AND Fine >= (?))
-                    )";
+                    ) ORDER BY Inizio, Fine";
 
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param("sssssss", $utente, $fDate, $lDate, $fDate, $lDate, $fDate, $lDate);

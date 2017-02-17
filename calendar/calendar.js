@@ -36,26 +36,26 @@
     }
 
     function prevMonth(val) { // Oggetto nel formato {month: val, year: val}
-        val.month = (val.month-1+12)%12;
-        val.year -= val.month == 11 ? 1 : 0;
-        return val;
-    }
+    val.month = (val.month-1+12)%12;
+    val.year -= val.month == 11 ? 1 : 0;
+    return val;
+}
 
     function nextMonth(val) { // Oggetto nel formato {month: val year: val}
-        val.month = (val.month+1)%12;
-        val.year += val.month == 0 ? 1 : 0;
-        return val;
-    }
+    val.month = (val.month+1)%12;
+    val.year += val.month == 0 ? 1 : 0;
+    return val;
+}
 
-    function updateTopBar() {
-        var info = monthNames[currentMonth] + " " + currentYear;
-        $("#top-table h1").text(info);        
-        $("#top-table").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
-    }
+function updateTopBar() {
+    var info = monthNames[currentMonth] + " " + currentYear;
+    $("#top-table h1").text(info);        
+    $("#top-table").css('background-color', seasonColor[Math.floor(((currentMonth+1)%12)/3)]);
+}
 
-    function goToday() {
-        currentYear = date.getFullYear();
-        currentMonth = date.getMonth();
+function goToday() {
+    currentYear = date.getFullYear();
+    currentMonth = date.getMonth();
         currentDay = date.getDate(); // RIMANE FISSO INDIPENDENTEMENTE DAL MESE-ANNO!
         createMonthBody(true); // rigenero il calendario mensile del giorno corrente (lo rigenero sempre in quando quello settimanale SI BASA su quello mensile)
         if (currState == state.weekly) {
@@ -177,30 +177,30 @@
     }
 
     function getEventsList(event) {
-        var day = $(event.target).text();
+        clickedDay = $(event.target).text();
         var year = currentYear;
         var month = currentMonth;
         var cell = $(event.target).parents("td").first();
-       
+
         // Verifico se il giorno è nel mese/anno corrente oppure no
         if (cell.attr('class') == "not-curr-month") {
-            if(day > 20) { // È nel mese precedente (eventualmente nell'anno precedente)
+            if(clickedDay > 20) { // È nel mese precedente (eventualmente nell'anno precedente)
                 var prev = prevMonth({month: month, year: year});
-                month = prev.month;
-                year = prev.year;
-            } else if (day < 10) { // È nel mese seguente (eventualmente nell'anno seguente)
-                var next = nextMonth({month: month, year: year});
-                month = next.month;
-                year = next.year;
-            }
+            month = prev.month;
+            year = prev.year;
+            } else if (clickedDay < 10) { // È nel mese seguente (eventualmente nell'anno seguente)
+            var next = nextMonth({month: month, year: year});
+            month = next.month;
+            year = next.year;
         }
-        
-        var fDate = new Date(year, month, day);
-        var lDate = fDate;
-        fDate.setUTCHours(24,0,0,0);
-        fDate = fDate.toJSON().replace(/[T,Z]/g, " ");
-        lDate.setUTCHours(23,59,0,0);
-        lDate = lDate.toJSON().replace(/[T,Z]/g, " ");
+    }
+
+    var fDate = new Date(year, month, clickedDay);
+    var lDate = fDate;
+    fDate.setUTCHours(24,0,0,0);
+    fDate = fDate.toJSON().replace(/[T,Z]/g, " ");
+    lDate.setUTCHours(23,59,0,0);
+    lDate = lDate.toJSON().replace(/[T,Z]/g, " ");
 
         // RICHIESTA TRAMITE AJAX
         $.getJSON('../calendar/queries.php', {type: "getEvents", fDate: fDate, lDate: lDate}, function(json) {
@@ -222,13 +222,13 @@
 
     function eventsCtrls() {
         return '<div class="btn-group" role="group" aria-label="Navigazione calendario">' +
-                    '<button type="button" class="btn btn-default" aria-label="Modifica evento">' +
-                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
-                    '</button>' +
-                    '<button type="button" class="btn btn-default" aria-label="Elimina evento">' +
-                        '<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>' +
-                    '</button>' +
-                '</div>';
+        '<button type="button" class="btn btn-default" aria-label="Modifica evento">' +
+        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+        '</button>' +
+        '<button type="button" class="btn btn-default" aria-label="Elimina evento">' +
+        '<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>' +
+        '</button>' +
+        '</div>';
     }
 
 
@@ -476,9 +476,48 @@
     });
 
     $("#calendar-panel #btn-addEvent").click(function() {
-        $('#events-modal .form-control').val("");
-        $('#events-modal').modal('hide');
+        var desc = $('#events-modal #newEvent').val();
+        var fTime = $('#events-modal #startEvent').val();
+        var lTime = $('#events-modal #endEvent').val();
+
+        if(desc && validTime(fTime) && validTime(lTime)) {
+            console.log("ok");
+            if(fTime > lTime) {
+                var tmp = fTime;
+                fTime = lTime;
+                lTime = tmp;
+            }
+
+            console.log(fTime + " " + lTime);
+            var date = [currentYear , (currentMonth%12 +1), clickedDay].join("-");
+
+            // Invio il nuovo evento per essere inserito nel db
+            $.post('../calendar/insertions.php', {date: date, fTime: fTime, lTime: lTime, desc: desc}, function(data, textStatus, xhr) {
+                // console.log("out:" + data);
+            }); 
+
+            $('#events-modal .form-control').val("");
+            $('#events-modal').modal('hide');
+        } else {
+            alert("Valori non validi: controllare i dati inseriti.");
+        }
     });
+
+    function validTime(inputStr) {
+        if (!inputStr || inputStr.length<1) {
+            return false;
+        }
+       
+        var time = inputStr.split(inputStr.includes('.') ? '.' : ':');
+
+        return time.length === 2 
+               && parseInt(time[0],10)>=0 
+               && parseInt(time[0],10)<=23 
+               && parseInt(time[1],10)>=0 
+               && parseInt(time[1],10)<=59;
+    }
+
+
 
 
 
