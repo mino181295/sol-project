@@ -23,8 +23,10 @@
         }
     }
 
+    $nomeMateria = $_POST['materia'];
+    $notificationText = "Materiale caricato in $nomeMateria";
     $sql_inserimento = "INSERT INTO notifica(Matricola_mit, Matricola_dest, testo, Stato)
-    VALUES (".$_SESSION['matricola'].", ?, 'Materiale caricato nel servizio studio', 1);";
+    VALUES (".$_SESSION['matricola'].", ?, '".$notificationText."', 1);";
 
     $stmt = $mysqli->prepare($sql_inserimento);
    
