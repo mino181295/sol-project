@@ -1,0 +1,7 @@
+Modificare Ordine
+Fare una copia backup
+Modificare tutte le relazioni in relazioni logiche
+Fare il Quick SQL
+Capire come si mette su un DB
+Metterci i comandi SQL
+Capire come si esporta un DB

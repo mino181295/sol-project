@@ -15,7 +15,7 @@
             <button type="button" class="btn btn-labeled" id="back-to-service"> <span class="btn-label"><i class="glyphicon glyphicon-arrow-left"></i> </span> </button>
         </div>
         <div class="col-xs-10 col-md-10 text-center">
-            <h1><?php echo ucfirst($materia);?></h1>
+            <h1 id="materia-title"><?php echo ucfirst($materia);?></h1>
         </div>
     </div>
 
@@ -30,6 +30,8 @@
                         <div class="panel-body">
                             <!-- Drop Zone -->
                             <script type="text/javascript">
+                                var nomeMateria = $('#materia-title').text();
+                                
                                 $('#drop-zone').dropzone({
                                     addRemoveLinks: true,
                                     paramName: "file",
@@ -42,8 +44,10 @@
                                             $.ajax({
                                                 type: "POST",
                                                 url: "php/insert_notification.php",
+                                                data: {'materia' : nomeMateria},
                                                 async: false,
                                                 success: function (text) {
+                                                    console.log(nomeMateria);
                                                 }
                                             });
                                         });
