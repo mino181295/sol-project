@@ -69,4 +69,53 @@
       }
     }
   }
+
+  function convertEventIntoNotification() {
+
+    include 'db_connect.php';
+    //sec_session_start();
+    if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
+      $sql = "SELECT Descrizione, DATE_FORMAT(Inizio,'%H:%i') TIMEONLY, DATE_FORMAT(Fine,'%H:%i') TIMEONLY FROM evento WHERE Utente = (?)
+        AND (
+        (Inizio BETWEEN (?) AND (?))
+        OR
+        (Fine BETWEEN (?) AND (?))
+        OR
+        (Inizio <= (?) AND Fine >= (?))
+        )";
+
+      $stmt = $mysqli->prepare($sql);
+      $stmt->bind_param("sssssss", $utente, $fDate, $lDate, $fDate, $lDate, $fDate, $lDate);
+
+      // set parameters and execute
+      $utente = $_SESSION['email'];
+      $fDate = substr(date("Y-m-d 23:59:59"), 0, -5); 
+      $lDate = substr(date("Y-m-d 00:00:00"), 0, -5); 
+      $stmt->execute();
+      $stmt->store_result();
+      if($stmt->num_rows > 0) {
+        $stmt->bind_result($desc, $iniz, $fin);
+        $result = [];
+        while($stmt->fetch()){
+          $time = " (" . $iniz . "-" . $fin . ")";
+          $result[] = [$desc, $time];
+        }
+        
+        $sql = 'SELECT Testo FROM notifica WHERE Matricola_mit = "0"';
+        $result = $mysqli->query($sql);
+        $procedi = true;
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+            if($row['Testo'] == ($desc . $time)) {
+              $procedi = false;
+            }
+          }
+        } 
+        if($procedi) {
+          $sql = 'INSERT INTO notifica (ID, Matricola_mit, Matricola_dest, Testo, Orario, Stato) VALUES (NULL, "0", "' . $_SESSION['matricola'] . '", "' . $desc . $time . '", CURRENT_TIMESTAMP, "1")';
+          $result = $mysqli->query($sql);
+        }
+      }
+    }
+  }
 ?>
