@@ -96,7 +96,7 @@
                         <span class="input-group-addon" id="basic-addon-evento">Nuovo evento</span>
 
                         <label for="newEvent" class="sr-only">Aggiungi Evento</label>
-                        <input type="text" id="newEvent" name="newEvent" class="form-control"/>
+                        <input type="text" id="newEvent" name="newEvent" class="form-control" />
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon-orario">Orario</span>

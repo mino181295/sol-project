@@ -517,6 +517,10 @@ function goToday() {
                && parseInt(time[1],10)<=59;
     }
 
+    $("#calendar-panel #events-modal").on('shown.bs.modal', function() {
+        //$("#calendar-panel #events-modal #newEvent").focus();
+        $(this).find("#newEvent").focus();
+    });
 
 
 
