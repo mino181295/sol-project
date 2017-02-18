@@ -8,7 +8,6 @@
 	   	if(login($email, $password, $mysqli) == true) {
 	      	// Login eseguito
 	      	$_SESSION['loggedIn']=true;
-	      	convertEventIntoNotification();
 	   		header('Location: ../app/index.php');
 	   	} else if(!emailExist($email, $mysqli)){ 
 	      	// email sbagliata

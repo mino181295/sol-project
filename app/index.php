@@ -6,7 +6,8 @@
         // link calendar to all buttons
         sec_session_start();
 
-        if (isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
+        if (isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {         
+            convertEventIntoNotification();
         } else {
             header('Location: ../login/login.php');
         }
